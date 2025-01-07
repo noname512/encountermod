@@ -1,0 +1,580 @@
+{
+    "rhinemod:RhineStrike": {
+        "NAME": "Strike",
+        "DESCRIPTION": "Deal !D! damage.",
+        "UPGRADE_DESCRIPTION": "",
+        "EXTENDED_DESCRIPTION": [
+            "Deal !D! damage. NL If the enemy has rhinemod:Stunned, change rhinemod:Gravity .",
+            "Deal !D! damage. NL Apply !M! rhinemod:Water_Stain ."
+        ]
+    },
+    "rhinemod:RhineDefend": {
+        "NAME": "Defend",
+        "DESCRIPTION": "gain !B! Block .",
+        "UPGRADE_DESCRIPTION": "",
+        "EXTENDED_DESCRIPTION": [
+            "Gain !B! Block . NL rhinemod:Calcium : !M!",
+            "Gain !B! Block . NL rhinemod:Research_Progress : !M!",
+            "Gain !B! Block . NL rhinemod:Flowing_Shape : !M!"
+        ]
+    },
+    "rhinemod:Destiny": {
+        "NAME": "Destiny",
+        "DESCRIPTION": "Choose a card, upgrade it to a random rhinemod:Affinity this combat.",
+        "UPGRADE_DESCRIPTION": "Choose a card and an rhinemod:Affinity , upgrade or switch it this combat."
+    },
+    "rhinemod:DefenseSection": {
+        "NAME": "Defense Section",
+        "DESCRIPTION": "Deal !D! damage.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:ComponentsControlSection": {
+        "NAME": "Components Control Section",
+        "DESCRIPTION": "Change rhinemod:Gravity . NL Summon a rhinemod:Star_Ring with !M! HP.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:EcologicalSection": {
+        "NAME": "Ecological Section",
+        "DESCRIPTION": "Apply !M! rhinemod:Water_Stain . NL Draw a card.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+
+    "rhinemod:DangerousEntityRemoval": {
+        "NAME": "Dangerous Entity Removal",
+        "DESCRIPTION": "Deal !D! damage, apply !M! Vulnerable .",
+        "UPGRADE_DESCRIPTION": "",
+        "EXTENDED_DESCRIPTION": [
+            "Deal !D! damage."
+        ]
+    },
+    "rhinemod:ProgressiveMoisturization": {
+        "NAME": "Progressive Moisturization",
+        "DESCRIPTION": "Apply !M! rhinemod:Water_Stain . NL rhinemod:Flowing_Shape : !rhinemod:M2! ",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:TransmitterResearch": {
+        "NAME": "Transmitter Research",
+        "DESCRIPTION": "rhinemod:Research_Progress : !M! NL Add !rhinemod:M2! *Unscrupulous into your discard pile.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:IcefieldsAdventure": {
+        "NAME": "Icefields Adventure",
+        "DESCRIPTION": "Gain !B! Block. NL rhinemod:Research_Progress : !M! ",
+        "UPGRADE_DESCRIPTION": "Gain !B! Block . Enemies with rhinemod:Water_Stain lose !M! HP."
+    },
+    "rhinemod:BookOfFairyTales": {
+        "NAME": "Book of Fairy Tales",
+        "DESCRIPTION": "Draw !M! cards, each card will be upgraded this combat with a probability of 20%.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:StarlightIntersection": {
+        "NAME": "Starlight Intersection",
+        "DESCRIPTION": "For each enemy present, deal !D! damage to all enemies.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:StarSculpt": {
+        "NAME": "Star Sculpt",
+        "DESCRIPTION": "Summon a rhinemod:Star_Ring with !M! HP.",
+        "UPGRADE_DESCRIPTION": "Summon a rhinemod:Star_Ring with !M! HP and !rhinemod:M2! Strength ."
+    },
+    "rhinemod:ShatteredVision": {
+        "NAME": "Shattered Vision",
+        "DESCRIPTION": "Deal a total of !D! damage evenly to all enemies.",
+        "UPGRADE_DESCRIPTION": "",
+        "EXTENDED_DESCRIPTION": [
+            "Deal a total of !D! damage evenly to all enemies. Remove this card from you deck. NL Exhaust .",
+            "Apply a total of !M! rhinemod:Water_Stain evenly to all characters. NL The rhinemod:Water_Stain you were applied changes to equal amount of Block ."
+        ]
+    },
+    "rhinemod:HighEfficiencyFreezingModule": {
+        "NAME": "High-Efficiency Freezing Module",
+        "DESCRIPTION": "Deal !D! damage to all enemies. If the target has rhinemod:Water_Stain , changes to !M! damage.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:DependentVariable": {
+        "NAME": "Dependent Variable",
+        "DESCRIPTION": "Deal damage equals to the number of your rhinemod:Research_Progress .",
+        "UPGRADE_DESCRIPTION": "rhinemod:Research_Progress : !M! . Deal damage equals to the number of your rhinemod:Research_Progress .",
+        "EXTENDED_DESCRIPTION" : [" NL (Deal !D! damage in total.)"]
+    },
+    "rhinemod:FirstAid": {
+        "NAME": "First Aid",
+        "DESCRIPTION": "Each friend character gains !B! Block .",
+        "UPGRADE_DESCRIPTION": "",
+        "EXTENDED_DESCRIPTION" : [
+            "Gain !B! Block . NL Use !M! rhinemod:Calcium to gain additional !B! Block.",
+            "Summon a rhinemod:Star_Ring with !M! HP. Each friend character gains !B! Block .",
+            "Gain !B! Block . NL rhinemod:Flowing_Shape : !M!"
+        ]
+    },
+    "rhinemod:GalaxyOrbit": {
+        "NAME": "Galaxy Orbit",
+        "DESCRIPTION": "Apply !M! Strength to each of your rhinemod:Star_Ring gain !M! . NL Exhaust .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:CrackedSkill": {
+        "NAME": "Co-developed Formula",
+        "DESCRIPTION": "gain !B! Block.",
+        "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Exhaust . NL Remove this card from you deck.",
+        "EXTENDED_DESCRIPTION": ["Cracked Technique"]
+    },
+    "rhinemod:ReflectionInWater": {
+        "NAME": "Reflection in Water",
+        "DESCRIPTION": "Deal !D! damage, for each layer of rhinemod:Submersion of the target, deal additional damage once.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:CriticalPoint": {
+        "NAME": "Critical Point",
+        "DESCRIPTION": "Choose a rhinemod:Star_Ring . When it explodes, damage deal to enemy increases !M! times.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:DressingFlowingShape": {
+        "NAME": "Dresser Flowing Shape",
+        "DESCRIPTION": "",
+        "UPGRADE_DESCRIPTION": "",
+        "EXTENDED_DESCRIPTION": [
+            "Gain !B! Block . NL Gain an additional effect when drawn.",
+            "Gain !B! Block . NL Draw !M! cards. NL (Effect changes when drawn again)",
+            "Gain !B! Block . NL Apply !M! rhinemod:Water_Stain . NL (Effect changes when drawn again)",
+            "Gain !B! Block . NL rhinemod:Flowing_Shape : !M! . NL (Effect changes when drawn again)",
+            "Gain !B! Block . NL Gain additional !M! Block . NL (Effect changes when drawn again)"]
+    },
+    "rhinemod:LokenWatertank": {
+        "NAME": "Loken Watertank",
+        "DESCRIPTION": "Deal !D! damage to all characters. NL Add !M! *Unscrupulous into your draw pile.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+
+
+    "rhinemod:PlanetaryDebris": {
+        "NAME": "Planetary Debris",
+        "DESCRIPTION": "Deal !M! damage to all enemies whenever rhinemod:Gravity changes.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:HighSpeedResonatingTroubleshooter": {
+        "NAME": "High-Speed Resonating Troubleshooter",
+        "DESCRIPTION": "Mark an enemy, at the end of turn or its death, deal damage to all enemies equal to the total amount of damage taken during the marking period. NL Exhaust .",
+        "UPGRADE_DESCRIPTION": "Mark an enemy, at the end of turn or its death, deal damage to all enemies equal to the total amount of damage taken during the marking period."
+    },
+    "rhinemod:Starfall": {
+        "NAME": "Starfall",
+        "DESCRIPTION": "Deal !D! damage to all enemies. NL Change rhinemod:Gravity .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:PureWaterIsLife": {
+        "NAME": "Pure Water is Life",
+        "DESCRIPTION": "Choose an enemy, gain Block equals to its rhinemod:Water_Stain .",
+        "UPGRADE_DESCRIPTION": "Gain block equals to the total rhinemod:Water_Stain of all enemies."
+    },
+    "rhinemod:MedicineDispensing": {
+        "NAME": "Medicine Dispensing",
+        "DESCRIPTION": "Gain !B! Block. NL rhinemod:Research_Progress : !M! NL rhinemod:Flowing_Shape : !M!",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:Enkephalin": {
+        "NAME": "Enkephalin",
+        "DESCRIPTION": "Gain Block equals to HP you've already lost. NL Exhaust .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:SHAFT": {
+        "NAME": "S.H.A.F.T.",
+        "DESCRIPTION": "Draw a card. NL If you already played 3 *S.H.A.F.T. this combat, gain [E] [E] [E] [E] .",
+        "UPGRADE_DESCRIPTION": "Draw a card. NL If you already played 3 *S.H.A.F.T. this combat , gain [E] [E] [E] [E] and this card costs 0.",
+        "EXTENDED_DESCRIPTION": [
+            "Gain [E] [E] [E] [E] , add 4 *Unscrupulous into your draw pile. NL Exhaust ."
+        ]
+    },
+    "rhinemod:EmergencyDefenseProcedures": {
+        "NAME": "Emergency Self-Defense Procedures",
+        "DESCRIPTION": "Gain !B! Block , decrease !M! Block for each *Unscrupulous in your hand, draw pile and discard pile.",
+        "UPGRADE_DESCRIPTION": "",
+        "EXTENDED_DESCRIPTION": [
+            "rhinemod:Calcium : !M! . NL Gain block equals to your rhinemod:Calcium .",
+            "Gain !B! Block . Gain !M! additional Block for each layer of your rhinemod:Perturbation .",
+            "( !rhinemod:M2! Block in total)"
+        ]
+    },
+    "rhinemod:TechnologyRisingStar": {
+        "NAME": "Technology Rising Star Award",
+        "DESCRIPTION": "Draw !M! cards, gain rhinemod:Research_Progress equals to their costs.",
+        "UPGRADE_DESCRIPTION": "",
+        "EXTENDED_DESCRIPTION": [
+            "rhinemod:Research_Progress : !M! . NL Randomly Exhaust at most !rhinemod:M2! Status card.",
+            "Change rhinemod:Gravity to a chosen direction. Summon a rhinemod:Star_Ring with 1 HP.",
+            "rhinemod:Research_Progress : !M! . NL Add *Pale *Fir into your hand."
+        ]
+    },
+    "rhinemod:UnusedBoxingGloves": {
+        "NAME": "Unused Boxing Gloves",
+        "DESCRIPTION": "Deal !D! damage !M! times. NL rhinemod:Calcium : !rhinemod:M2!",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:BionicDevice": {
+        "NAME": "Bionic Device",
+        "DESCRIPTION": "In this turn, whenever an enemy attacks you, it loses 1 Strength . NL Exhaust .",
+        "UPGRADE_DESCRIPTION": "rhinemod:Flowing_Shape : !M!"
+    },
+    "rhinemod:NovaEruption": {
+        "NAME": "Nova Eruption",
+        "DESCRIPTION": "Explode a rhinemod:Star_Ring . This explosion deals !M! times of damage to enemies and deals no damage to you.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:ApplyFullForce": {
+        "NAME": "Apply Full Force",
+        "DESCRIPTION": "Deal !D! damage, if the target is rhinemod:Stunned , deal double damage.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:TwoToOne": {
+        "NAME": "Two against One",
+        "DESCRIPTION": "Deal !D! damage. Can be played only if no more than half of the cards in your hand are of same rhinemod:Affinity .",
+        "UPGRADE_DESCRIPTION": "",
+        "EXTENDED_DESCRIPTION": [
+            "One against Two",
+            "Deal !D! damage. Can be played only if more than half of the cards in your hand are of same rhinemod:Affinity ."
+        ]
+    },
+    "rhinemod:EcologicalInteraction": {
+        "NAME": "Ecological Interaction",
+        "DESCRIPTION": "Add X random Plant cards into your hand.",
+        "UPGRADE_DESCRIPTION": "Add X+1 random Plant cards into your hand."
+    },
+    "rhinemod:QuicksandGeneration": {
+        "NAME": "Quicksand Generation",
+        "DESCRIPTION": "Gain !B! Block . NL Apply a total of !M! Weak evenly to all enemies intend to attack.",
+        "UPGRADE_DESCRIPTION": "",
+        "EXTENDED_DESCRIPTION": [
+            "Quickwater Generation",
+            "Gain !B! Block . NL Apply !M! rhinemod:Water_Stain to the attacker after next time you were attacked."
+        ]
+    },
+    "rhinemod:Memory": {
+        "NAME": "Memory",
+        "DESCRIPTION": "Deal !D! damage for each *Unscrupulous you Exhaust . NL Exhaust .",
+        "UPGRADE_DESCRIPTION": "",
+        "EXTENDED_DESCRIPTION": [
+            " NL (Deal !M! damage in total.)"
+        ]
+    },
+    "rhinemod:ResourceEconomization": {
+        "NAME": "Resource Economization",
+        "DESCRIPTION": "Change all your rhinemod:Flowing_Shape into equal amount of [E] . NL Exhaust .",
+        "UPGRADE_DESCRIPTION": "Change all your rhinemod:Flowing_Shape into equal amount of [E] ."
+    },
+    "rhinemod:FullBlow": {
+        "NAME": "Full Blow",
+        "DESCRIPTION": "Deal !D! damage. NL Use all rhinemod:Calcium and deal damage equal to !M! times of its number.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:HeadquarterBuilding": {
+        "NAME": "Headquarter Building",
+        "DESCRIPTION": "Innate , Exhaust . NL Gain !M! Research_Progress.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:LightPenetratingClouds": {
+        "NAME": "Light Penetrating Clouds",
+        "DESCRIPTION": "Deal !D! damage. NL Deal one more time for each [#EFC851]Rare[] card in your deck.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:LoneLight": {
+        "NAME": "Lone Light",
+        "DESCRIPTION": "Add one of following card into your hand: NL *Egotist , *Traitor , *Seeker , *Loner , *Pioneer. NL rhinemod:Good_Night,_Terra .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:FlowCombo": {
+        "NAME": "One-Two Punch",
+        "DESCRIPTION": "Use all rhinemod:Flowing_Shape , deal !D! damage for each one you use.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:AcademicResearch": {
+        "NAME": "Academic Research",
+        "DESCRIPTION": "Choose 1 of 3 random cards to add to you hand, it costs 0 this turn. NL Exhaust .",
+        "UPGRADE_DESCRIPTION": "",
+        "EXTENDED_DESCRIPTION": [
+            "\"Bioengineering\"",
+            "Gain !B! Block , deal !D! damage,  NL rhinemod:Calcium : !M! . NL Remove this card from you deck. NL Exhaust .",
+            "Particle Physics",
+            "rhinemod:Research_Progress : !M! . NL If you have !rhinemod:M2! rhinemod:Research_Progress , choose 1 of 3 Star Ring cards to add to your hand.",
+            "Ecology",
+            "Choose 1 of 3 random Plant cards to add to your hand."
+        ]
+    },
+    "rhinemod:EliminateThreat": {
+        "NAME": "Eliminate Threat",
+        "DESCRIPTION": "When you deal rhinemod:Smash , the target loses !M! Strength this turn.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:RedShiftExperiment": {
+        "NAME": "Red-Shift Experiment",
+        "DESCRIPTION": "Summon a rhinemod:Star_Ring with !M! HP, when it explodes, add !rhinemod:M2! *Unscrupulous into your discard pile.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:GalleriaStellaria": {
+        "NAME": "Galleria Stellaria",
+        "DESCRIPTION": "Your rhinemod:Star_Ring attack one more time each turn.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:Truth": {
+        "NAME": "Truth",
+        "DESCRIPTION": "All rhinemod:Star_Ring attack one more time now. If you have at least !M! rhinemod:Star_Ring , add 1 *Egotist into your hand.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:FreeFromDream": {
+        "NAME": "Free from Dream",
+        "DESCRIPTION": "Deal !D! damage. NL Apply rhinemod:Stunned and !M! Vulnerable to all enemies who intends to attack with lower damage.",
+        "UPGRADE_DESCRIPTION": "",
+        "EXTENDED_DESCRIPTION": [
+            "Exhaust all *Unscrupulous . NL If you Exhaust at least !rhinemod:M2! *Unscrupulous , add 1 *Pioneer into your hand. NL Exhaust .",
+            "Apply !rhinemod:M2! rhinemod:Water_Stain to all rhinemod:Stunned enemies."
+        ]
+    },
+    "rhinemod:Dreamer": {
+        "NAME": "Dreamer",
+        "DESCRIPTION": "Deal !D! damage. NL Increase !M! damage for each card in your exhaust pile.",
+        "UPGRADE_DESCRIPTION": "",
+        "EXTENDED_DESCRIPTION": [
+            "Deal !D! damage. NL Increase !M! damage for each time rhinemod:Gravity changes this combat.",
+            "Deal !D! damage. NL Permanently increase !M! damage whenever an enemy enters rhinemod:Submersion [#EFC851]4[] ."
+        ]
+    },
+    "rhinemod:AprilShowers": {
+        "NAME": "April Showers",
+        "DESCRIPTION": "Gain !B! Block . NL If your hand contains cards of all rhinemod:Affinity , add 1 *Seeker into your hand.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:ProjectHorizonArc": {
+        "NAME": "Project Horizon Arc",
+        "DESCRIPTION": "Deal !D! damage. NL Add 1 *Unscrupulous into your draw pile.",
+        "UPGRADE_DESCRIPTION": "",
+        "EXTENDED_DESCRIPTION": [
+            "Deal !D! damage. NL Change rhinemod:Gravity . NL If deal rhinemod:Smash , add 1 *Loner into your hand."
+        ]
+    },
+    "rhinemod:EmergencyEscapeDoor": {
+        "NAME": "Emergency Escape Door",
+        "DESCRIPTION": "Deal !D! damage. NL Change rhinemod:Gravity . NL Add 1 *Traitor into your hand.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:IntricateReconstruction": {
+        "NAME": "Intricate Reconstruction",
+        "DESCRIPTION": "Double your rhinemod:Calcium . NL Exhaust .",
+        "UPGRADE_DESCRIPTION": "Triple your rhinemod:Calcium . NL Exhaust ."
+    },
+
+    "rhinemod:Calcification": {
+        "NAME": "Calcification",
+        "DESCRIPTION": "rhinemod:Calcium : !M! . NL At the start of your turn, reduce additional !rhinemod:M2! rhinemod:Calcium .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:Solidify": {
+        "NAME": "Solidify",
+        "DESCRIPTION": "rhinemod:Calcium will not reduce.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:HallOfStasis": {
+        "NAME": "Hall of Stasis",
+        "DESCRIPTION": "Target loses 1 HP !M! times. NL Exhaust .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:HeatDeath": {
+        "NAME": "Heat Death",
+        "DESCRIPTION": "Summon a Black Hole with 1 remain HP, evenly distribute HP of all enemies. NL Exhaust .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:DreadnoughtProtocol": {
+        "NAME": "Dreadnought Protocol",
+        "DESCRIPTION": "When you would die, your HP will not below 1 in 1 turn. If not triggered at the end of combat, heal !M! HP.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:SuperficialRegulation": {
+        "NAME": "Superficial Regulation",
+        "DESCRIPTION": "Choose 1 card of each rhinemod:Affinity from your draw pile, draw them in random order, and arrange your draw pile in same order.",
+        "UPGRADE_DESCRIPTION": "Choose 1 card of each rhinemod:Affinity from your draw pile, draw them in random order, and arrange your draw pile in same order. NL Retain"
+    },
+    "rhinemod:DancingInThrees": {
+        "NAME": "Dancing in Threes",
+        "DESCRIPTION": "If you played cards of all rhinemod:Affinity , gain !M! rhinemod:Calcium , rhinemod:Research_Progress and rhinemod:Flowing_Shape .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:HAMHRR": {
+        "NAME": "H.A.M.H.R.R.",
+        "DESCRIPTION": "Deal !D! damage. NL If not deal rhinemod:Smash , deal another !M! damage.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:StartUpCapital": {
+        "NAME": "Start-up Capital",
+        "DESCRIPTION": "Innate , Exhaust . NL Draw !M! cards, gain [E] [E] . NL Add !rhinemod:M2! *Unscrupulous into your discard pile.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:Galaxy": {
+        "NAME": "Galaxy",
+        "DESCRIPTION": "Deal !D! damage. NL For each rhinemod:Star_Ring you control, cost 1 [E] less and double the damage.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:WaveBarrier": {
+        "NAME": "Wave Barrier",
+        "DESCRIPTION": "Gain !M! Buffer . NL You cannot play cards of rhinemod:Affinity to Muelsyse in next 3 combats.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:PureDewOfFreshBlossoms": {
+        "NAME": "Pure Dew of Fresh Blossoms",
+        "DESCRIPTION": "Enemies with rhinemod:Submersion cannot apply debuff to you.",
+        "UPGRADE_DESCRIPTION": "Retain . NL Enemies with rhinemod:Submersion cannot apply debuff to you."
+    },
+    "rhinemod:LikeMind": {
+        "NAME": "Like Mind",
+        "DESCRIPTION": "First time you gain rhinemod:Calcium , rhinemod:Research_Progress or rhinemod:Flowing_Shape each turn, randomly gain 1 of 3 with number of !M!.",
+        "UPGRADE_DESCRIPTION": "",
+        "EXTENDED_DESCRIPTION": [
+            "First time you gain rhinemod:Calcium , rhinemod:Research_Progress or rhinemod:Flowing_Shape each turn, gain additional !M! rhinemod:Calcium .",
+            "First time you gain rhinemod:Calcium , rhinemod:Research_Progress or rhinemod:Flowing_Shape each turn, gain additional !M! rhinemod:Research_Progress .",
+            "First time you gain rhinemod:Calcium , rhinemod:Research_Progress or rhinemod:Flowing_Shape each turn, gain additional !M! rhinemod:Flowing_Shape ."
+        ]
+    },
+    "rhinemod:Refreshment": {
+        "NAME": "Refreshment",
+        "DESCRIPTION": "Whenever you gain Block , draw 1 card and gain rhinemod:Research_Progress equals to its cost. Trigger at most !M! times each turn.",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:IdealistForm": {
+        "NAME": "Idealist Form",
+        "DESCRIPTION": "At the end of each turn, if you played cards of all rhinemod:Affinity , deal !M! damage to all enemies.",
+        "UPGRADE_DESCRIPTION": "",
+        "EXTENDED_DESCRIPTION": [
+            "At the start of your turn, Exhaust all *Unscrupulous in your hand. For each one you Exhaust , gain !M! rhinemod:Calcium .",
+            "At the start of your turn, play 1 *Lone *Light .",
+            "At the start of your turn, draw 1 card and gain !M! rhinemod:Flowing_Shape ."
+        ]
+    },
+    "rhinemod:MultiEcho": {
+        "NAME": "Multi Echo",
+        "DESCRIPTION": "Choose a card with different name, discard other cards in your hand. Change all your rhinemod:Flowing_Shape into copies of this card with Exhaust and Retain .",
+        "UPGRADE_DESCRIPTION": "",
+        "EXTENDED_DESCRIPTION": [
+            "Copy:",
+            " NL Exhaust , Retain ."
+        ]
+    },
+    "rhinemod:Disorder": {
+        "NAME": "\"Disorder\"",
+        "DESCRIPTION": "Deal !D! damage, gain !B! Block , draw !M! cards, repeat !rhinemod:M2! times. NL Whenever you draw this card or play another card, rearrange other numbers. NL Ethereal .",
+        "UPGRADE_DESCRIPTION": "Deal !D! damage, gain !B! Block , draw !M! cards, repeat !rhinemod:M2! times. NL Whenever you draw this card or play another card, rearrange other numbers."
+    },
+    "rhinemod:Omen": {
+        "NAME": "Omen",
+        "DESCRIPTION": "Record all the cards of rhinemod:Affinity to Saria you play next this turn. At the start of next turn, play their copies.",
+        "UPGRADE_DESCRIPTION": "Record all the cards of rhinemod:Affinity to Saria you play next this turn. At the end of this turn, play their copies."
+    },
+
+    "rhinemod:Unscrupulous": {
+        "NAME": "Unscrupulous",
+        "DESCRIPTION": "rhinemod:Research_Progress : !M! . NL Exhaust .",
+        "UPGRADE_DESCRIPTION": "",
+        "EXTENDED_DESCRIPTION": ["Research Progress is not enough!"]
+    },
+    "rhinemod:Egotist": {
+        "NAME": "Egotist",
+        "DESCRIPTION": "At the end of this combat, rhinemod:Star_Ring will not deal damage to you. NL Ethereal .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:Traitor": {
+        "NAME": "Traitor",
+        "DESCRIPTION": "When you deal rhinemod:Smash , deal double damage. NL Ethereal .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:Seeker": {
+        "NAME": "Seeker",
+        "DESCRIPTION": "When you gain rhinemod:Research_Progress , gain equal Block in addition. NL Ethereal .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:Loner": {
+        "NAME": "Loner",
+        "DESCRIPTION": "The effect of rhinemod:Gravity increases to 50%. At the start of each turn, add one *Lean into your hand. NL Ethereal .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:Pioneer": {
+        "NAME": "Pioneer",
+        "DESCRIPTION": "*Unscrupulous will not decrease rhinemod:Research_Progress . NL Whenever you Exhaust 1 *Unscrupulous , draw a card. NL Ethereal .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:Lean": {
+        "NAME": "Lean",
+        "DESCRIPTION": "Choose a direction and change rhinemod:Gravity to it. NL Ethereal . NL Exhaust .",
+        "UPGRADE_DESCRIPTION": "Choose a direction and change rhinemod:Gravity to it. NL Retain . NL Exhaust ."
+    },
+    "rhinemod:GravityUp": {
+        "NAME": "Weightless",
+        "DESCRIPTION": "Switch to rhinemod:Weightless .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:GravityDown": {
+        "NAME": "Overweight",
+        "DESCRIPTION": "Switch to rhinemod:Overweight .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:GravityNone": {
+        "NAME": "Reset",
+        "DESCRIPTION": "Reset rhinemod:Gravity .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:GiantRing": {
+        "NAME": "Giant Ring",
+        "DESCRIPTION": "Summon a rhinemod:Star_Ring with !M! HP. NL Exhaust .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:BipolarNebula": {
+        "NAME": "Multi-polar Nebula",
+        "DESCRIPTION": "Summon !M! rhinemod:Star_Ring with 15 HP. NL Exhaust .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:StellarRing": {
+        "NAME": "Stellar Ring",
+        "DESCRIPTION": "Summon a rhinemod:Star_Ring with 15 HP and !M! Strength . NL Exhaust .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:SquareSunflower": {
+        "NAME": "Square Sunflower",
+        "DESCRIPTION": "Gain [E] [E] . NL Exhaust .",
+        "UPGRADE_DESCRIPTION": "Gain [E] [E] [E] . NL Exhaust ."
+    },
+    "rhinemod:IcefieldsCottongrass": {
+        "NAME": "Icefields Cottongrass",
+        "DESCRIPTION": "Gain !B! Block, draw 1 card, randomly add a copy of this card into your hand, draw pile, discard pile or exhaust pile. NL Exhaust .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:Sarracenia": {
+        "NAME": "Sarracenia",
+        "DESCRIPTION": "Apply rhinemod:Stunned and !M! rhinemod:Water_Stain . NL Exhaust .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:SheathedBeech": {
+        "NAME": "Sheathed Beech",
+        "DESCRIPTION": "In this turn, whenever you play a Skill card, gain 1 temporary Dexterity and !M! Block . NL Exhaust .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:PaleFir": {
+        "NAME": "Pale Fir",
+        "DESCRIPTION": "Gain !B! Block , Gain additional 1 Block for each !M! HP you‘ve already lost. NL Exhaust .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:AuxiliaryDrone": {
+        "NAME": "AuxiliaryDrone",
+        "DESCRIPTION": "Prevent next rhinemod:Smash you received. NL Exhaust .",
+        "UPGRADE_DESCRIPTION": "Prevent next !M! rhinemod:Smash you received. NL Exhaust ."
+    },
+    "rhinemod:AttackInsteadOfDefend": {
+        "NAME": "Attack Instead of Defend",
+        "DESCRIPTION": "Whenever you deal unblocked damage less than !M! , increase the damage to !M! .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+    "rhinemod:TracingOrigins": {
+        "NAME": "Tracing Origins",
+        "DESCRIPTION": "rhinemod:Research_Progress : !M! . NL Exhaust all *Unscrupulous . NL In this turn, you cannot play cards that add *Unscrupulous .",
+        "UPGRADE_DESCRIPTION": ""
+    },
+
+    "rhinemod:DEPRECATED_SHAFT": {
+        "NAME": "S.H.A.F.T",
+        "DESCRIPTION": "Draw !M! cards, if they are of different types, add !rhinemod:M2! *Unscrupulous into your draw pile.",
+        "UPGRADE_DESCRIPTION": "Draw !M! cards, if they are of same type, add 1 *Traitor into your hand."
+    }
+}

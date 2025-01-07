@@ -1,0 +1,325 @@
+{
+  "rhinemod:WaterDamage": {
+    "NAME": "Water Stain",
+    "DESCRIPTIONS": ["Gain 1 #ySubmersion when accumulated to #b", " . #b", " already."]
+  },
+  "rhinemod:Submersion": {
+    "NAME": "Submersion",
+    "DESCRIPTIONS": [
+      "Take #b",
+      " damage and lose #b5 #yWater #yStain at the start of turn. Deal #b",
+      " % less damage. Current layer num: #b",
+      " ."
+    ]
+  },
+  "rhinemod:Stunned": {
+    "NAME": "Stunned",
+    "DESCRIPTIONS": ["In this turn, #yWater #yStain will not lose. Take #b7 damage when #yGravity changes."]
+  },
+  "rhinemod:PlanetaryDebris": {
+    "NAME": "Planetary Debris",
+    "DESCRIPTIONS": ["Deal #b", " damage to all enemies whenever #yGravity changes."]
+  },
+  "rhinemod:HighSpeedResonatingTroubleshooter": {
+    "NAME": "High-Speed Resonating Troubleshooter",
+    "DESCRIPTIONS": ["At the end of your turn or its death, you deal #b", " damage to all enemies"]
+  },
+  "rhinemod:Solidify": {
+    "NAME": "Solidify",
+    "DESCRIPTIONS": ["#yCalcium will not reduce."]
+  },
+  "rhinemod:ResearchProgress": {
+    "NAME": "Research Progress",
+    "DESCRIPTIONS": [
+      "Gain 1 #yPerturbation when accumulated to a certain value. The required value increases linearly. Each layer of #yPerturbation alternately provides linearly increasing layers of #yMetallicize and #yThorns. Currently #b",
+      " layers，needs additional #b",
+      " layers to gain next #yPerturbation ."
+    ]
+  },
+  "rhinemod:BionicDevicePower": {
+    "NAME": "Bionic Device",
+    "DESCRIPTIONS": [
+      "In this turn, whenever an enemy attacks you, it loses #b",
+      " #yStrength ."
+    ]
+  },
+  "rhinemod:DreadnoughtProtocolPower": {
+    "NAME": "Dreadnought Protocol",
+    "DESCRIPTIONS": [
+      "When you would die, your HP will not below 1 in 1 turn. If not triggered at the end of combat, heal #b",
+      " HP."
+    ]
+  },
+  "rhinemod:QuickwaterArea": {
+    "NAME": "Quickwater Area",
+    "DESCRIPTIONS": [
+      "Apply #b",
+      " #yWater #yStain to the attacker after next time you were attacked."
+    ]
+  },
+  "rhinemod:ReduceCalcium": {
+    "NAME": "Calcium Reduction",
+    "DESCRIPTIONS": [
+      "At the start of each turn, lose #b",
+      " #yCalcium in addition."
+    ]
+  },
+  "rhinemod:PDOFBPower": {
+    "NAME": "Pure Dew of Fresh Blossoms",
+    "DESCRIPTIONS": [
+      "Enemies with #ySubmersion cannot apply debuff to you."
+    ]
+  },
+  "rhinemod:LikeMindPower": {
+    "NAME": "Like Mind",
+    "DESCRIPTIONS": [
+      "First time you gain #yCalcium , #yResearch #yProgress or #yFlowing_Shape each turn, ",
+      "randomly gain 1 of 3 with number of #b",
+      " .",
+      "gain additional #b",
+      " #yCalcium .",
+      "gain additional #b",
+      " #yResearch #yProgress .",
+      "gain additional #b",
+      " #yFlowing #yShape ."
+    ]
+  },
+  "rhinemod:LikeMindPowerRandom": {
+    "NAME": "Like Mind",
+    "DESCRIPTIONS": []
+  },
+  "rhinemod:LikeMindPowerCalcium": {
+    "NAME": "Like Mind S",
+    "DESCRIPTIONS": []
+  },
+  "rhinemod:LikeMindPowerFlowsp": {
+    "NAME": "Like Mind M",
+    "DESCRIPTIONS": []
+  },
+  "rhinemod:LikeMindPowerResearch": {
+    "NAME": "Like Mind K",
+    "DESCRIPTIONS": []
+  },
+  "rhinemod:ExperimentError": {
+    "NAME": "Experiment Error",
+    "DESCRIPTIONS": [
+      "When the #yStar #yRing dead，Add #b",
+      " #yUnscrupulous to your discard pile."
+    ]
+  },
+  "rhinemod:GalleriaStellariaPower": {
+    "NAME": "Galleria Stellaria",
+    "DESCRIPTIONS": [
+      "Your #yStar #yRing attack #b",
+      " more time each turn.",
+      " more times each turn."
+    ]
+  },
+  "rhinemod:RefreshmentPower": {
+    "NAME": "Refreshment",
+    "DESCRIPTIONS": [
+      "Whenever you gain #yBlock , draw 1 card and gain #yResearch #yProgress equals to its cost. Trigger at most #b",
+      " times each turn. (#b",
+      " time rest this turn)",
+      " times rest this turn)"
+    ]
+  },
+
+
+  "rhinemod:DamageOutPower": {
+    "NAME": "Damage Out",
+    "DESCRIPTIONS": [
+      "Take #b",
+      " % less damage. When taken damage, reduce #b",
+      " ."
+    ]
+  },
+  "rhinemod:AutoAttack": {
+    "NAME": "Auto Attack",
+    "DESCRIPTIONS": [
+      "At the start of each turn, deal #b",
+      " damage. When taken damage, reduce #b",
+      " ."
+    ]
+  },
+  "rhinemod:AutoDefend": {
+    "NAME": "Auto Defend",
+    "DESCRIPTIONS": [
+      "At the start of each turn, gain #b",
+      " #yBlock . When taken damage, reduce #b",
+      " ."
+    ]
+  },
+  "rhinemod:VoidPower": {
+    "NAME": "Disturb",
+    "DESCRIPTIONS": [
+      "At the start of each turn, add #b",
+      " #yVoid into your discard pile."
+    ]
+  },
+  "rhinemod:Brittleness": {
+    "NAME": "Brittleness",
+    "DESCRIPTIONS": [
+      "Dead when being #ySmash ."
+    ]
+  },
+  "rhinemod:NoStun": {
+    "NAME": "No Stun",
+    "DESCRIPTIONS": [
+      "Cannot get #yStunned status"
+    ]
+  },
+  "rhinemod:Armor": {
+    "NAME": "Armor",
+    "DESCRIPTIONS": [
+      "Take half damage if it's not #ySmash ."
+    ]
+  },
+  "rhinemod:WeaknessSmash": {
+    "NAME": "Weakness: Smash",
+    "DESCRIPTIONS": [
+      "Take double damage if it's #ySmash ."
+    ]
+  },
+  "rhinemod:WeaknessNonSmash": {
+    "NAME": "Weakness: Non-Smash",
+    "DESCRIPTIONS": [
+      "Take another equal damage when taken damage if it's not #ySmash ."
+    ]
+  },
+  "rhinemod:Equality": {
+    "NAME": "Equality",
+    "DESCRIPTIONS": [
+      "Damage dealt will be evenly distributed to all characters except itself."
+    ]
+  },
+  "rhinemod:Journey": {
+    "NAME": "Journey",
+    "DESCRIPTIONS": [
+      "When taken damage first time each turn, deal #b",
+      " damage to you.",
+      "(Already triggered this turn.)",
+      "(Not triggered this turn.)"
+    ]
+  },
+  "rhinemod:ExplodePower": {
+    "NAME": "Self Explosion",
+    "DESCRIPTIONS": [
+      "When dead, deal #b",
+      " damage to you",
+      ", and summon a #yTraffic #yPolice .",
+      "."
+    ]
+  },
+  "rhinemod:InvisiblePower": {
+    "NAME": "Invisible",
+    "DESCRIPTIONS": [
+      "Invincible and cannot be chose. #b",
+      " turn left.",
+      " turns left."
+    ]
+  },
+  "rhinemod:IdealistFormPower": {
+    "NAME": "Idealist Form",
+    "DESCRIPTIONS": [
+      "At the end of each turn, if you played cards of all #yAffinity , deal #b",
+      " damage to all enemies.",
+      "Saria",
+      "Kristen",
+      "Muelsyse",
+      ")",
+      ", ",
+      "(Already played: "
+    ]
+  },
+  "rhinemod:IdealistFormPowerS": {
+    "NAME": "Idealist Form S",
+    "DESCRIPTIONS": [
+      "At the start of your turn, #yExhaust all #yUnscrupulous in your hand. For each one you #yExhaust , gain #b",
+      " #yCalcium ."
+    ]
+  },
+  "rhinemod:IdealistFormPowerK": {
+    "NAME": "Idealist Form K",
+    "DESCRIPTIONS": [
+      "At the start of your turn, play #b",
+      " #yLone #yLight ."
+    ]
+  },
+  "rhinemod:IdealistFormPowerM": {
+    "NAME": "Idealist Form M",
+    "DESCRIPTIONS": [
+      "At the start of your turn, draw #b",
+      " card and gain #b",
+      " cards and gain #b",
+      " #yFlowing #yShape ."
+    ]
+  },
+  "rhinemod:OmenPower": {
+    "NAME": "Omen",
+    "DESCRIPTIONS": [
+      "At the start of next turn, play the copy of ",
+      "At the end of this turn, play the copy of ",
+      ", ",
+      ".",
+      "recorded cards"
+    ]
+  },
+
+  "rhinemod:SheathedBeechPower": {
+    "NAME": "Sheathed Beech",
+    "DESCRIPTIONS": ["In this turn, whenever you play a Skill card, gain #b", " temporary #yDexterity and #b", " #yBlock ."]
+  },
+  "rhinemod:EgotistPower": {
+    "NAME": "Egotist",
+    "DESCRIPTIONS": ["At the end of this combat, #yStar #yRing will not deal damage to you."]
+  },
+  "rhinemod:TraitorPower": {
+    "NAME": "Traitor",
+    "DESCRIPTIONS": ["When you deal #ySmash , deal double damage."]
+  },
+  "rhinemod:SeekerPower": {
+    "NAME": "Seeker",
+    "DESCRIPTIONS": ["When you gain #yResearch #yProgress , gain equal #yBlock in addition."]
+  },
+  "rhinemod:LonerPower": {
+    "NAME": "Loner",
+    "DESCRIPTIONS": ["The effect of #yGravity increases to 50%. At the start of each turn, add one #yLean into your hand."]
+  },
+  "rhinemod:PioneerPower": {
+    "NAME": "Pioneer",
+    "DESCRIPTIONS": ["#yUnscrupulous will not decrease #yResearch #yProgress ."]
+  },
+  "rhinemod:AIODPower": {
+    "NAME": "Attack Instead of Defend",
+    "DESCRIPTIONS": ["Whenever you deal unblocked damage less than #b", " , increase the damage to #b", " ."]
+  },
+  "rhinemod:AuxiliaryDronePower": {
+    "NAME": "Auxiliary Drone",
+    "DESCRIPTIONS": ["Prevent next #b", " #ySmash you received."]
+  },
+  "rhinemod:EliminateThreatPower": {
+    "NAME": "Eliminate Threat",
+    "DESCRIPTIONS": ["When you deal #ySmash , the target loses #b", " Strength this turn."]
+  },
+  "rhinemod:CriticalPointPower": {
+    "NAME": "Critical Point",
+    "DESCRIPTIONS": [
+      "When it explodes, damage deal to enemy increases #b",
+      " time.",
+      " times."
+    ]
+  },
+  "rhinemod:SHAFTPower": {
+    "NAME": "S.H.A.F.T.",
+    "DESCRIPTIONS": ["Gathering energy( #y", "/3 ).", "Energy gathering complete."]
+  },
+  "rhinemod:BlackBeanTeaPower": {
+    "NAME": "Black Bean Tea",
+    "DESCRIPTIONS": ["At the start of next turn, lose #b", " #yGold ."]
+  },
+  "rhinemod:Order": {
+    "NAME": "Order",
+    "DESCRIPTIONS": ["In this turn, you cannot play cards that add #yUnscrupulous ."]
+  }
+}

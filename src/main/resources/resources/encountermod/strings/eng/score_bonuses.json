@@ -1,0 +1,20 @@
+{
+  "rhinemod:Melt": {
+    "NAME": "Obtain Melt",
+    "DESCRIPTIONS": [
+      "You almost got the poor little elf killed!"
+    ]
+  },
+  "rhinemod:ViolateDeal": {
+    "NAME": "Violate Deal",
+    "DESCRIPTIONS": [
+      "How can you expect to get paid without doing any work?"
+    ]
+  },
+  "rhinemod:StarPod": {
+    "NAME": "Beat Starpod",
+    "DESCRIPTIONS": [
+      "You fly for outer space just like you've been dreaming of."
+    ]
+  }
+}

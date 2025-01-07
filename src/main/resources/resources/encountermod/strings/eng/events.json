@@ -1,0 +1,109 @@
+{
+  "rhinemod:SkyEvent": {
+    "NAME": "The Sky",
+    "DESCRIPTIONS": ["站在塔的高处，再一次望向天空，漫天繁星。这里确实很高，从这里向上无疑会节省很多力气。你们看向星空，看着错误的轨道，继续向着塔顶……"],
+    "OPTIONS": ["[前进！]"]
+  },
+  "rhinemod:MysteriousInvent": {
+    "NAME": "Mysterious Invent",
+    "DESCRIPTIONS": [
+      "你碰到了一群看起来像是科考队的人，她们希望能够登上塔顶，并计划在塔顶尝试突破那神秘的天际屏障。",
+      "她们将一个徽章形状的物品放在了你的手上。",
+      "她们向你表达了感激，并给了你一些金币作为预报酬。",
+      "你摇了摇头，这个委托难度太高，而你不想做一个言而无信的人。"
+    ],
+    "OPTIONS": [
+      "[共同行动] #g使本局游戏走向不同的结局。",
+      "[帮忙处理腐化之心] #g获得 #g",
+      " #g金币。",
+      "[离开]",
+      "[离开]"
+    ]
+  },
+  "rhinemod:AmongstTheStars": {
+    "NAME": "Amongst The Stars",
+    "DESCRIPTIONS": [
+      "The dome enveloping the ceiling suddenly opens itself. False starlight floods the Tower. NL On the planetarium before you, the stars begin to move erratically. Just like in countless experiments before, no matter how many times you try, they just refuse to stay on the right track. NL From here, open the sky above, and only then can the truth be perceived.",
+      "Silver liquid spews out from the planetarium, and in an instant, all the planets are thrown out of their orbits, rushing towards a single position at a speed too fast for the naked eye. The entire galaxy pours down on you. You have weathered the storm. You cross the galaxy. The true sky is within reach.",
+      "You'd like to gaze at the stars together, just like you did before. NL ... NL The sky is beautiful.",
+      "You still have time to turn back, before you hit the barrier. Sacrifice should not be approved, even justified and inevitable. A real pioneer should be clearing the way for all humanity, instead of jumping headfirst into the abyss, never to return."
+    ],
+    "OPTIONS": [
+      "[Continue] #gObtain #yEgotist, #yTraitor, #ySeeker, #yLoner, #yPioneer.",
+      "[Stop] #gHeal #g",
+      " #gHP.",
+      "[Leave]",
+      "[Leave]"
+    ]
+  },
+  "rhinemod:HeartEvent": {
+    "NAME": "The Heart",
+    "DESCRIPTIONS": [
+      "You have everything ready, but before takeoff, there’s one issue that needs to be resolved—The Heart. Its pulsation interferes with all data calculations and must be eliminated.",
+      "Saria clenched her fist...",
+      "~One~ ~punch~ ~...~",
+      "@Two@ @punches@ @...@",
+      "@Three@ @punches!@",
+      "The Heart was pierced through, and the greatest threat has been eliminated. Now it’s time to break through the Starpod."
+    ],
+    "OPTIONS": [
+      "[Continue]",
+      "[Fight]",
+      "[Continue]",
+      "[Continue]",
+      "[Continue]",
+      "[Continue]",
+      "[Continue]",
+      "[Locked] Requires: AscensionLevel 20",
+      "[Locked] Requires: AscensionLevel 19 or below"
+    ]
+  },
+  "rhinemod:UnsecuredCorridors": {
+    "NAME": "Unsecured Corridors",
+    "DESCRIPTIONS": [
+      "You pushed open a heavy door, only to be greeted by an unexpectedly shabby sight. The walls around you were smooth and flat, resembling an ordinary storage room. The only exception was a partition door on one side, exuding an air of mystery, as if something extremely important was hidden behind it.",
+      "A phrase rings in your head:\" ~If~ ~I~ ~had~ ~any~ ~say~ ~in~ ~it,~ ~this~ ~place~ ~would~ ~be~ ~stuffed~ ~full~ ~of~ @power@ @armor@ .\" NL In an instant, several power armors appeared before you, their metallic joints emitting a low, rumbling @hum@ as they charged toward you.",
+      "\"There must be quite a few traps here,\" you decided to quickly cross the corridor to avoid them as much as possible. NL You navigated through @the@ @spears@ @emerged@ @from@ @the@ @ground@ , @floor@ @that@ @suddenly@ @collapsed@ , but didn't dodge @the@ @flying@ @blades@ , resulting in injuries as you entered the partition door. Behind the door was only a #gsmall #gball covered with glass, which you put into your pocket.",
+      "You felt you should stay focused on the goal of being here and not waste time on such irrelevant matters. You turned around and left."
+    ],
+    "OPTIONS": [
+      "[Recollect] You recalled a classic comment made by a colleague.",
+      "[Continue] #rTake #r",
+      " #rDamage. #gObtain #gDor-3 #gBionic.",
+      "[Leave]",
+      "[Fight] #rEngage #rin #ra #rdifficult #rbattle. #gObtain #g2 #gRelics."
+    ]
+  },
+  "rhinemod:TheCure": {
+    "NAME": "The Cure",
+    "DESCRIPTIONS": [
+      "The stairs of the tower suddenly change, the passageway for the other end @instantly@ @open@ . The light coming in mapped out a brown Liberi, you recognize she is Olivia Silence from Structural Section NL \"You want to tear a corner of the sky, but even if we all raise our heads, it doesn't means the problems under our feet will simply disappear. Knowing this, do you still want to move forward regardless?\"",
+      "\"Yes, at all cost.\" NL Silence gives her own unmanned aerial vehicle to you, it will help you bridge the gap between your dreams.",
+      "\"Yes, unless there are insurmountable obstacles.\" NL Silence pulls out a bottle of potion that glitters with gold and wishes you all a safe trip home.",
+      "\"...\" you hesitated. NL Silence looks to one of you, \"I know how far a scientist would go for her dream. I know that feeling of rapture, which is why I know the strength it takes to fight it with morality.\" NL \"Saria, you've long been seeking a balance between science and order. You do well; perhaps too well.\" NL \"Your order is falling apart. But if you're willing to let balance go... perhaps you'll find your roots amidst the chaos.\" NL \"I believe you can.\""
+    ],
+    "OPTIONS": [
+      "[Determination] #rLose #y75 #rGold， #gObtain #gAuxiliary #gDrone.",
+      "[Vigil] #gObtain #gFairy #gin #ga #gBottle.",
+      "[Hesitation] #gObtain #gTracing #gOrigins.",
+      "[Leave]",
+      "[Locked] Requires: At least 75 Gold.",
+      "[Locked] Requires: Play with character Rhine Lab."
+    ]
+  },
+  "rhinemod:StarlitNight": {
+    "NAME": "Starlit Night",
+    "DESCRIPTIONS": [
+      "You walked into a thick fog, and in a daze, you found yourself back on that night from your college days. The voice of Muelsyse, sounding a degree younger, echoed in your ears: 'Look at that stone, what does it resemble?' ... Right, what did that stone look like?",
+      "Kristen grabs the shining stone, and looks up. She seems to be comparing it to something, as she moves the rock around... NL \"Scientists do not believe that dreams are false. Because what they're essentially doing is proving to all humanity that dreams can come true.\" She said at the end.",
+      "\"Oh, come on! It looks like Saria, right? It's so hard, and yet it shines so 'perfectly!'\" Muelsyse took a big bite of the cream puff, as if to say that no one understood her joke.",
+      "Losing judgment due to emotions is foolish, especially since this is an illusion of the past. Since it's an illusion, all you need to do is break through it."
+    ],
+    "OPTIONS": [
+      "[Like Star] #gObtain #g\"Imperishable\".",
+      "[Like Saria] #gObtain #gWaterdrop #gManifestation.",
+      "[Stone is Just Stone] #gObatin #gCalcareous #gStamp.",
+      "[Leave]"
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "rhinemod:AbstractRhineCard": {
+    "TEXT": [
+      "+",
+      " S",
+      " K",
+      " M"
+    ]
+  },
+  "rhinemod:DestinyAction": {
+    "TEXT": [
+      "Choose a card to upgrade"
+    ]
+  },
+  "rhinemod:MultiEchoAction": {
+    "TEXT": [
+      "Choose a card to copy"
+    ]
+  },
+  "rhinemod:StarRing": {
+    "TEXT": [
+      "Star Ring",
+      "At the start of your turn, deal #b",
+      " damage to all enemies. Prioritizes enemy attacks and blasts when broken, dealing half the total taken damage to all characters. ",
+      "Deals #r5 damage to you at the end of the combat."
+    ]
+  },
+  "rhinemod:ChangeBranchOption": {
+    "TEXT": [
+      "Revamp",
+      "Change the Affinity of 1 card in your deck.",
+      "No card that can change the Affinity.",
+      "Choose a card to change the Affinity.",
+      "#bRevamp %s #bto %s"
+    ]
+  },
+  "rhinemod:RunHistoryMonsterNames": {
+    "TEXT": [
+      "Arclight Commando",
+      "Beckbeast and Commando",
+      "Double Commando",
+      "Arclight Mirrorguard",
+      "Double Vanguard",
+      "Arclight Vanguard and Commando",
+      "Perpetrator",
+      "R Series Power Armor",
+      "Experiment Power Armor and Trimounts City Guard",
+      "Arclight Team",
+      "Jesselton Williams",
+      "\"Mechanical Menace\"",
+      "\"Awaken\"",
+      "Turnpike",
+      "Traffic Police",
+      "Starpod"
+    ]
+  },
+  "rhinemod:TheSky": {
+    "TEXT": [
+      "The Sky"
+    ]
+  },
+  "rhinemod:SelectScreenText": {
+    "TEXT": [
+      "Choose 1 card from each Affinity"
+    ]
+  },
+  "rhinemod:Config": {
+    "TEXT": [
+      "New enemy spawn frequency (adjustments will take effect in the next round and require restarting the game)."
+    ],
+    "EXTRA_TEXT": [
+      "Never",
+      "Normal",
+      "More",
+      "Many"
+    ]
+  }
+}

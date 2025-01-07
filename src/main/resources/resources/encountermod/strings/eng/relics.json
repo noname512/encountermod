@@ -1,0 +1,133 @@
+{
+  "rhinemod:TITStudentIdCard": {
+    "NAME": "TIT Student ID Card",
+    "FLAVOR": "This card provides access to the academic and laboratory buildings at Trimount Institute of Technology.",
+    "DESCRIPTIONS": ["Whenever you remove 2 cards from your deck, random upgrade 1 card when entering next room."]
+  },
+  "rhinemod:RhineLabEmployeeCard": {
+    "NAME": "莱茵生命员工证",
+    "FLAVOR": "持此卡可进入莱茵生命总部及对应科室实验区域。",
+    "DESCRIPTIONS": ["Whenever you remove 1 card from your deck, random upgrade 1 card to random #yaffinity when entering next room."]
+  },
+  "rhinemod:AwakenModel": {
+    "NAME": "\"Awaken\" Model",
+    "FLAVOR": "Forward or backward, both are directions of technology; it knows no right or wrong, only perpetual progress.",
+    "DESCRIPTIONS": ["At the end of each #b3 turns, deal #b20 damage and evenly distribute to all enemies."]
+  },
+  "rhinemod:ThreeDimensionArtDisplay": {
+    "NAME": "Three-Dimension Art Display",
+    "FLAVOR": "The impression that Rhine Lab often gives is akin to this work of art: inscrutable, multi-faceted, impossible to sift fact from fiction.",
+    "DESCRIPTIONS": ["Heal #b14 HP upon pickup. Heal #b2 HP after each combat."]
+  },
+  "rhinemod:Stargate": {
+    "NAME": "Stargate",
+    "FLAVOR": "○The rootless garden is flooded with starlight, and the ring now displays a serene cavity.",
+    "DESCRIPTIONS": ["When you are not in combat, right-click to go to the shop. Can be triggered at most #b2 times.", "The energy of stargate is used up."]
+  },
+  "rhinemod:FlameEmitter": {
+    "NAME": "Flame Emitter",
+    "FLAVOR": "Saria didn't know how it would be used when approved to produce it.",
+    "DESCRIPTIONS": ["During Boss combats, gain #b3 #yStrength ."]
+  },
+  "rhinemod:OrangeStorm": {
+    "NAME": "Orange Storm",
+    "FLAVOR": "A Mama John's candy product. The orange flavor, cheap and delicious, is a best-seller among children.",
+    "DESCRIPTIONS": ["Upon pickup, raise your Max HP by #b3 . Improve the effect of the card #yPale #yFir ."]
+  },
+  "rhinemod:PittsAssortedFruits": {
+    "NAME": "Pitt's Assorted Fruits",
+    "FLAVOR": "Compete with Mama John's line of products in the sweets market with a rich taste and superb cost-effectiveness.",
+    "DESCRIPTIONS": ["Right-click to heal #b8 HP. After you raise your Max HP, refresh this relic."]
+  },
+  "rhinemod:PeppermintChapstick": {
+    "NAME": "Peppermint Chapstick",
+    "FLAVOR": "We're even again once you buy me a new stick. This is the only brand I use, don't get the wrong one. Okay?",
+    "DESCRIPTIONS": ["Right-click during combat to gain #b2 #yFlowing #yShape, #b", " time rest.", " times rest.", "Used up, can be bought again at the shop."]
+  },
+  "rhinemod:Future": {
+    "NAME": "Future.",
+    "FLAVOR": "The inevitable meaning and the ultimate seeking of life.",
+    "DESCRIPTIONS": ["Gain [E] at the start of your turn. You can no longer #yRevamp ."]
+  },
+  "rhinemod:RhineChargeSuit": {
+    "NAME": "Rhine Charge Suit",
+    "FLAVOR": "In the midst of the tempest, only those on guard stay standing.",
+    "DESCRIPTIONS": ["Gain #b2 #yCalcium at the start of your turn."]
+  },
+  "rhinemod:DeadBranches": {
+    "NAME": "\"Dead Branches\"",
+    "FLAVOR": "As if sentient, they seem to be following Nasti's thoughts.",
+    "DESCRIPTIONS": ["Gain [E] at the start of your turn. Upon pickup, lose #b15 Max HP."]
+  },
+  "rhinemod:BottleOfMemories": {
+    "NAME": "Bottle of Memory",
+    "FLAVOR": "○There was a time when they treated each other with sincerity, more or less.",
+    "DESCRIPTIONS": ["At the start of your turn, add #b1 #yMemory into your hand."]
+  },
+
+  "rhinemod:Melt": {
+    "NAME": "Melt",
+    "FLAVOR": "The water gently envelopes everything in its body.",
+    "DESCRIPTIONS": [
+      "You cannot play cards of #yaffinity to Muelsyse during next #b",
+      " combat.",
+      " combats.",
+      "She has recovered, but please cherish her."]
+  },
+  "rhinemod:LoneTrail": {
+    "NAME": "Lone Trail",
+    "FLAVOR": "Good night, Terra. \n Good night, universe.",
+    "DESCRIPTIONS": ["The adventure will head towards a different ending."]
+  },
+  "rhinemod:Deal": {
+    "NAME": "Deal",
+    "FLAVOR": "This money can't even buy a medical kit, but it's better than nothing.",
+    "DESCRIPTIONS": ["A contract from Rhine Lab, which specifies the commission and the tasks to be completed."]
+  },
+  "rhinemod:Dor3Bionic": {
+    "NAME": "Dor-3 Bionic",
+    "FLAVOR": "To her, it is not a mere creation, it is her family, her dream.",
+    "DESCRIPTIONS": ["When encountering the next #yPower #yArmor or #yAwaken, automatically eliminate the target enemy and upgrade to a different model."]
+  },
+  "rhinemod:AwakenRelic": {
+    "NAME": "\"Awaken\"",
+    "FLAVOR": "Love and hope shall achieve that which technology cannot.",
+    "DESCRIPTIONS": ["At the end of each #b3 turns, deal #b120 damage and evenly distribute to all enemies."]
+  },
+  "rhinemod:R31HeavyPowerArmorRelic": {
+    "NAME": "R-31 Heavy Power Armor",
+    "FLAVOR": "Columbians continue to seek greater efficiency within the bounds of the law.",
+    "DESCRIPTIONS": ["At the start of combat, deal #b3 damage #b10 times to a random enemy, and apply #yStunned to it."]
+  },
+  "rhinemod:ExperimentalPowerArmorRelic": {
+    "NAME": "Experimental Power Armor",
+    "FLAVOR": "It is able to function without a pilot.",
+    "DESCRIPTIONS": ["When being attacked which is not #ySmash , take half damage."]
+  },
+
+  "rhinemod:WaterdropManifestation": {
+    "NAME": "Waterdrop Manifestation",
+    "FLAVOR": "So long as the reaction between you two remains, it will never dissipate.",
+    "DESCRIPTIONS": [
+      "Whenever you played #b4 #yPlant cards, gain [E] . (Right-click to switch)",
+      "Whenever you played #b4 #yPlant cards, draw #b2 cards. (Right-click to switch)"
+    ]
+  },
+  "rhinemod:Imperishable": {
+    "NAME": "\"Inextinguishable\"",
+    "FLAVOR": "Let us meet again in the true skies.",
+    "DESCRIPTIONS": [
+      "Whenever you summon a #yStar #yRing , double its HP, but apply #b2 #yExperiment #yError . (Right-click to switch)",
+      "Whenever you summon a #yStar #yRing , halve its HP, but apply #b1 #yCritical #yPoint . (Right-click to switch)"
+    ]
+  },
+  "rhinemod:CalcareousStamp": {
+    "NAME": "Calcareous Stamp",
+    "FLAVOR": "Diamond is more flexible than she is.",
+    "DESCRIPTIONS": [
+      "Cards of affinity to Saria you played cost #yCalcium instead. (Not effected by #ySolidify , currently on, right-click to turn off)",
+      "Cards of affinity to Saria you played cost #yCalcium instead. (Not effected by #ySolidify , currently off, right-click to turn on)",
+      "Not enough #rCalcium."
+    ]
+  }
+}

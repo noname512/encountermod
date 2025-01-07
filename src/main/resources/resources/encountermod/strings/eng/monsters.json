@@ -1,0 +1,82 @@
+{
+  "rhinemod:BlackHole": {
+    "NAME": "Black Hole",
+    "MOVES": [],
+    "DIALOG": []
+  },
+  "rhinemod:ArclightCommando": {
+    "NAME": "Arclight Commando",
+    "MOVES": ["Run up", "Take off"],
+    "DIALOG": []
+  },
+  "rhinemod:MilitaryBeckbeast": {
+    "NAME": "Military Beckbeast",
+    "MOVES": [],
+    "DIALOG": []
+  },
+  "rhinemod:ArclightMirrorguard": {
+    "NAME": "Arclight Mirrorguard",
+    "MOVES": [],
+    "DIALOG": []
+  },
+  "rhinemod:ArclightVanguard": {
+    "NAME": "Arclight Vanguard",
+    "MOVES": [],
+    "DIALOG": []
+  },
+  "rhinemod:Perpetrator": {
+    "NAME": "Perpetrator",
+    "MOVES": [],
+    "DIALOG": []
+  },
+  "rhinemod:R31": {
+    "NAME": "R-31 Heavy Power Armor",
+    "MOVES": ["Move", "Overload"],
+    "DIALOG": []
+  },
+  "rhinemod:R11": {
+    "NAME": "R-11 Assault Power Armor",
+    "MOVES": ["Move"],
+    "DIALOG": []
+  },
+  "rhinemod:TrimountsCityGuard": {
+    "NAME": "Trimounts City Guard",
+    "MOVES": [],
+    "DIALOG": []
+  },
+  "rhinemod:ExperimentalPowerArmor": {
+    "NAME": "Experimental Power Armor",
+    "MOVES": [],
+    "DIALOG": []
+  },
+  "rhinemod:JesseltonWilliams": {
+    "NAME": "Jesselton Williams",
+    "MOVES": ["Iron Storm", "Armor Piercing", "Remove Camouflage"],
+    "DIALOG": []
+  },
+  "rhinemod:Crossroads": {
+    "NAME": "Crossroads",
+    "MOVES": [],
+    "DIALOG": ["Warning: Unknown Energy Source Detected!"]
+  },
+  "rhinemod:Awaken_Monster": {
+    "NAME": "Awaken",
+    "MOVES": ["Shattered Vision"],
+    "DIALOG": []
+  },
+  "rhinemod:Turnpike": {
+    "NAME": "Turnpike",
+    "MOVES": [],
+    "DIALOG": []
+  },
+  "rhinemod:TrafficPolice": {
+    "NAME": "Traffic Police",
+    "MOVES": [],
+    "DIALOG": []
+  },
+  "rhinemod:StarPod": {
+    "NAME": "Star Pod",
+    "MOVES": ["Self-Healing"],
+    "DIALOG": []
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "CALCIUM": {
+    "PROPER_NAME": "Calcium",
+    "NAMES": [
+      "Calcium",
+      "calcium",
+      "钙质粒子"
+    ],
+    "DESCRIPTION": "Lose 1 at the end of your turn. Provide numerical bonus to cards with affinity to Saria."
+  },
+  "SMASH": {
+    "PROPER_NAME": "Smash",
+    "NAMES": [
+      "Smash",
+      "smash",
+      "重击"
+    ],
+    "DESCRIPTION": "One-time damage that is higher than 15. Give the target [#EFC851]Stunned[] ."
+  },
+  "STUNNED": {
+    "PROPER_NAME": "Stunned",
+    "NAMES": [
+      "Stunned",
+      "stunned",
+      "眩晕"
+    ],
+    "DESCRIPTION": "[#EFC851]Water[] [#EFC851]Stain[] is no longer reduced and takes 7 damage when [#EFC851]Gravity[] changed."
+  },
+  "GRAVITY": {
+    "PROPER_NAME": "Gravity",
+    "NAMES": [
+      "Gravity",
+      "gravity",
+      "重力"
+    ],
+    "DESCRIPTION": "All attack damage is increased when in [#EFC851]weightless[] and decreased when in [#EFC851]overweight[]. Resets at the start of your turn."
+  },
+  "GRAVITY_UP": {
+    "PROPER_NAME": "Weightless",
+    "NAMES": [
+      "GravityUp",
+      "gravityup",
+      "Weightless",
+      "weightless",
+      "失重"
+    ],
+    "DESCRIPTION": "All attack damage increase 30%. Resets at the start of your turn."
+  },
+  "GRAVITY_DOWN": {
+    "PROPER_NAME": "Overweight",
+    "NAMES": [
+      "GravityDown",
+      "gravitydown",
+      "Overweight",
+      "overweight",
+      "超重"
+    ],
+    "DESCRIPTION": "All attack damage decrease 30%. Resets at the start of your turn."
+  },
+  "FLOWING_SHAPE": {
+    "PROPER_NAME": "Flowing Shape",
+    "NAMES": [
+      "FlowingShape",
+      "flowingshape",
+      "Flowing_Shape",
+      "flowing_shape",
+      "流形"
+    ],
+    "DESCRIPTION": "Next time you play a card with affinity to Saria or Kristen, play a copy whose value is a certain multiple (number of layers divided by 5) of the original one."
+  },
+  "WATER_DAMAGE": {
+    "PROPER_NAME": "Water Stain",
+    "NAMES": [
+      "WaterDamage",
+      "waterdamage",
+      "WaterStain",
+      "waterstain",
+      "Water_Stain",
+      "water_stain",
+      "水渍"
+    ],
+    "DESCRIPTION": "A stackable state. Enter [#EFC851]Submersion[] when accumulated to a certain value."
+  },
+  "SUBMERSION": {
+    "PROPER_NAME": "Submersion",
+    "NAMES": [
+      "Submersion",
+      "submersion",
+      "浸没"
+    ],
+    "DESCRIPTION": "A multi-layered state. According to the number of layers, take a certain amount of damage and deal less damage. Dead when accumulated to 4 layers. Reduces 5 [#EFC851]Water Stain[] each turn."
+  },
+  "RESEARCH_PROGRESS": {
+    "PROPER_NAME": "Research Progress",
+    "NAMES": [
+      "ResearchProgress",
+      "researchprogress",
+      "Research_Progress",
+      "research_progress",
+      "科研进度"
+    ],
+    "DESCRIPTION": "Gain 1 [#EFC851]Perturbation[] when accumulated to a certain value. The required value increases linearly."
+  },
+  "PERTURBATION": {
+    "PROPER_NAME": "Perturbation",
+    "NAMES": [
+      "Perturbation",
+      "波骇"
+    ],
+    "DESCRIPTION": "Each layer alternately provides linearly increasing layers of [#EFC851]Metallicize[] and [#EFC851]Thorns[] ."
+  },
+  "STARRING": {
+    "PROPER_NAME": "Star Ring",
+    "NAMES": [
+      "StarRing",
+      "starring",
+      "Star_Ring",
+      "star_ring",
+      "星环"
+    ],
+    "DESCRIPTION": "A summon that deals 5 damage to all enemies at the start of your turn. Prioritizes enemy attacks and blasts when broken, dealing half the total taken damage to all characters. Deals 5 damage to you at the end of the combat."
+  },
+  "GOODNIGHT": {
+    "PROPER_NAME": "Good Night, Terra",
+    "NAMES": [
+      "Good_Night,_Terra",
+      "good_night,_terra",
+      "晚安，泰拉"
+    ],
+    "DESCRIPTION": "Removed until end of combat, i.e. [#EFC851]Exhaust[] ."
+  },
+  "AFFINITY": {
+    "PROPER_NAME": "Affinity",
+    "NAMES": [
+      "Affinity",
+      "倾向"
+    ],
+    "DESCRIPTION": "Different branches to chose when upgrade cards. "
+  },
+  "EXPERIMENTERROR": {
+    "PROPER_NAME": "Experiment Error",
+    "NAMES": [
+      "实验错误",
+      "ExperimentError",
+      "experimenterror",
+      "Experiment_Error",
+      "experiment_error"
+    ],
+    "DESCRIPTION": "When the [#EFC851]Star[] [#EFC851]Ring[] dead，Add same number of [#EFC851]Unscrupulous[] to your discard pile."
+  },
+  "CRITICALPOINT": {
+    "PROPER_NAME": "Critical Point",
+    "NAMES": [
+      "临界点",
+      "CriticalPoint",
+      "criticalpoint",
+      "Critical_Point",
+      "critical_point"
+    ],
+    "DESCRIPTION": "When the [#EFC851]Star[] [#EFC851]Ring[] explodes, damage deal to enemy increases the same number of times."
+  }
+}

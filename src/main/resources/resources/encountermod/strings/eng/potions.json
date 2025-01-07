@@ -1,0 +1,14 @@
+{
+  "rhinemod:BottledCalcium": {
+    "NAME": "Bottled Calcium",
+    "DESCRIPTIONS": ["Gain #b", " #yCalcium ."]
+  },
+  "rhinemod:BlackBeanTea": {
+    "NAME": "Black Bean Tea",
+    "DESCRIPTIONS": ["Gain #b", " #yStrength . At the start of next turn, lose #b", " #yGold ."]
+  },
+  "rhinemod:UnknownReagent": {
+    "NAME": "Unknown Reagent",
+    "DESCRIPTIONS": ["Deal #b", " damage to random enemy #b", " times. If the target is a mechanical enemy from Rhine Mod, deal double damage."]
+  }
+}

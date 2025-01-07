@@ -1,0 +1,17 @@
+{
+  "encountermod:GraffitiOfTheEraOfHope": {
+    "NAME": "希望时代的涂鸦",
+    "FLAVOR": "我是个提卡兹孤儿，爸爸妈妈死于天灾，是隔壁的菲林叔叔一家收养了我，把我当作家里的一分子。我可以问心无愧地说，我是先民的后代。",
+    "DESCRIPTIONS": ["拾取时立刻获得 #g2 #y构想 ，刷新时不会出现精英敌人。"]
+  },
+  "encountermod:HatredOfTheEraOfVendetta": {
+    "NAME": "死仇时代的恨意",
+    "FLAVOR": "我的妹妹被血魔咬死，爸爸被食腐者带走，妈妈带着我逃了出来。我绝不会向萨卡兹妥协，就算要忏悔，也得等到它们彻底消失再说。",
+    "DESCRIPTIONS": ["所有角色造成的伤害提高至 #g120% ，刷新时更高概率变为战斗节点。"]
+  },
+  "encountermod:LongingOfTheEraOfDreams": {
+    "NAME": "美愿时代的留恋",
+    "FLAVOR": "听说萨卡兹能够实现任何愿望，于是我执着地探求他们的秘密，如今看来，这成了他们苦难的开端。",
+    "DESCRIPTIONS": ["拾取时立刻获得 #g50 金币，刷新时宝箱的权重提升至 #g3 倍，宝箱会尽量提供适配遗物。"]
+  }
+}
