@@ -1,12 +1,10 @@
 {
-  "encountermod:Idea": {
+  "encountermod:panel": {
     "TEXT": [
-      "构想"
-    ]
-  },
-  "encountermod:Refresh": {
-    "TEXT": [
-      "刷新"
+      "刷新",
+      "消耗 1 #y构想 ，将此节点刷新为一个不同类型的节点。",
+      "构想",
+      "战斗胜利时有 30% 概率获取，可用于刷新节点。"
     ]
   }
 }

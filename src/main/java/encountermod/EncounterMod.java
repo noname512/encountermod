@@ -11,6 +11,7 @@ import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
@@ -18,6 +19,7 @@ import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.custom.CustomMod;
+import encountermod.patches.RefreshPatch;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import encountermod.events.*;
@@ -32,8 +34,10 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
 
     private static final Logger logger = LogManager.getLogger(EncounterMod.class.getName());
     public static Texture ideaImg;
+    public static Texture refreshImg;
     public static int ideaCount;
-    public static final Hitbox ideaHb = new Hitbox(210.0F * Settings.scale, 64.0F * Settings.scale);
+    public static Hitbox ideaHb;
+    public static String[] TEXT;
 
     public EncounterMod() {
         BaseMod.subscribe(this);
@@ -47,6 +51,14 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
     @Override
     public void receivePostInitialize() {
         ideaImg = ImageMaster.loadImage("resources/encountermod/images/ui/Idea.png");
+        refreshImg = ImageMaster.loadImage("resources/encountermod/images/ui/Refresh.png");
+        ideaHb = new Hitbox(140.0F * Settings.scale, 64.0F * Settings.scale);
+        float ICON_W = 64.0F * Settings.scale;
+        float ICON_Y = Settings.HEIGHT - ICON_W;
+        ideaHb.move(Settings.WIDTH - 670.0F * Settings.scale, ICON_Y + ICON_W / 2.0F);
+        UIStrings uiString = CardCrawlGame.languagePack.getUIString("encountermod:panel");
+        TEXT = uiString.TEXT;
+        RefreshPatch.init();
         initializeEvents();
     }
 
