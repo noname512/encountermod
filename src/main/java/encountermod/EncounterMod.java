@@ -38,6 +38,7 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
     public static int ideaCount;
     public static Hitbox ideaHb;
     public static String[] TEXT;
+    public static int prob;
 
     public EncounterMod() {
         BaseMod.subscribe(this);
@@ -108,10 +109,20 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
 
     @Override
     public void receiveEditRelics() {
+        // common.
+        BaseMod.addRelic(new BagOfIdeas(), RelicType.SHARED);
+
+        // uncommon.
+        BaseMod.addRelic(new RevenantRemains(), RelicType.SHARED);
+
+        // rare.
+        BaseMod.addRelic(new SpiritHunterEarl(), RelicType.SHARED);
+
         // event.
         BaseMod.addRelic(new GraffitiOfTheEraOfHope(), RelicType.SHARED);
         BaseMod.addRelic(new HatredOfTheEraOfVendetta(), RelicType.SHARED);
         BaseMod.addRelic(new LongingOfTheEraOfDreams(), RelicType.SHARED);
+        BaseMod.addRelic(new VisionsOfTheEraOfProsperity(), RelicType.SHARED);
     }
 
     @Override

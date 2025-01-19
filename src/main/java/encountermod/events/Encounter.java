@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import encountermod.relics.GraffitiOfTheEraOfHope;
 import encountermod.relics.HatredOfTheEraOfVendetta;
 import encountermod.relics.LongingOfTheEraOfDreams;
+import encountermod.relics.VisionsOfTheEraOfProsperity;
 
 public class Encounter extends AbstractImageEvent {
     public static final String ID = "encountermod:Encounter";
@@ -26,7 +27,8 @@ public class Encounter extends AbstractImageEvent {
         this.imageEventText.setDialogOption(OPTIONS[0], false, new GraffitiOfTheEraOfHope());
         this.imageEventText.setDialogOption(OPTIONS[1], false, new HatredOfTheEraOfVendetta());
         this.imageEventText.setDialogOption(OPTIONS[2], false, new LongingOfTheEraOfDreams());
-        this.imageEventText.setDialogOption(OPTIONS[3]);
+        this.imageEventText.setDialogOption(OPTIONS[3], false, new VisionsOfTheEraOfProsperity());
+        this.imageEventText.setDialogOption(OPTIONS[4]);
     }
 
     @Override
@@ -51,8 +53,13 @@ public class Encounter extends AbstractImageEvent {
                     logMetricObtainRelic(NAME, "Longing of the Era of Dreams", relic);
                     AbstractDungeon.getCurrRoom().spawnRelicAndObtain(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F, relic);
                     break;
+                case 3:
+                    relic = new VisionsOfTheEraOfProsperity();
+                    logMetricObtainRelic(NAME, "Visions of the Era of Prosperity", relic);
+                    AbstractDungeon.getCurrRoom().spawnRelicAndObtain(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F, relic);
+                    break;
             }
-            this.imageEventText.updateDialogOption(0, OPTIONS[3]);
+            this.imageEventText.updateDialogOption(0, OPTIONS[4]);
             this.imageEventText.clearRemainingOptions();
         }
         openMap();

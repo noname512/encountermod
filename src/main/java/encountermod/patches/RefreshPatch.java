@@ -2,18 +2,17 @@ package encountermod.patches;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.*;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
-import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.rooms.*;
 import com.megacrit.cardcrawl.screens.DungeonMapScreen;
 import encountermod.EncounterMod;
+import encountermod.relics.VisionsOfTheEraOfProsperity;
 import javassist.CtBehavior;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class RefreshPatch {
     @SpirePatch(clz = MapRoomNode.class, method = SpirePatch.CLASS)
     public static class OptFields {
         public static SpireField<Hitbox> refreshHb = new SpireField<>(() -> new Hitbox(25.0F * Settings.scale, 25.0F * Settings.scale));
-        public static SpireField<Boolean> refreshed = new SpireField<>(() -> false);
+        public static SpireField<Integer> refreshNumRoom = new SpireField<>(() -> 0);
     }
 
     private static ArrayList<PowerTip> tips;
@@ -33,6 +32,8 @@ public class RefreshPatch {
     private static float OFFSET_Y;
     public static HashMap<String, Integer> roomWeight;
     public static int totalWeight;
+    public static int refreshNumDungeon;
+    public static int maxRefreshNum;
 
     public static void init() {
         tips = new ArrayList<>();
@@ -48,6 +49,7 @@ public class RefreshPatch {
         roomWeight.put("Shop", 1);
         roomWeight.put("Rest", 2);
         totalWeight = 12;
+        maxRefreshNum = 1;
     }
 
     @SpirePatch(clz = MapRoomNode.class, method = "render")
@@ -88,22 +90,26 @@ public class RefreshPatch {
                 OptFields.refreshHb.get(_inst).update();
 
                 if (OptFields.refreshHb.get(_inst).hovered) {
-                    if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.MAP && AbstractDungeon.dungeonMapScreen.clicked && ___animWaitTimer[0] <= 0.0F && EncounterMod.ideaCount > 0 && !OptFields.refreshed.get(_inst)) {
+                    if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.MAP && AbstractDungeon.dungeonMapScreen.clicked && ___animWaitTimer[0] <= 0.0F && EncounterMod.ideaCount > 0 && OptFields.refreshNumRoom.get(_inst) < maxRefreshNum) {
                         EncounterMod.ideaCount--;
-                        OptFields.refreshed.set(_inst, true);
+                        OptFields.refreshNumRoom.set(_inst, OptFields.refreshNumRoom.get(_inst) + 1);
                         String roomType = getRoomTypeStr(_inst);
-                        int resWeight = totalWeight - roomWeight.getOrDefault(roomType, 0);
-                        int rnd = AbstractDungeon.mapRng.random(resWeight - 1);
                         String targetRoomType = "";
-                        for (String s : roomWeight.keySet())
-                            if (!s.equals(roomType)) {
-                                if (rnd < roomWeight.get(s)) {
-                                    targetRoomType = s;
-                                    break;
-                                } else {
-                                    rnd -= roomWeight.get(s);
+                        if (AbstractDungeon.player.hasRelic(VisionsOfTheEraOfProsperity.ID) && !roomType.equals("Shop") && refreshNumDungeon == 0) {
+                            targetRoomType = "Shop";
+                        } else {
+                            int resWeight = totalWeight - roomWeight.getOrDefault(roomType, 0);
+                            int rnd = AbstractDungeon.mapRng.random(resWeight - 1);
+                            for (String s : roomWeight.keySet())
+                                if (!s.equals(roomType)) {
+                                    if (rnd < roomWeight.get(s)) {
+                                        targetRoomType = s;
+                                        break;
+                                    } else {
+                                        rnd -= roomWeight.get(s);
+                                    }
                                 }
-                            }
+                        }
                         if (targetRoomType.isEmpty()) {
                             Logger.getLogger(RefreshPatch.class.getName()).warning("Invalid refresh result!");
                         } else {
@@ -129,6 +135,7 @@ public class RefreshPatch {
                                     break;
                             }
                         }
+                        refreshNumDungeon++;
                     }
                 }
             }
@@ -159,5 +166,13 @@ public class RefreshPatch {
             roomType = "Rest";
         }
         return roomType;
+    }
+
+    @SpirePatch(clz = AbstractDungeon.class, method = "generateMap")
+    public static class InitFreshNumDungeonPatch {
+        @SpirePostfixPatch
+        public static void Postfix() {
+            RefreshPatch.refreshNumDungeon = 0;
+        }
     }
 }

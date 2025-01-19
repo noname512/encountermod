@@ -19,7 +19,8 @@ public class IdeaPatch {
     public static class InitializePatch {
         @SpirePrefixPatch
         public static void Prefix(AbstractPlayer _inst) {
-            EncounterMod.ideaCount = 0;
+            EncounterMod.ideaCount = 10;
+            EncounterMod.prob = 3;
         }
     }
 
@@ -27,7 +28,7 @@ public class IdeaPatch {
     public static class OnVictoryPatch {
         @SpirePrefixPatch
         public static void Prefix(AbstractPlayer _inst) {
-            if (AbstractDungeon.miscRng.random(9) < 3) {
+            if (AbstractDungeon.miscRng.random(9) < EncounterMod.prob) {
                 EncounterMod.ideaCount++;
                 // TODO: vfx
             }

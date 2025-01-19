@@ -6,31 +6,22 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
-import encountermod.patches.RefreshPatch;
 
-public class LongingOfTheEraOfDreams extends CustomRelic {
+public class VisionsOfTheEraOfProsperity extends CustomRelic {
 
-    public static final String ID = "encountermod:LongingOfTheEraOfDreams";
+    public static final String ID = "encountermod:VisionsOfTheEraOfProsperity";
     public static final RelicStrings relicStrings = CardCrawlGame.languagePack.getRelicStrings(ID);
     public static final String NAME = relicStrings.NAME;
     public static final String[] DESCRIPTIONS = relicStrings.DESCRIPTIONS;
-    public static final Texture IMG = new Texture("resources/encountermod/images/relics/LongingOfTheEraOfDreams.png");
-    public static final Texture IMG_OUTLINE = new Texture("resources/encountermod/images/relics/LongingOfTheEraOfDreams_p.png");
-    public LongingOfTheEraOfDreams() {
+    public static final Texture IMG = new Texture("resources/encountermod/images/relics/VisionsOfTheEraOfProsperity.png");
+    public static final Texture IMG_OUTLINE = new Texture("resources/encountermod/images/relics/VisionsOfTheEraOfProsperity_p.png");
+    public VisionsOfTheEraOfProsperity() {
         super(ID, IMG, IMG_OUTLINE, RelicTier.SPECIAL, LandingSound.MAGICAL);
     }
 
     @Override
     public void onEquip() {
-        AbstractDungeon.player.gainGold(50);
-        RefreshPatch.roomWeight.put("Treasure", 6);
-        RefreshPatch.totalWeight = 16;
-    }
-
-    @Override
-    public void onUnequip() {
-        RefreshPatch.roomWeight.put("Treasure", 2);
-        RefreshPatch.totalWeight = 12;
+        AbstractDungeon.player.gainGold(180);
     }
 
     @Override
@@ -40,6 +31,6 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
 
     @Override
     public AbstractRelic makeCopy() {
-        return new LongingOfTheEraOfDreams();
+        return new VisionsOfTheEraOfProsperity();
     }
 }
