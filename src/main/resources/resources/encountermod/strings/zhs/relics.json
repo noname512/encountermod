@@ -7,7 +7,7 @@
   "encountermod:HatredOfTheEraOfVendetta": {
     "NAME": "死仇时代的恨意",
     "FLAVOR": "我的妹妹被血魔咬死，爸爸被食腐者带走，妈妈带着我逃了出来。我绝不会向萨卡兹妥协，就算要忏悔，也得等到它们彻底消失再说。",
-    "DESCRIPTIONS": ["所有角色造成的伤害提高至 #g120% ，刷新时更高概率变为精英战斗节点。战斗胜利时有额外 #g20% 的概率获得 #y构想 。"]
+    "DESCRIPTIONS": ["所有角色的攻击提高至 #g120% ，刷新时更高概率变为精英战斗节点。战斗胜利时有额外 #g20% 的概率获得 #y构想 。"]
   },
   "encountermod:LongingOfTheEraOfDreams": {
     "NAME": "美愿时代的留恋",

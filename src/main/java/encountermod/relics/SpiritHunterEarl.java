@@ -3,8 +3,11 @@ package encountermod.relics;
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.rooms.MonsterRoom;
 import encountermod.EncounterMod;
 
 public class SpiritHunterEarl extends CustomRelic {
@@ -27,6 +30,16 @@ public class SpiritHunterEarl extends CustomRelic {
     @Override
     public void onUnequip() {
         EncounterMod.prob -= 3;
+    }
+
+    @Override
+    public void onEnterRoom(AbstractRoom r) {
+        if (!(r instanceof MonsterRoom)) {
+            if (AbstractDungeon.miscRng.random(9) < 2) {
+                EncounterMod.ideaCount++;
+                // TODO: vfx
+            }
+        }
     }
 
     @Override

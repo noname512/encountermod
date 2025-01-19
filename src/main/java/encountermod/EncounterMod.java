@@ -132,6 +132,8 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
         BaseMod.loadCustomStrings(RelicStrings.class, relicStrings);
         String eventStrings = Gdx.files.internal("resources/encountermod/strings/" + lang + "/events.json").readString(String.valueOf(StandardCharsets.UTF_8));
         BaseMod.loadCustomStrings(EventStrings.class, eventStrings);
+        String powerStrings = Gdx.files.internal("resources/encountermod/strings/" + lang + "/powers.json").readString(String.valueOf(StandardCharsets.UTF_8));
+        BaseMod.loadCustomStrings(PowerStrings.class, powerStrings);
         String uiStrings = Gdx.files.internal("resources/encountermod/strings/" + lang + "/ui.json").readString(String.valueOf(StandardCharsets.UTF_8));
         BaseMod.loadCustomStrings(UIStrings.class, uiStrings);
     }

@@ -39,7 +39,7 @@ public class RefreshPatch {
         tips = new ArrayList<>();
         tips.add(new PowerTip(EncounterMod.TEXT[0], EncounterMod.TEXT[1]));
         SPACING_X = Settings.xScale * 64.0F * 2.0F;
-        OFFSET_X = 600.0F * Settings.xScale;
+        OFFSET_X = 610.0F * Settings.xScale;
         OFFSET_Y = 200.0F * Settings.scale;
         roomWeight = new HashMap<>();
         roomWeight.put("Monster", 4);
@@ -60,7 +60,7 @@ public class RefreshPatch {
                 return;
             }
             if (AbstractDungeon.getCurrMapNode().isConnectedTo(_inst) || AbstractDungeon.getCurrMapNode().wingedIsConnectedTo(_inst) || (!AbstractDungeon.firstRoomChosen && _inst.y == 0)) {
-                sb.draw(EncounterMod.refreshImg, _inst.x * SPACING_X + OFFSET_X - 64.0F * Settings.scale + _inst.offsetX, _inst.y * Settings.MAP_DST_Y + OFFSET_Y + DungeonMapScreen.offsetY - 64.0F * Settings.scale + _inst.offsetY, 42.0F, 42.0F, 84.0F, 84.0F, 0.3F * Settings.scale, 0.3F * Settings.scale, 0.0F, 0, 0, 84, 84, false, false);
+                sb.draw(EncounterMod.refreshImg, _inst.x * SPACING_X + OFFSET_X - 42.0F + _inst.offsetX, _inst.y * Settings.MAP_DST_Y + OFFSET_Y + DungeonMapScreen.offsetY - 42.0F + _inst.offsetY, 42.0F, 42.0F, 84.0F, 84.0F, 0.3F * Settings.scale, 0.3F * Settings.scale, 0.0F, 0, 0, 84, 84, false, false);
                 if (OptFields.refreshHb.get(_inst).hovered) {
                     OptFields.refreshHb.get(_inst).render(sb);
                     TipHelper.queuePowerTips(InputHelper.mX + 50.0F * Settings.scale, InputHelper.mY + 50.0F * Settings.scale, tips);

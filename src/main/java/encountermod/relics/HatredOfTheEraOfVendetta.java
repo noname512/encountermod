@@ -2,13 +2,15 @@ package encountermod.relics;
 
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.MathUtils;
-import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.RelicStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import encountermod.EncounterMod;
 import encountermod.patches.RefreshPatch;
+import encountermod.powers.HatredPower;
 
 public class HatredOfTheEraOfVendetta extends CustomRelic {
 
@@ -24,8 +26,8 @@ public class HatredOfTheEraOfVendetta extends CustomRelic {
 
     @Override
     public void onEquip() {
-        RefreshPatch.roomWeight.put("Elite", 4);
-        RefreshPatch.totalWeight = 15;
+        RefreshPatch.roomWeight.put("Elite", 12);
+        RefreshPatch.totalWeight = 23;
         EncounterMod.prob += 2;
     }
 
@@ -37,13 +39,16 @@ public class HatredOfTheEraOfVendetta extends CustomRelic {
     }
 
     @Override
-    public int onAttackedToChangeDamage(DamageInfo info, int damageAmount) {
-        return MathUtils.floor(damageAmount * 1.2F);
+    public void atBattleStart() {
+        addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new HatredPower(AbstractDungeon.player)));
+        for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
+            addToBot(new ApplyPowerAction(m, m, new HatredPower(m)));
+        }
     }
 
     @Override
-    public int onAttackToChangeDamage(DamageInfo info, int damageAmount) {
-        return MathUtils.floor(damageAmount * 1.2F);
+    public void onSpawnMonster(AbstractMonster m) {
+        addToBot(new ApplyPowerAction(m, m, new HatredPower(m)));
     }
 
     @Override

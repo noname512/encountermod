@@ -18,7 +18,7 @@ public class IdeaPatch {
     public static class InitializePatch {
         @SpirePrefixPatch
         public static void Prefix(AbstractPlayer _inst) {
-            EncounterMod.ideaCount = 10;
+            EncounterMod.ideaCount = 0;
             EncounterMod.prob = 3;
             EncounterMod.firstEvent = true;
         }
