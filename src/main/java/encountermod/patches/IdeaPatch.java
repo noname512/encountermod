@@ -14,13 +14,13 @@ import com.megacrit.cardcrawl.ui.panels.TopPanel;
 import encountermod.EncounterMod;
 
 public class IdeaPatch {
-
     @SpirePatch(clz = AbstractPlayer.class, method = "initializeStarterDeck")
     public static class InitializePatch {
         @SpirePrefixPatch
         public static void Prefix(AbstractPlayer _inst) {
             EncounterMod.ideaCount = 10;
             EncounterMod.prob = 3;
+            EncounterMod.firstEvent = true;
         }
     }
 

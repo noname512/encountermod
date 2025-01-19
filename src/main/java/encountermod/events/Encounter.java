@@ -1,15 +1,21 @@
 package encountermod.events;
 
+import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.AbstractImageEvent;
 import com.megacrit.cardcrawl.localization.EventStrings;
+import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import encountermod.EncounterMod;
 import encountermod.relics.GraffitiOfTheEraOfHope;
 import encountermod.relics.HatredOfTheEraOfVendetta;
 import encountermod.relics.LongingOfTheEraOfDreams;
 import encountermod.relics.VisionsOfTheEraOfProsperity;
+
 
 public class Encounter extends AbstractImageEvent {
     public static final String ID = "encountermod:Encounter";
@@ -23,10 +29,10 @@ public class Encounter extends AbstractImageEvent {
         INTRO, LEAVE
     }
     public Encounter() {
-        super(NAME, DESCRIPTIONS[0], "resources/rhinemod/images/event/Encounter.png");
+        super(NAME, DESCRIPTIONS[0], "resources/encountermod/images/event/Encounter.png");
         this.imageEventText.setDialogOption(OPTIONS[0], false, new GraffitiOfTheEraOfHope());
         this.imageEventText.setDialogOption(OPTIONS[1], false, new HatredOfTheEraOfVendetta());
-        this.imageEventText.setDialogOption(OPTIONS[2], false, new LongingOfTheEraOfDreams());
+        this.imageEventText.setDialogOption(OPTIONS[2], true, new LongingOfTheEraOfDreams());
         this.imageEventText.setDialogOption(OPTIONS[3], false, new VisionsOfTheEraOfProsperity());
         this.imageEventText.setDialogOption(OPTIONS[4]);
     }
@@ -63,5 +69,17 @@ public class Encounter extends AbstractImageEvent {
             this.imageEventText.clearRemainingOptions();
         }
         openMap();
+    }
+
+    @SpirePatch(clz = AbstractDungeon.class, method = "generateEvent")
+    public static class GenerateEventPatch {
+        @SpirePrefixPatch
+        public static SpireReturn<?> Prefix(Random rng) {
+            if (EncounterMod.firstEvent) {
+                EncounterMod.firstEvent = false;
+                return SpireReturn.Return(new Encounter());
+            }
+            return SpireReturn.Continue();
+        }
     }
 }

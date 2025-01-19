@@ -39,6 +39,7 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
     public static Hitbox ideaHb;
     public static String[] TEXT;
     public static int prob;
+    public static boolean firstEvent;
 
     public EncounterMod() {
         BaseMod.subscribe(this);
@@ -66,7 +67,6 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
     private void initializeEvents() {
         BaseMod.addEvent(new AddEventParams.Builder(Encounter.ID, Encounter.class).
                 eventType(EventUtils.EventType.ONE_TIME).
-                dungeonID("TheCity").
                 endsWithRewardsUI(false).
                 create());
     }
