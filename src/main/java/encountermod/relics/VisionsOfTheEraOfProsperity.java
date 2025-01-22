@@ -6,6 +6,8 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.rooms.TreasureRoomBoss;
 
 public class VisionsOfTheEraOfProsperity extends CustomRelic {
 
@@ -22,11 +24,19 @@ public class VisionsOfTheEraOfProsperity extends CustomRelic {
     @Override
     public void onEquip() {
         AbstractDungeon.player.gainGold(180);
+        counter = 0;
     }
 
     @Override
     public String getUpdatedDescription() {
         return DESCRIPTIONS[0];
+    }
+
+    @Override
+    public void onEnterRoom(AbstractRoom room) {
+        if (room instanceof TreasureRoomBoss) {
+            counter = 0;
+        }
     }
 
     @Override

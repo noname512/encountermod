@@ -25,7 +25,7 @@ public class HatredPower extends AbstractPower {
     }
 
     @Override
-    public float atDamageGive(float damage, DamageInfo.DamageType type, AbstractCard card) {
+    public float atDamageGive(float damage, DamageInfo.DamageType type) {
         return damage * 1.2F;
     }
 

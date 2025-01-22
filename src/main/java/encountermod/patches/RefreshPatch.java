@@ -90,8 +90,13 @@ public class RefreshPatch {
                 OptFields.refreshHb.get(_inst).update();
 
                 if (OptFields.refreshHb.get(_inst).hovered) {
-                    if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.MAP && AbstractDungeon.dungeonMapScreen.clicked && ___animWaitTimer[0] <= 0.0F && EncounterMod.ideaCount > 0 && OptFields.refreshNumRoom.get(_inst) < maxRefreshNum) {
-                        EncounterMod.ideaCount--;
+                    if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.MAP && AbstractDungeon.dungeonMapScreen.clicked && ___animWaitTimer[0] <= 0.0F && (EncounterMod.ideaCount > 0 || (AbstractDungeon.player.hasRelic(VisionsOfTheEraOfProsperity.ID) && AbstractDungeon.player.getRelic(VisionsOfTheEraOfProsperity.ID).counter == 0)) && OptFields.refreshNumRoom.get(_inst) < maxRefreshNum) {
+                        if ((AbstractDungeon.player.hasRelic(VisionsOfTheEraOfProsperity.ID) && AbstractDungeon.player.getRelic(VisionsOfTheEraOfProsperity.ID).counter == 0)) {
+                            AbstractDungeon.player.getRelic(VisionsOfTheEraOfProsperity.ID).counter = 1;
+                        }
+                        else {
+                            EncounterMod.ideaCount--;
+                        }
                         OptFields.refreshNumRoom.set(_inst, OptFields.refreshNumRoom.get(_inst) + 1);
                         String roomType = getRoomTypeStr(_inst);
                         String targetRoomType = "";

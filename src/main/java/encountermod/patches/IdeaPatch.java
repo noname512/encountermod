@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.TipHelper;
+import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.ui.panels.TopPanel;
 import encountermod.EncounterMod;
 
@@ -28,6 +29,10 @@ public class IdeaPatch {
     public static class OnVictoryPatch {
         @SpirePrefixPatch
         public static void Prefix(AbstractPlayer _inst) {
+            if (AbstractDungeon.getCurrRoom() instanceof MonsterRoomBoss) {
+                EncounterMod.ideaCount++;
+                return;
+            }
             if (AbstractDungeon.miscRng.random(9) < EncounterMod.prob) {
                 EncounterMod.ideaCount++;
                 // TODO: vfx
