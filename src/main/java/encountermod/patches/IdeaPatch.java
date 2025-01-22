@@ -22,6 +22,7 @@ public class IdeaPatch {
             EncounterMod.ideaCount = 0;
             EncounterMod.prob = 3;
             EncounterMod.firstEvent = true;
+            SaveData.fromSaveFile = false;
         }
     }
 

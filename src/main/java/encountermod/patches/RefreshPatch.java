@@ -2,14 +2,18 @@ package encountermod.patches;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.*;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.PowerTip;
+import com.megacrit.cardcrawl.helpers.SaveHelper;
 import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
+import com.megacrit.cardcrawl.map.MapGenerator;
 import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.rooms.*;
+import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 import com.megacrit.cardcrawl.screens.DungeonMapScreen;
 import encountermod.EncounterMod;
 import encountermod.relics.VisionsOfTheEraOfProsperity;
@@ -33,7 +37,10 @@ public class RefreshPatch {
     public static HashMap<String, Integer> roomWeight;
     public static int totalWeight;
     public static int refreshNumDungeon;
+    public static int rngUsedNum;
     public static int maxRefreshNum;
+
+    private static final Logger logger = Logger.getLogger(RefreshPatch.class.getName());
 
     public static void init() {
         tips = new ArrayList<>();
@@ -103,6 +110,7 @@ public class RefreshPatch {
                             EncounterMod.ideaCount--;
                             int resWeight = totalWeight - roomWeight.getOrDefault(roomType, 0);
                             int rnd = AbstractDungeon.mapRng.random(resWeight - 1);
+                            rngUsedNum++;
                             for (String s : roomWeight.keySet())
                                 if (!s.equals(roomType)) {
                                     if (rnd < roomWeight.get(s)) {
@@ -114,31 +122,16 @@ public class RefreshPatch {
                                 }
                         }
                         if (targetRoomType.isEmpty()) {
-                            Logger.getLogger(RefreshPatch.class.getName()).warning("Invalid refresh result!");
+                            logger.warning("Invalid refresh result!");
                         } else {
-                            Logger.getLogger(RefreshPatch.class.getName()).info("node(" + _inst.x + ", " + _inst.y + ") refreshed to " + targetRoomType + " Room.");
-                            switch (targetRoomType) {
-                                case "Elite":
-                                    _inst.room = new MonsterRoomElite();
-                                    break;
-                                case "Monster":
-                                    _inst.room = new MonsterRoom();
-                                    break;
-                                case "Event":
-                                    _inst.room = new EventRoom();
-                                    break;
-                                case "Treasure":
-                                    _inst.room = new TreasureRoom();
-                                    break;
-                                case "Shop":
-                                    _inst.room = new ShopRoom();
-                                    break;
-                                case "Rest":
-                                    _inst.room = new RestRoom();
-                                    break;
-                            }
+                            logger.info("node(" + _inst.x + ", " + _inst.y + ") refreshed to " + targetRoomType + " Room.");
+                            SaveData.nodeRefreshData.add(new SaveData.NodeRefreshSave(_inst.x, _inst.y, targetRoomType));
+                            _inst.room = getRoomFromType(targetRoomType);
+                            refreshNumDungeon++;
                         }
-                        refreshNumDungeon++;
+                        if (!CardCrawlGame.loadingSave) {
+                            SaveHelper.saveIfAppropriate(SaveFile.SaveType.ENTER_ROOM);
+                        }
                     }
                 }
             }
@@ -154,30 +147,67 @@ public class RefreshPatch {
     }
 
     private static String getRoomTypeStr(MapRoomNode _inst) {
-        String roomType = "";
         if (_inst.room instanceof MonsterRoomElite) {
-            roomType = "Elite";
+            return "Elite";
         } else if (_inst.room instanceof MonsterRoom && !(_inst.room instanceof MonsterRoomBoss)) {
-            roomType = "Monster";
+            return "Monster";
         } else if (_inst.room instanceof EventRoom) {
-            roomType = "Event";
+            return "Event";
         } else if (_inst.room instanceof TreasureRoom) {
-            roomType = "Treasure";
+            return "Treasure";
         } else if (_inst.room instanceof ShopRoom) {
-            roomType = "Shop";
+            return "Shop";
         } else if (_inst.room instanceof RestRoom) {
-            roomType = "Rest";
+            return "Rest";
         }
-        return roomType;
+        return "";
+    }
+
+    private static AbstractRoom getRoomFromType(String type) {
+        switch (type) {
+            case "Elite":
+                return new MonsterRoomElite();
+            case "Monster":
+                return new MonsterRoom();
+            case "Event":
+                return new EventRoom();
+            case "Treasure":
+                return new TreasureRoom();
+            case "Shop":
+                return new ShopRoom();
+            case "Rest":
+                return new RestRoom();
+        }
+        return new EventRoom();
     }
 
     @SpirePatch(clz = AbstractDungeon.class, method = "generateMap")
     public static class InitFreshNumDungeonPatch {
         @SpirePostfixPatch
         public static void Postfix() {
-            RefreshPatch.refreshNumDungeon = 0;
-            if (AbstractDungeon.player.hasRelic(VisionsOfTheEraOfProsperity.ID)) {
-                AbstractDungeon.player.getRelic(VisionsOfTheEraOfProsperity.ID).counter = 1;
+            logger.info("fromSaveFile = " + SaveData.fromSaveFile);
+            if (SaveData.fromSaveFile) {
+                for (SaveData.NodeRefreshSave data : SaveData.nodeRefreshData) {
+                    MapRoomNode node = AbstractDungeon.map.get(data.y).get(data.x);
+                    if (node.x != data.x || node.y != data.y) {
+                        logger.info("invalid node (" + data.x + ", " + data.y + ")!");
+                        continue;
+                    }
+                    OptFields.refreshNumRoom.set(node, OptFields.refreshNumRoom.get(node) + 1);
+                    logger.info("Refresh node (" + data.x + ", " + data.y + ") to " + data.result + " by save file");
+                    node.room = getRoomFromType(data.result);
+                }
+                logger.info("Encountermod refreshed the dungeon map as follows:");
+                logger.info(MapGenerator.toString(AbstractDungeon.map, true));
+                for (int i = 0; i < rngUsedNum; i++) AbstractDungeon.mapRng.random(2); // used random
+                SaveData.fromSaveFile = false;
+            } else {
+                refreshNumDungeon = 0;
+                rngUsedNum = 0;
+                if (AbstractDungeon.player.hasRelic(VisionsOfTheEraOfProsperity.ID)) {
+                    AbstractDungeon.player.getRelic(VisionsOfTheEraOfProsperity.ID).counter = 1;
+                }
+                SaveData.nodeRefreshData.clear();
             }
         }
     }
