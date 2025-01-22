@@ -90,19 +90,17 @@ public class RefreshPatch {
                 OptFields.refreshHb.get(_inst).update();
 
                 if (OptFields.refreshHb.get(_inst).hovered) {
-                    if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.MAP && AbstractDungeon.dungeonMapScreen.clicked && ___animWaitTimer[0] <= 0.0F && (EncounterMod.ideaCount > 0 || (AbstractDungeon.player.hasRelic(VisionsOfTheEraOfProsperity.ID) && AbstractDungeon.player.getRelic(VisionsOfTheEraOfProsperity.ID).counter == 0)) && OptFields.refreshNumRoom.get(_inst) < maxRefreshNum) {
-                        if ((AbstractDungeon.player.hasRelic(VisionsOfTheEraOfProsperity.ID) && AbstractDungeon.player.getRelic(VisionsOfTheEraOfProsperity.ID).counter == 0)) {
-                            AbstractDungeon.player.getRelic(VisionsOfTheEraOfProsperity.ID).counter = 1;
-                        }
-                        else {
-                            EncounterMod.ideaCount--;
-                        }
+                    if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.MAP && AbstractDungeon.dungeonMapScreen.clicked && ___animWaitTimer[0] <= 0.0F &&
+                            (EncounterMod.ideaCount > 0 || (AbstractDungeon.player.hasRelic(VisionsOfTheEraOfProsperity.ID) && refreshNumDungeon == 0))
+                            && OptFields.refreshNumRoom.get(_inst) < maxRefreshNum) {
                         OptFields.refreshNumRoom.set(_inst, OptFields.refreshNumRoom.get(_inst) + 1);
                         String roomType = getRoomTypeStr(_inst);
                         String targetRoomType = "";
-                        if (AbstractDungeon.player.hasRelic(VisionsOfTheEraOfProsperity.ID) && !roomType.equals("Shop") && refreshNumDungeon == 0) {
+                        if (AbstractDungeon.player.hasRelic(VisionsOfTheEraOfProsperity.ID) && refreshNumDungeon == 0) {
                             targetRoomType = "Shop";
+                            AbstractDungeon.player.getRelic(VisionsOfTheEraOfProsperity.ID).counter = 0;
                         } else {
+                            EncounterMod.ideaCount--;
                             int resWeight = totalWeight - roomWeight.getOrDefault(roomType, 0);
                             int rnd = AbstractDungeon.mapRng.random(resWeight - 1);
                             for (String s : roomWeight.keySet())
@@ -178,6 +176,9 @@ public class RefreshPatch {
         @SpirePostfixPatch
         public static void Postfix() {
             RefreshPatch.refreshNumDungeon = 0;
+            if (AbstractDungeon.player.hasRelic(VisionsOfTheEraOfProsperity.ID)) {
+                AbstractDungeon.player.getRelic(VisionsOfTheEraOfProsperity.ID).counter = 1;
+            }
         }
     }
 }
