@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.AbstractImageEvent;
+import com.megacrit.cardcrawl.helpers.EventHelper;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
@@ -80,6 +81,18 @@ public class Encounter extends AbstractImageEvent {
                 return SpireReturn.Return(new Encounter());
             }
             return SpireReturn.Continue();
+        }
+    }
+
+    @SpirePatch(clz = EventHelper.class, method = "roll", paramtypez = {Random.class})
+    public static class RollEventPatch {
+        @SpirePrefixPatch
+        public static SpireReturn<?> Prefix(Random eventRng) {
+            if (EncounterMod.firstEvent) {
+                return SpireReturn.Return(EventHelper.RoomResult.EVENT);
+            } else {
+                return SpireReturn.Continue();
+            }
         }
     }
 }
