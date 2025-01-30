@@ -28,7 +28,6 @@ public class RevenantRemains extends CustomRelic {
 
     @Override
     public void onUnequip() {
-        EncounterMod.ideaCount--;
         RefreshPatch.maxRefreshNum--;
     }
 
