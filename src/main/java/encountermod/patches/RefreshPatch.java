@@ -63,7 +63,7 @@ public class RefreshPatch {
     public static class RenderMapPatch {
         @SpireInsertPatch(locator = Locator.class)
         public static void Insert(MapRoomNode _inst, SpriteBatch sb) {
-            if (getRoomTypeStr(_inst).isEmpty() || (!AbstractDungeon.id.equals("Exordium") && !AbstractDungeon.id.equals("TheCity") && !AbstractDungeon.id.equals("TheBeyond"))) {
+            if (getRoomTypeStr(_inst).isEmpty() || (!AbstractDungeon.id.equals("Exordium") && !AbstractDungeon.id.equals("TheCity") && !AbstractDungeon.id.equals("TheBeyond") && !AbstractDungeon.id.equals("samirg:TheSami"))) {
                 return;
             }
             if (AbstractDungeon.getCurrMapNode().isConnectedTo(_inst) || AbstractDungeon.getCurrMapNode().wingedIsConnectedTo(_inst) || (!AbstractDungeon.firstRoomChosen && _inst.y == 0)) {
