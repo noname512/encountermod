@@ -33,7 +33,7 @@ public class Encounter extends AbstractImageEvent {
         super(NAME, DESCRIPTIONS[0], "resources/encountermod/images/event/Encounter.png");
         this.imageEventText.setDialogOption(OPTIONS[0], false, new GraffitiOfTheEraOfHope());
         this.imageEventText.setDialogOption(OPTIONS[1], false, new HatredOfTheEraOfVendetta());
-        this.imageEventText.setDialogOption(OPTIONS[2], true, new LongingOfTheEraOfDreams());
+        this.imageEventText.setDialogOption(OPTIONS[2], false, new LongingOfTheEraOfDreams());
         this.imageEventText.setDialogOption(OPTIONS[3], false, new VisionsOfTheEraOfProsperity());
         this.imageEventText.setDialogOption(OPTIONS[4]);
     }
