@@ -40,6 +40,7 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
     public static String[] TEXT;
     public static int prob;
     public static boolean firstEvent;
+    public static boolean isLastOpRefresh;
 
     public EncounterMod() {
         BaseMod.subscribe(this);

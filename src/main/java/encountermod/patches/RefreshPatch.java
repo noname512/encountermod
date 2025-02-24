@@ -15,9 +15,13 @@ import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.rooms.*;
 import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 import com.megacrit.cardcrawl.screens.DungeonMapScreen;
+import com.megacrit.cardcrawl.ui.buttons.CancelButton;
 import encountermod.EncounterMod;
 import encountermod.relics.VisionsOfTheEraOfProsperity;
+import javassist.CannotCompileException;
 import javassist.CtBehavior;
+import javassist.expr.ExprEditor;
+import javassist.expr.MethodCall;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,6 +70,9 @@ public class RefreshPatch {
             if (getRoomTypeStr(_inst).isEmpty() || (!AbstractDungeon.id.equals("Exordium") && !AbstractDungeon.id.equals("TheCity") && !AbstractDungeon.id.equals("TheBeyond") && !AbstractDungeon.id.equals("samirg:TheSami"))) {
                 return;
             }
+            if (!(AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMPLETE)) {
+                return;
+            }
             if (AbstractDungeon.getCurrMapNode().isConnectedTo(_inst) || AbstractDungeon.getCurrMapNode().wingedIsConnectedTo(_inst) || (!AbstractDungeon.firstRoomChosen && _inst.y == 0)) {
                 sb.draw(EncounterMod.refreshImg, _inst.x * SPACING_X + OFFSET_X - 42.0F + _inst.offsetX, _inst.y * Settings.MAP_DST_Y + OFFSET_Y + DungeonMapScreen.offsetY - 42.0F + _inst.offsetY, 42.0F, 42.0F, 84.0F, 84.0F, 0.3F * Settings.scale, 0.3F * Settings.scale, 0.0F, 0, 0, 84, 84, false, false);
                 if (OptFields.refreshHb.get(_inst).hovered) {
@@ -90,6 +97,9 @@ public class RefreshPatch {
         @SpireInsertPatch(locator = Locator.class)
         public static void Insert(MapRoomNode _inst, @ByRef float[] ___animWaitTimer) {
             if (getRoomTypeStr(_inst).isEmpty() || (!AbstractDungeon.id.equals("Exordium") && !AbstractDungeon.id.equals("TheCity") && !AbstractDungeon.id.equals("TheBeyond") && !AbstractDungeon.id.equals("samirg:TheSami"))) {
+                return;
+            }
+            if (!(AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMPLETE)) {
                 return;
             }
             if (AbstractDungeon.getCurrMapNode().isConnectedTo(_inst) || AbstractDungeon.getCurrMapNode().wingedIsConnectedTo(_inst) || (!AbstractDungeon.firstRoomChosen && _inst.y == 0)) {
@@ -129,11 +139,13 @@ public class RefreshPatch {
                             _inst.room = getRoomFromType(targetRoomType);
                             refreshNumDungeon++;
                         }
+                        EncounterMod.isLastOpRefresh = true;
+                        AbstractDungeon.overlayMenu.cancelButton.hide();
+                        AbstractDungeon.dungeonMapScreen.dismissable = false;
                         if (!CardCrawlGame.loadingSave) {
-                            if ((AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMPLETE) && (AbstractDungeon.getCurrRoom() instanceof MonsterRoom)) {
+                            if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMPLETE) {
                                 SaveHelper.saveIfAppropriate(SaveFile.SaveType.POST_COMBAT);
-                            }
-                            else {
+                            } else {
                                 SaveHelper.saveIfAppropriate(SaveFile.SaveType.ENTER_ROOM);
                             }
                         }
@@ -214,6 +226,34 @@ public class RefreshPatch {
                 }
                 SaveData.nodeRefreshData.clear();
             }
+        }
+    }
+
+    @SpirePatch(clz = AbstractDungeon.class, method = "nextRoomTransition", paramtypez = {SaveFile.class})
+    public static class NextRoomTransitionPatch {
+        @SpirePrefixPatch
+        public static void Prefix() {
+            EncounterMod.isLastOpRefresh = false;
+        }
+    }
+
+    @SpirePatch(clz = DungeonMapScreen.class, method = "open")
+    public static class CancelButtonShowPatch {
+        @SpireInstrumentPatch
+        public static ExprEditor Instrument() {
+            return new ExprEditor() {
+                @Override
+                public void edit(MethodCall m) throws CannotCompileException {
+                    if (m.getClassName().equals(CancelButton.class.getName()) && m.getMethodName().equals("show")) {
+                        m.replace(String.format(
+                                "if (%s.isLastOpRefresh) { %s.overlayMenu.cancelButton.hide(); %s.dungeonMapScreen.dismissable = false; } else { $_ = $proceed($$); }",
+                                EncounterMod.class.getName(),
+                                AbstractDungeon.class.getName(),
+                                AbstractDungeon.class.getName()
+                        ));
+                    }
+                }
+            };
         }
     }
 }

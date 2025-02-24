@@ -4,10 +4,16 @@ import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.map.MapRoomNode;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.rooms.EmptyRoom;
 import com.megacrit.cardcrawl.saveAndContinue.SaveAndContinue;
 import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 import encountermod.EncounterMod;
+import javassist.CannotCompileException;
 import javassist.CtBehavior;
+import javassist.expr.ExprEditor;
+import javassist.expr.MethodCall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -38,6 +44,8 @@ public class SaveData {
         public int ecm_rng_used_num = 0;
         public HashMap<String, Integer> ecm_room_weight = new HashMap<>();
         public int ecm_total_weight = 0;
+        public boolean ecm_is_last_op_refresh = false;
+        public boolean ecm_first_room_chosen = false;
     }
 
     public static int idea_count = 0;
@@ -49,6 +57,8 @@ public class SaveData {
     public static boolean fromSaveFile;
     public static HashMap<String, Integer> room_weight = new HashMap<>();
     public static int total_weight = 0;
+    public static boolean is_last_op_refresh = false;
+    public static boolean first_room_chosen = false;
 
     @SpirePatch(clz = SaveFile.class, method = "<ctor>", paramtypez = {SaveFile.SaveType.class})
     public static class SaveTheSaveData {
@@ -61,6 +71,8 @@ public class SaveData {
             rng_used_num = RefreshPatch.rngUsedNum;
             room_weight = new HashMap<>(RefreshPatch.roomWeight);
             total_weight = RefreshPatch.totalWeight;
+            is_last_op_refresh = EncounterMod.isLastOpRefresh;
+            first_room_chosen = AbstractDungeon.firstRoomChosen;
             SaveData.logger.info("Extra Data Saved!");
         }
     }
@@ -77,6 +89,8 @@ public class SaveData {
             params.put("ecm_rng_used_num", rng_used_num);
             params.put("ecm_room_weight", room_weight);
             params.put("ecm_total_weight", total_weight);
+            params.put("ecm_is_last_op_refresh", is_last_op_refresh);
+            params.put("ecm_first_room_chosen", first_room_chosen);
         }
 
         private static class Locator extends SpireInsertLocator {
@@ -102,6 +116,8 @@ public class SaveData {
                 rng_used_num = data.ecm_rng_used_num;
                 room_weight = new HashMap<>(data.ecm_room_weight);
                 total_weight = data.ecm_total_weight;
+                is_last_op_refresh = data.ecm_is_last_op_refresh;
+                first_room_chosen = data.ecm_first_room_chosen;
                 SaveData.logger.info("Loaded encountermod save data successfully");
             } catch (Exception e) {
                 SaveData.logger.error("Fail to load rhinemod save data.");
@@ -128,7 +144,50 @@ public class SaveData {
             RefreshPatch.rngUsedNum = rng_used_num;
             RefreshPatch.roomWeight = new HashMap<>(room_weight);
             RefreshPatch.totalWeight = total_weight;
+            EncounterMod.isLastOpRefresh = is_last_op_refresh;
             SaveData.logger.info("Save loaded.");
+        }
+    }
+
+    @SpirePatch(clz = AbstractDungeon.class, method = "populatePathTaken")
+    public static class PopulatePathTakenPatch {
+        @SpireInstrumentPatch
+        public static ExprEditor Instrument() {
+            return new ExprEditor() {
+                @Override
+                public void edit(MethodCall m) throws CannotCompileException {
+                    if (m.getClassName().equals(AbstractDungeon.class.getName()) && m.getMethodName().equals("nextRoomTransition")) {
+                        m.replace(String.format("if (%s.isLastOpRefresh) { %s.handle($1); } else { $_ = $proceed($$); }", EncounterMod.class.getName(), SaveData.PopulatePathTakenPatch.class.getName()));
+                    }
+                }
+            };
+        }
+
+        public static void handle(SaveFile saveFile) {
+            AbstractDungeon.dungeonMapScreen.dismissable = false;
+            AbstractDungeon.rs = AbstractDungeon.RenderScene.NORMAL;
+            AbstractDungeon.previousScreen = null;
+            AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMPLETE;
+            AbstractDungeon.firstRoomChosen = first_room_chosen;
+            AbstractDungeon.dungeonMapScreen.open(false);
+            AbstractDungeon.scene.randomizeScene();
+        }
+
+        @SpirePostfixPatch
+        public static void Postfix(AbstractDungeon _inst, SaveFile saveFile) {
+            if (EncounterMod.isLastOpRefresh && !first_room_chosen) {
+                AbstractDungeon.currMapNode = new MapRoomNode(0, -1);
+                AbstractDungeon.currMapNode.room = new EmptyRoom();
+            }
+        }
+    }
+
+    @SpirePatch(clz = AbstractDungeon.class, method = "isLoadingIntoNeow")
+    public static class LoadingIntoNeowPatch {
+        @SpirePrefixPatch
+        public static SpireReturn<?> Prefix(AbstractDungeon _inst, SaveFile saveFile) {
+            if (EncounterMod.isLastOpRefresh) return SpireReturn.Return(false);
+            else return SpireReturn.Continue();
         }
     }
 }
