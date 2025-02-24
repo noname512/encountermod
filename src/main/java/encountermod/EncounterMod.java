@@ -61,7 +61,7 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
         ideaHb.move(Settings.WIDTH - 670.0F * Settings.scale, ICON_Y + ICON_W / 2.0F);
         UIStrings uiString = CardCrawlGame.languagePack.getUIString("encountermod:panel");
         TEXT = uiString.TEXT;
-        RefreshPatch.init();
+        RefreshPatch.initPosition();
         initializeEvents();
     }
 
@@ -140,10 +140,11 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
     }
 
     private String getLang() {
-        String lang = "eng";
-        if (Settings.language == Settings.GameLanguage.ZHS || Settings.language == Settings.GameLanguage.ZHT) {
-            lang = "zhs";
-        }
-        return lang;
+        return "zhs";
+//        String lang = "eng";
+//        if (Settings.language == Settings.GameLanguage.ZHS || Settings.language == Settings.GameLanguage.ZHT) {
+//            lang = "zhs";
+//        }
+//        return lang;
     }
 }

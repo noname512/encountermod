@@ -24,6 +24,7 @@ public class IdeaPatch {
             EncounterMod.firstEvent = true;
             SaveData.fromSaveFile = false;
             EncounterMod.isLastOpRefresh = false;
+            RefreshPatch.init();
         }
     }
 

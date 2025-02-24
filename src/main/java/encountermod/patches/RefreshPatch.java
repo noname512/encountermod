@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.helpers.SaveHelper;
 import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
+import com.megacrit.cardcrawl.map.MapEdge;
 import com.megacrit.cardcrawl.map.MapGenerator;
 import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.rooms.*;
@@ -22,12 +23,15 @@ import javassist.CannotCompileException;
 import javassist.CtBehavior;
 import javassist.expr.ExprEditor;
 import javassist.expr.MethodCall;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
 public class RefreshPatch {
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(RefreshPatch.class);
+
     @SpirePatch(clz = MapRoomNode.class, method = SpirePatch.CLASS)
     public static class OptFields {
         public static SpireField<Hitbox> refreshHb = new SpireField<>(() -> new Hitbox(25.0F * Settings.scale, 25.0F * Settings.scale));
@@ -46,12 +50,15 @@ public class RefreshPatch {
 
     private static final Logger logger = Logger.getLogger(RefreshPatch.class.getName());
 
-    public static void init() {
+    public static void initPosition() {
         tips = new ArrayList<>();
         tips.add(new PowerTip(EncounterMod.TEXT[0], EncounterMod.TEXT[1]));
         SPACING_X = Settings.xScale * 64.0F * 2.0F;
         OFFSET_X = 610.0F * Settings.xScale;
         OFFSET_Y = 200.0F * Settings.scale;
+    }
+
+    public static void init() {
         roomWeight = new HashMap<>();
         roomWeight.put("Monster", 4);
         roomWeight.put("Elite", 1);
@@ -74,6 +81,7 @@ public class RefreshPatch {
                 return;
             }
             if (AbstractDungeon.getCurrMapNode().isConnectedTo(_inst) || AbstractDungeon.getCurrMapNode().wingedIsConnectedTo(_inst) || (!AbstractDungeon.firstRoomChosen && _inst.y == 0)) {
+                logger.info("render refresh, x = " + _inst.x + ", y = " + _inst.y);
                 sb.draw(EncounterMod.refreshImg, _inst.x * SPACING_X + OFFSET_X - 42.0F + _inst.offsetX, _inst.y * Settings.MAP_DST_Y + OFFSET_Y + DungeonMapScreen.offsetY - 42.0F + _inst.offsetY, 42.0F, 42.0F, 84.0F, 84.0F, 0.3F * Settings.scale, 0.3F * Settings.scale, 0.0F, 0, 0, 84, 84, false, false);
                 if (OptFields.refreshHb.get(_inst).hovered) {
                     OptFields.refreshHb.get(_inst).render(sb);
@@ -118,6 +126,10 @@ public class RefreshPatch {
                             AbstractDungeon.player.getRelic(VisionsOfTheEraOfProsperity.ID).counter = 0;
                         } else {
                             EncounterMod.ideaCount--;
+                            logger.info("totalWeight: " + totalWeight);
+                            for (String type : roomWeight.keySet())
+                                logger.info("weight of " + type + ": " + roomWeight.get(type));
+                            logger.info("real room type: " + roomType);
                             int resWeight = totalWeight - roomWeight.getOrDefault(roomType, 0);
                             int rnd = AbstractDungeon.mapRng.random(resWeight - 1);
                             rngUsedNum++;

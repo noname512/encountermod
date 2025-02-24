@@ -46,6 +46,7 @@ public class SaveData {
         public int ecm_total_weight = 0;
         public boolean ecm_is_last_op_refresh = false;
         public boolean ecm_first_room_chosen = false;
+        public int ecm_max_refresh_num = 1;
     }
 
     public static int idea_count = 0;
@@ -59,6 +60,7 @@ public class SaveData {
     public static int total_weight = 0;
     public static boolean is_last_op_refresh = false;
     public static boolean first_room_chosen = false;
+    public static int max_refresh_num = 1;
 
     @SpirePatch(clz = SaveFile.class, method = "<ctor>", paramtypez = {SaveFile.SaveType.class})
     public static class SaveTheSaveData {
@@ -73,6 +75,7 @@ public class SaveData {
             total_weight = RefreshPatch.totalWeight;
             is_last_op_refresh = EncounterMod.isLastOpRefresh;
             first_room_chosen = AbstractDungeon.firstRoomChosen;
+            max_refresh_num = RefreshPatch.maxRefreshNum;
             SaveData.logger.info("Extra Data Saved!");
         }
     }
@@ -91,6 +94,7 @@ public class SaveData {
             params.put("ecm_total_weight", total_weight);
             params.put("ecm_is_last_op_refresh", is_last_op_refresh);
             params.put("ecm_first_room_chosen", first_room_chosen);
+            params.put("ecm_max_refresh_num", max_refresh_num);
         }
 
         private static class Locator extends SpireInsertLocator {
@@ -118,6 +122,7 @@ public class SaveData {
                 total_weight = data.ecm_total_weight;
                 is_last_op_refresh = data.ecm_is_last_op_refresh;
                 first_room_chosen = data.ecm_first_room_chosen;
+                max_refresh_num = data.ecm_max_refresh_num;
                 SaveData.logger.info("Loaded encountermod save data successfully");
             } catch (Exception e) {
                 SaveData.logger.error("Fail to load rhinemod save data.");
@@ -145,6 +150,7 @@ public class SaveData {
             RefreshPatch.roomWeight = new HashMap<>(room_weight);
             RefreshPatch.totalWeight = total_weight;
             EncounterMod.isLastOpRefresh = is_last_op_refresh;
+            RefreshPatch.maxRefreshNum = max_refresh_num;
             SaveData.logger.info("Save loaded.");
         }
     }
@@ -167,6 +173,9 @@ public class SaveData {
             AbstractDungeon.dungeonMapScreen.dismissable = false;
             AbstractDungeon.rs = AbstractDungeon.RenderScene.NORMAL;
             AbstractDungeon.previousScreen = null;
+            if (first_room_chosen) {
+                AbstractDungeon.currMapNode = AbstractDungeon.nextRoom;
+            }
             AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMPLETE;
             AbstractDungeon.firstRoomChosen = first_room_chosen;
             AbstractDungeon.dungeonMapScreen.open(false);
