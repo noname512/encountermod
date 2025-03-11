@@ -6,5 +6,15 @@
       "构想",
       "战斗胜利时有 30% 概率获取，可用于刷新节点。"
     ]
+  },
+  "encountermod:IdeaReward": {
+    "TEXT": [
+      "构想"
+    ]
+  },
+  "encountermod:ExtraRelicReward": {
+    "TEXT": [
+      "用构想换取："
+    ]
   }
 }

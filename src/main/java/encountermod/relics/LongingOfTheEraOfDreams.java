@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
+import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.red.FiendFire;
 import com.megacrit.cardcrawl.cards.tempCards.Shiv;
@@ -18,9 +19,11 @@ import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.potions.PotionSlot;
 import com.megacrit.cardcrawl.relics.*;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.TreasureRoom;
 import encountermod.EncounterMod;
 import encountermod.patches.RefreshPatch;
+import encountermod.reward.ExtraRelicReward;
 
 import java.util.ArrayList;
 
@@ -57,6 +60,14 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
     @Override
     public AbstractRelic makeCopy() {
         return new LongingOfTheEraOfDreams();
+    }
+
+    @Override
+    public void onChestOpenAfter(boolean bossChest) {
+        this.flash();
+        this.addToTop(new RelicAboveCreatureAction(AbstractDungeon.player, this));
+        AbstractDungeon.getCurrRoom().rewards.add(new ExtraRelicReward(new RedSkull()));
+        AbstractDungeon.getCurrRoom().rewards.add(new ExtraRelicReward(new BagOfIdeas()));
     }
 
     @SpirePatch(clz = AbstractDungeon.class, method = "returnRandomRelic")
@@ -324,4 +335,6 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
             return cnt;
         }
     }
+
+
 }

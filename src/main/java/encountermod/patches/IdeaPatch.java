@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.ui.panels.TopPanel;
 import encountermod.EncounterMod;
+import encountermod.reward.IdeaReward;
 
 public class IdeaPatch {
     @SpirePatch(clz = AbstractPlayer.class, method = "initializeStarterDeck")
@@ -33,12 +34,10 @@ public class IdeaPatch {
         @SpirePrefixPatch
         public static void Prefix(AbstractPlayer _inst) {
             if (AbstractDungeon.getCurrRoom() instanceof MonsterRoomBoss) {
-                EncounterMod.ideaCount++;
-                return;
+                AbstractDungeon.getCurrRoom().rewards.add(new IdeaReward());
             }
-            if (AbstractDungeon.miscRng.random(9) < EncounterMod.prob) {
-                EncounterMod.ideaCount++;
-                // TODO: vfx
+            else if (AbstractDungeon.miscRng.random(9) < EncounterMod.prob) {
+                AbstractDungeon.getCurrRoom().rewards.add(new IdeaReward());
             }
         }
     }

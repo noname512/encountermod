@@ -17,9 +17,14 @@ import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.rewards.RewardSave;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.custom.CustomMod;
+import encountermod.patches.ExtraRelicRewardPatch;
+import encountermod.patches.IdeaRewardPatch;
 import encountermod.patches.RefreshPatch;
+import encountermod.reward.ExtraRelicReward;
+import encountermod.reward.IdeaReward;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import encountermod.events.*;
@@ -28,6 +33,8 @@ import encountermod.relics.*;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+
+import static com.megacrit.cardcrawl.helpers.RelicLibrary.getRelic;
 
 @SpireInitializer
 public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscriber, EditStringsSubscriber, PostBattleSubscriber, PostInitializeSubscriber, PostDungeonInitializeSubscriber, AddCustomModeModsSubscriber, OnStartBattleSubscriber, OnPlayerLoseBlockSubscriber, RelicGetSubscriber {
@@ -63,6 +70,27 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
         TEXT = uiString.TEXT;
         RefreshPatch.initPosition();
         initializeEvents();
+        initializeRewards();
+    }
+
+    private void initializeRewards() {
+        BaseMod.registerCustomReward(
+                IdeaRewardPatch.ENCOUNTERMOD_IDEAREWARD,
+                (rewardSave) -> { // this handles what to do when this quest type is loaded.
+                    return new IdeaReward();
+                },
+                (customReward) -> { // this handles what to do when this quest type is saved.
+                    return new RewardSave(customReward.type.toString(), null, -1, 0);
+                });
+        BaseMod.registerCustomReward(
+                ExtraRelicRewardPatch.ENCOUNTERMOD_EXTRARELICREWARD,
+                (rewardSave) -> { // this handles what to do when this quest type is loaded.
+                    return new ExtraRelicReward(getRelic(rewardSave.id));
+                },
+                (customReward) -> { // this handles what to do when this quest type is saved.
+                    return new RewardSave(customReward.type.toString(), customReward.relic.toString(), -1, 0);
+                });
+
     }
 
     private void initializeEvents() {
