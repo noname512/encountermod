@@ -9,6 +9,8 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.MonsterRoom;
 import encountermod.EncounterMod;
+import encountermod.patches.IdeaPatch;
+import encountermod.vfx.IdeaFlashEffect;
 
 public class SpiritHunterEarl extends CustomRelic {
 
@@ -37,7 +39,7 @@ public class SpiritHunterEarl extends CustomRelic {
         if (!(r instanceof MonsterRoom)) {
             if (AbstractDungeon.miscRng.random(9) < 2) {
                 EncounterMod.ideaCount++;
-                // TODO: vfx
+                IdeaPatch.topEffect.add(new IdeaFlashEffect());
             }
         }
     }

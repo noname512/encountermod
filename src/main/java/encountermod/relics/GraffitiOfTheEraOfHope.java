@@ -6,7 +6,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import encountermod.EncounterMod;
+import encountermod.patches.IdeaPatch;
 import encountermod.patches.RefreshPatch;
+import encountermod.vfx.IdeaFlashEffect;
 
 public class GraffitiOfTheEraOfHope extends CustomRelic {
 
@@ -23,6 +25,7 @@ public class GraffitiOfTheEraOfHope extends CustomRelic {
     @Override
     public void onEquip() {
         EncounterMod.ideaCount += 2;
+        IdeaPatch.topEffect.add(new IdeaFlashEffect());
         RefreshPatch.roomWeight.put("Monster", 2);
         RefreshPatch.roomWeight.put("Elite", 0);
         RefreshPatch.totalWeight = 9;

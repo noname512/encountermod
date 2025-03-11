@@ -21,6 +21,7 @@ import com.megacrit.cardcrawl.rewards.RewardSave;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.custom.CustomMod;
 import encountermod.patches.ExtraRelicRewardPatch;
+import encountermod.patches.IdeaPatch;
 import encountermod.patches.IdeaRewardPatch;
 import encountermod.patches.RefreshPatch;
 import encountermod.reward.ExtraRelicReward;
@@ -69,13 +70,14 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
         UIStrings uiString = CardCrawlGame.languagePack.getUIString("encountermod:panel");
         TEXT = uiString.TEXT;
         RefreshPatch.initPosition();
+        IdeaPatch.topEffect = new ArrayList<>();
         initializeEvents();
         initializeRewards();
     }
 
     private void initializeRewards() {
         BaseMod.registerCustomReward(
-                IdeaRewardPatch.ENCOUNTERMOD_IDEAREWARD,
+                IdeaRewardPatch.IDEA_REWARD,
                 (rewardSave) -> { // this handles what to do when this quest type is loaded.
                     return new IdeaReward();
                 },
@@ -83,14 +85,13 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
                     return new RewardSave(customReward.type.toString(), null, -1, 0);
                 });
         BaseMod.registerCustomReward(
-                ExtraRelicRewardPatch.ENCOUNTERMOD_EXTRARELICREWARD,
+                ExtraRelicRewardPatch.IDEA_REWARD,
                 (rewardSave) -> { // this handles what to do when this quest type is loaded.
                     return new ExtraRelicReward(getRelic(rewardSave.id));
                 },
                 (customReward) -> { // this handles what to do when this quest type is saved.
                     return new RewardSave(customReward.type.toString(), customReward.relic.toString(), -1, 0);
                 });
-
     }
 
     private void initializeEvents() {
