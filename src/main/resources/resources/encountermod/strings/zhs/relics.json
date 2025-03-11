@@ -12,7 +12,7 @@
   "encountermod:LongingOfTheEraOfDreams": {
     "NAME": "美愿时代的留恋",
     "FLAVOR": "听说萨卡兹能够实现任何愿望，于是我执着地探求他们的秘密，如今看来，这成了他们苦难的开端。",
-    "DESCRIPTIONS": ["拾取时立刻获得 #g50 金币，刷新时更高概率变为宝箱节点，宝箱会尽量提供适配遗物。"]
+    "DESCRIPTIONS": ["拾取时立刻获得 #g50 金币，刷新时更高概率变为宝箱节点，宝箱会尽量提供适配遗物且可以用构想换取额外遗物。"]
   },
   "encountermod:VisionsOfTheEraOfProsperity": {
     "NAME": "繁荣时代的畅想",

@@ -45,8 +45,8 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
     @Override
     public void onEquip() {
         AbstractDungeon.player.gainGold(50);
-        RefreshPatch.roomWeight.put("Treasure", 8);
-        RefreshPatch.totalWeight = 18;
+        RefreshPatch.roomWeight.put("Treasure", 9);
+        RefreshPatch.totalWeight = 19;
     }
 
     @Override
@@ -94,7 +94,7 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
         if (list.isEmpty()) {
             list.add(new CultistMask());
         }
-        return list.get(AbstractDungeon.relicRng.random(list.size() - 1));
+        return list.get(AbstractDungeon.relicRng.random(list.size() - 1)).makeCopy();
     }
 
     @SpirePatch(clz = AbstractDungeon.class, method = "returnRandomRelic")
