@@ -16,9 +16,11 @@ import com.megacrit.cardcrawl.characters.*;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.potions.*;
 import com.megacrit.cardcrawl.relics.*;
+import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.TreasureRoom;
 import com.megacrit.cardcrawl.shop.ShopScreen;
@@ -67,8 +69,32 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
     public void onChestOpenAfter(boolean bossChest) {
         this.flash();
         this.addToTop(new RelicAboveCreatureAction(AbstractDungeon.player, this));
-        AbstractDungeon.getCurrRoom().rewards.add(new ExtraRelicReward(new RedSkull()));
-        AbstractDungeon.getCurrRoom().rewards.add(new ExtraRelicReward(new BagOfIdeas()));
+        AbstractDungeon.getCurrRoom().rewards.add(new ExtraRelicReward(UnseenRelic()));
+        AbstractDungeon.getCurrRoom().rewards.add(new ExtraRelicReward(UnseenRelic()));
+    }
+
+    AbstractRelic UnseenRelic() {
+        ArrayList<AbstractRelic> list = new ArrayList<>();
+        RelicTier t = AbstractDungeon.returnRandomRelicTier();
+        if (t == RelicTier.COMMON) {
+            list.addAll(RelicLibrary.commonList);
+        }
+        else if (t == RelicTier.UNCOMMON) {
+            list.addAll(RelicLibrary.uncommonList);
+        }
+        else if (t == RelicTier.RARE) {
+            list.addAll(RelicLibrary.rareList);
+        }
+        list.removeIf(r -> AbstractDungeon.player.hasRelic(r.relicId));
+        for (RewardItem reward: AbstractDungeon.getCurrRoom().rewards) {
+            if (reward.type == RewardItem.RewardType.RELIC) {
+                list.removeIf(r -> r.relicId.equals(reward.relic.relicId));
+            }
+        }
+        if (list.isEmpty()) {
+            list.add(new CultistMask());
+        }
+        return list.get(AbstractDungeon.relicRng.random(list.size() - 1));
     }
 
     @SpirePatch(clz = AbstractDungeon.class, method = "returnRandomRelic")
@@ -266,10 +292,21 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                 }
                 lst.removeIf(r -> AbstractDungeon.player.hasRelic(r.relicId));
                 if (lst.isEmpty()) {
+                    AbstractDungeon.getCurrRoom().addRelicToRewards(new CultistMask());
                     return SpireReturn.Continue();
 //                    lst.add(new CultistMask()); // 邪教徒头套
                 }
-                return SpireReturn.Return(lst.get(AbstractDungeon.relicRng.random(lst.size() - 1)));
+                AbstractRelic spawnRelic = lst.get(AbstractDungeon.relicRng.random(lst.size() - 1));
+                if (tier == RelicTier.COMMON) {
+                    AbstractDungeon.commonRelicPool.remove(spawnRelic.relicId);
+                }
+                if (tier == RelicTier.UNCOMMON) {
+                    AbstractDungeon.uncommonRelicPool.remove(spawnRelic.relicId);
+                }
+                if (tier == RelicTier.RARE) {
+                    AbstractDungeon.rareRelicPool.remove(spawnRelic.relicId);
+                }
+                return SpireReturn.Return(spawnRelic);
             }
             return SpireReturn.Continue();
         }

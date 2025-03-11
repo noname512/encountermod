@@ -35,6 +35,15 @@ public class ExtraRelicReward extends CustomReward {
         EncounterMod.ideaCount --;
         relic.instantObtain();
         CardCrawlGame.metricData.addRelicObtainData(relic);
+        if (relic.tier == AbstractRelic.RelicTier.COMMON) {
+            AbstractDungeon.commonRelicPool.remove(relic.relicId);
+        }
+        if (relic.tier == AbstractRelic.RelicTier.UNCOMMON) {
+            AbstractDungeon.uncommonRelicPool.remove(relic.relicId);
+        }
+        if (relic.tier == AbstractRelic.RelicTier.RARE) {
+            AbstractDungeon.rareRelicPool.remove(relic.relicId);
+        }
         return true;
     }
 
