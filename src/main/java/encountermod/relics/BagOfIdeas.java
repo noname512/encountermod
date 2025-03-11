@@ -6,6 +6,8 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import encountermod.EncounterMod;
+import encountermod.patches.IdeaPatch;
+import encountermod.vfx.IdeaFlashEffect;
 
 public class BagOfIdeas extends CustomRelic {
 
@@ -22,6 +24,7 @@ public class BagOfIdeas extends CustomRelic {
     @Override
     public void onEquip() {
         EncounterMod.ideaCount += 3;
+        IdeaPatch.topEffect.add(new IdeaFlashEffect());
     }
 
     @Override

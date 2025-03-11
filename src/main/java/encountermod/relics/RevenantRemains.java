@@ -6,7 +6,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import encountermod.EncounterMod;
+import encountermod.patches.IdeaPatch;
 import encountermod.patches.RefreshPatch;
+import encountermod.vfx.IdeaFlashEffect;
 
 public class RevenantRemains extends CustomRelic {
 
@@ -23,6 +25,7 @@ public class RevenantRemains extends CustomRelic {
     @Override
     public void onEquip() {
         EncounterMod.ideaCount++;
+        IdeaPatch.topEffect.add(new IdeaFlashEffect());
         RefreshPatch.maxRefreshNum++;
     }
 

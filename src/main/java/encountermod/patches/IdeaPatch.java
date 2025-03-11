@@ -12,10 +12,15 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.ui.panels.TopPanel;
+import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import encountermod.EncounterMod;
 import encountermod.reward.IdeaReward;
 
+import java.util.ArrayList;
+
 public class IdeaPatch {
+    public static ArrayList<AbstractGameEffect> topEffect;
+
     @SpirePatch(clz = AbstractPlayer.class, method = "initializeStarterDeck")
     public static class InitializePatch {
         @SpirePrefixPatch
@@ -49,15 +54,22 @@ public class IdeaPatch {
             if (!Settings.hideTopBar) {
                 sb.setColor(Color.WHITE);
                 float ICON_W = 64.0F * Settings.scale;
-                float ICON_Y = Settings.HEIGHT - ICON_W;
                 float INFO_TEXT_Y = Settings.HEIGHT - 24.0F * Settings.scale;
-                sb.draw(EncounterMod.ideaImg, Settings.WIDTH - 740.0F * Settings.scale, ICON_Y, ICON_W, ICON_W);
-                FontHelper.renderFontLeftTopAligned(sb, FontHelper.topPanelInfoFont, Integer.toString(EncounterMod.ideaCount), Settings.WIDTH - 680.0F * Settings.scale, INFO_TEXT_Y, Color.WHITE);
+                float CENTER_X = Settings.WIDTH - 690.0F * Settings.scale - ICON_W / 2;
+                float CENTER_Y = Settings.HEIGHT - ICON_W / 2;
+                sb.draw(EncounterMod.ideaImg, CENTER_X - 32.0F, CENTER_Y - 32.0F, 32.0F, 32.0F, 64.0F, 64.0F, Settings.scale, Settings.scale, 0.0F, 0, 0, 64, 64, false, false);
+                FontHelper.renderFontLeftTopAligned(sb, FontHelper.topPanelInfoFont, Integer.toString(EncounterMod.ideaCount), Settings.WIDTH - 690.0F * Settings.scale, INFO_TEXT_Y, Color.WHITE);
                 EncounterMod.ideaHb.update(); // 偷个懒小孩子不要学（x
                 EncounterMod.ideaHb.render(sb);
                 if (EncounterMod.ideaHb.hovered) {
-                    TipHelper.renderGenericTip(Settings.WIDTH - 740.0F * Settings.scale, Settings.HEIGHT - 120.0F * Settings.scale, EncounterMod.TEXT[2], EncounterMod.TEXT[3]);
+                    TipHelper.renderGenericTip(Settings.WIDTH - 750.0F * Settings.scale, Settings.HEIGHT - 120.0F * Settings.scale, EncounterMod.TEXT[2], EncounterMod.TEXT[3]);
                 }
+
+                for (AbstractGameEffect e : topEffect) {
+                    e.update();
+                    e.render(sb);
+                }
+                topEffect.removeIf(e -> e.isDone);
             }
         }
     }
