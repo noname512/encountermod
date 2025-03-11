@@ -74,27 +74,19 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
     }
 
     AbstractRelic UnseenRelic() {
-        ArrayList<AbstractRelic> list = new ArrayList<>();
+        ArrayList<String> list = new ArrayList<>();
         RelicTier t = AbstractDungeon.returnRandomRelicTier();
-        if (t == RelicTier.COMMON) {
-            list.addAll(RelicLibrary.commonList);
-        }
-        else if (t == RelicTier.UNCOMMON) {
-            list.addAll(RelicLibrary.uncommonList);
-        }
-        else if (t == RelicTier.RARE) {
-            list.addAll(RelicLibrary.rareList);
-        }
-        list.removeIf(r -> AbstractDungeon.player.hasRelic(r.relicId));
+        RelicLibrary.populateRelicPool(list, t, AbstractDungeon.player.chosenClass);
+        list.removeIf(r -> AbstractDungeon.player.hasRelic(r));
         for (RewardItem reward: AbstractDungeon.getCurrRoom().rewards) {
             if (reward.type == RewardItem.RewardType.RELIC) {
-                list.removeIf(r -> r.relicId.equals(reward.relic.relicId));
+                list.removeIf(r -> reward.relic.relicId.equals(r));
             }
         }
         if (list.isEmpty()) {
-            list.add(new CultistMask());
+            list.add(CultistMask.ID);
         }
-        return list.get(AbstractDungeon.relicRng.random(list.size() - 1)).makeCopy();
+        return RelicLibrary.getRelic(list.get(AbstractDungeon.relicRng.random(list.size() - 1))).makeCopy();
     }
 
     @SpirePatch(clz = AbstractDungeon.class, method = "returnRandomRelic")
@@ -288,6 +280,7 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         }
                         break;
                     default:
+                        AbstractDungeon.getCurrRoom().addRelicToRewards(new RedCirclet());
                         return SpireReturn.Continue();
                 }
                 lst.removeIf(r -> AbstractDungeon.player.hasRelic(r.relicId));
