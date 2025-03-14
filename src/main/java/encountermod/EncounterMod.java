@@ -19,6 +19,7 @@ import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.relics.JuzuBracelet;
 import com.megacrit.cardcrawl.rewards.RewardSave;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.custom.CustomMod;
@@ -147,6 +148,23 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
                 bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)).
                 endsWithRewardsUI(false).
                 overrideEvent(GoldenWing.ID).
+                create());
+        BaseMod.addEvent(new AddEventParams.Builder(
+                encountermod.events.replacement.ScrapOoze.ID,
+                encountermod.events.replacement.ScrapOoze.class).
+                eventType(EventUtils.EventType.OVERRIDE).
+                bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID) &&
+                                    !AbstractDungeon.player.hasRelic(JuzuBracelet.ID)).
+                endsWithRewardsUI(false).
+                overrideEvent(ScrapOoze.ID).
+                create());
+        BaseMod.addEvent(new AddEventParams.Builder(
+                encountermod.events.replacement.GoopPuddle.ID,
+                encountermod.events.replacement.GoopPuddle.class).
+                eventType(EventUtils.EventType.OVERRIDE).
+                bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)).
+                endsWithRewardsUI(false).
+                overrideEvent(GoopPuddle.ID).
                 create());
     }
 
