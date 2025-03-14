@@ -11,8 +11,10 @@ import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.*;
@@ -28,6 +30,10 @@ import encountermod.reward.ExtraRelicReward;
 import encountermod.reward.IdeaReward;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import com.megacrit.cardcrawl.events.exordium.*;
+import com.megacrit.cardcrawl.events.city.*;
+import com.megacrit.cardcrawl.events.beyond.*;
+import com.megacrit.cardcrawl.events.shrines.*;
 import encountermod.events.*;
 import encountermod.relics.*;
 
@@ -49,6 +55,7 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
     public static int prob;
     public static boolean firstEvent;
     public static boolean isLastOpRefresh;
+    public static String MOD_ID = "encountermod";
 
     public EncounterMod() {
         BaseMod.subscribe(this);
@@ -98,6 +105,48 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
         BaseMod.addEvent(new AddEventParams.Builder(Encounter.ID, Encounter.class).
                 eventType(EventUtils.EventType.ONE_TIME).
                 endsWithRewardsUI(false).
+                create());
+
+        // Replacement
+        BaseMod.addEvent(new AddEventParams.Builder(
+                encountermod.events.replacement.BigFish.ID,
+                encountermod.events.replacement.BigFish.class).
+                eventType(EventUtils.EventType.OVERRIDE).
+                bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)).
+                endsWithRewardsUI(false).
+                overrideEvent(BigFish.ID).
+                create());
+        BaseMod.addEvent(new AddEventParams.Builder(
+                encountermod.events.replacement.Cleric.ID,
+                encountermod.events.replacement.Cleric.class).
+                eventType(EventUtils.EventType.OVERRIDE).
+                bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)).
+                endsWithRewardsUI(false).
+                overrideEvent(Cleric.ID).
+                create());
+        BaseMod.addEvent(new AddEventParams.Builder(
+                encountermod.events.replacement.GoldenIdolEvent.ID,
+                encountermod.events.replacement.GoldenIdolEvent.class).
+                eventType(EventUtils.EventType.OVERRIDE).
+                bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)).
+                endsWithRewardsUI(false).
+                overrideEvent(GoldenIdolEvent.ID).
+                create());
+        BaseMod.addEvent(new AddEventParams.Builder(
+                encountermod.events.replacement.ShiningLight.ID,
+                encountermod.events.replacement.ShiningLight.class).
+                eventType(EventUtils.EventType.OVERRIDE).
+                bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)).
+                endsWithRewardsUI(false).
+                overrideEvent(ShiningLight.ID).
+                create());
+        BaseMod.addEvent(new AddEventParams.Builder(
+                encountermod.events.replacement.GoldenWing.ID,
+                encountermod.events.replacement.GoldenWing.class).
+                eventType(EventUtils.EventType.OVERRIDE).
+                bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)).
+                endsWithRewardsUI(false).
+                overrideEvent(GoldenWing.ID).
                 create());
     }
 
