@@ -216,6 +216,64 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
                 overrideEvent(TheMausoleum.ID).
                 create());
 
+        BaseMod.addEvent(new AddEventParams.Builder(
+                encountermod.events.replacement.Falling.ID,
+                encountermod.events.replacement.Falling.class).
+                eventType(EventUtils.EventType.OVERRIDE).
+                bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)).
+                endsWithRewardsUI(false).
+                overrideEvent(Falling.ID).
+                create());
+        BaseMod.addEvent(new AddEventParams.Builder(
+                encountermod.events.replacement.MindBloom.ID,
+                encountermod.events.replacement.MindBloom.class).
+                eventType(EventUtils.EventType.OVERRIDE).
+                bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)).
+                endsWithRewardsUI(false).
+                overrideEvent(MindBloom.ID).
+                create());
+        BaseMod.addEvent(new AddEventParams.Builder(
+                encountermod.events.replacement.SecretPortal.ID,
+                encountermod.events.replacement.SecretPortal.class).
+                eventType(EventUtils.EventType.OVERRIDE).
+                bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)).
+                endsWithRewardsUI(false).
+                overrideEvent(SecretPortal.ID).
+                create());
+        BaseMod.addEvent(new AddEventParams.Builder(
+                encountermod.events.replacement.TombRedMask.ID,
+                encountermod.events.replacement.TombRedMask.class).
+                eventType(EventUtils.EventType.OVERRIDE).
+                bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)).
+                endsWithRewardsUI(false).
+                overrideEvent(TombRedMask.ID).
+                create());
+
+        BaseMod.addEvent(new AddEventParams.Builder(
+                encountermod.events.replacement.GremlinWheelGame.ID,
+                encountermod.events.replacement.GremlinWheelGame.class).
+                eventType(EventUtils.EventType.OVERRIDE).
+                bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)).
+                endsWithRewardsUI(false).
+                overrideEvent(GremlinWheelGame.ID).
+                create());
+        BaseMod.addEvent(new AddEventParams.Builder(
+                encountermod.events.replacement.FountainOfCurseRemoval.ID,
+                encountermod.events.replacement.FountainOfCurseRemoval.class).
+                eventType(EventUtils.EventType.OVERRIDE).
+                bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)).
+                endsWithRewardsUI(false).
+                overrideEvent(FountainOfCurseRemoval.ID).
+                create());
+        BaseMod.addEvent(new AddEventParams.Builder(
+                encountermod.events.replacement.AccursedBlacksmith.ID,
+                encountermod.events.replacement.AccursedBlacksmith.class).
+                eventType(EventUtils.EventType.OVERRIDE).
+                bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)).
+                endsWithRewardsUI(false).
+                overrideEvent(AccursedBlacksmith.ID).
+                create());
+
     }
 
     @Override
