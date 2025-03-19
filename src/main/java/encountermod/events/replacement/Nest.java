@@ -63,10 +63,10 @@ public class Nest extends AbstractImageEvent {
             case 0:
                 if (buttonPressed == 0) {
                     this.imageEventText.updateBodyText(INTRO_BODY_M_2);
+                    this.imageEventText.clearRemainingOptions();
                     this.imageEventText.setDialogOption(OPTIONS[0] + 6 + OPTIONS[1], new RitualDagger());
                     UnlockTracker.markCardAsSeen("RitualDagger");
                     this.imageEventText.updateDialogOption(0, OPTIONS[2] + this.goldGain + OPTIONS[3]);
-                    this.imageEventText.clearRemainingOptions();
                     this.screenNum = 1;
                     break;
                 }
