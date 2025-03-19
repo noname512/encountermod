@@ -21,7 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class BackToBasics extends AbstractImageEvent {
-    public static final String ID = "encoutermod:Back to Basics";
+    public static final String ID = "encountermod:Back to Basics";
     private static final EventStrings eventStrings;
     private static final EventStrings modStrings;
     public static final String NAME;

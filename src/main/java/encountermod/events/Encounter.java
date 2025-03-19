@@ -78,6 +78,7 @@ public class Encounter extends AbstractImageEvent {
         public static SpireReturn<?> Prefix(Random rng) {
             if (EncounterMod.firstEvent) {
                 EncounterMod.firstEvent = false;
+                AbstractDungeon.eventList.remove(ID);
                 return SpireReturn.Return(new Encounter());
             }
             return SpireReturn.Continue();
