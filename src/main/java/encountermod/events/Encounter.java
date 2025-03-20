@@ -79,6 +79,8 @@ public class Encounter extends AbstractImageEvent {
             if (EncounterMod.firstEvent) {
                 EncounterMod.firstEvent = false;
                 AbstractDungeon.eventList.remove(ID);
+                AbstractDungeon.specialOneTimeEventList.remove(ID);
+                AbstractDungeon.shrineList.remove(ID);
                 return SpireReturn.Return(new Encounter());
             }
             return SpireReturn.Continue();

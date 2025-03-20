@@ -140,6 +140,7 @@ public class GoopPuddle extends AbstractImageEvent {
                         AbstractDungeon.player.masterDeck.removeCard(card);
                         imageEventText.clearAllDialogs();
                         imageEventText.setDialogOption(OPTIONS[5]);
+                        this.screen = CurScreen.RESULT;
                         return;
                     default:
                         return;
