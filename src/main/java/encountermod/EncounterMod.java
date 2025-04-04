@@ -23,6 +23,7 @@ import com.megacrit.cardcrawl.relics.JuzuBracelet;
 import com.megacrit.cardcrawl.rewards.RewardSave;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.custom.CustomMod;
+import encountermod.cards.Empty;
 import encountermod.patches.ExtraRelicRewardPatch;
 import encountermod.patches.IdeaPatch;
 import encountermod.patches.IdeaRewardPatch;
@@ -81,6 +82,11 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
         IdeaPatch.topEffect = new ArrayList<>();
         initializeEvents();
         initializeRewards();
+        initializeSpecialBattle();
+    }
+
+    private void initializeSpecialBattle() {
+        BaseMod.addCard(new Empty());
     }
 
     private void initializeRewards() {

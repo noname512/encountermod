@@ -1,0 +1,7 @@
+{
+  "encountermod:Empty": {
+    "NAME": "空无",
+    "DESCRIPTION": "不能被打出。 NL 抽到这张牌时失去 [E] 。",
+    "UPGRADE_DESCRIPTION": ""
+  }
+}

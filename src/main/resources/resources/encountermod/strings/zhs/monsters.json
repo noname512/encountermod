@@ -1,0 +1,32 @@
+{
+  "encountermod:Envy": {
+    "NAME": "妒",
+    "MOVES": [],
+    "DIALOG": []
+  },
+  "encountermod:Smarty": {
+    "NAME": "得意",
+    "MOVES": [],
+    "DIALOG": []
+  },
+  "encountermod:Fury": {
+    "NAME": "盛怒",
+    "MOVES": [],
+    "DIALOG": []
+  },
+  "encountermod:PadmāsanaofRebirth": {
+    "NAME": "托生莲座",
+    "MOVES": [],
+    "DIALOG": []
+  },
+  "encountermod:AgginiofNila": {
+    "NAME": "尼卢火",
+    "MOVES": [],
+    "DIALOG": []
+  },
+  "encountermod:Qui'lon, Avatāra of Mahāsattva": {
+    "NAME": "奎隆，摩诃萨埵权化",
+    "MOVES": [],
+    "DIALOG": []
+  }
+}
