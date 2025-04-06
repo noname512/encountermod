@@ -28,13 +28,13 @@ public class AgginiofNila extends AbstractMonster {
         if (AbstractDungeon.ascensionLevel >= 7)
             setHp(30);
         if (AbstractDungeon.ascensionLevel >= 17) {
-            damage = 8;
+            damage = 6;
         }
         else if (AbstractDungeon.ascensionLevel >= 2) {
-            damage = 7;
+            damage = 5;
         }
         else {
-            damage = 6;
+            damage = 4;
         }
         currentHealth = 1;
     }

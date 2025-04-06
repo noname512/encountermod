@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.*;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import encountermod.actions.SummonEnemyAction;
 import encountermod.powers.FriendlyChatPower;
@@ -19,11 +19,14 @@ import encountermod.powers.QuiLonPower;
 import encountermod.powers.RecordPower;
 import encountermod.relics.GraffitiOfTheEraOfHope;
 import jdk.javadoc.internal.doclint.Env;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
 public class QuiLon extends AbstractMonster {
     public static final String ID = "encountermod:Qui'lon, Avatāra of Mahāsattva";
+    public static final Logger logger = LogManager.getLogger(QuiLon.class.getName());
     public static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings(ID);
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
@@ -35,8 +38,8 @@ public class QuiLon extends AbstractMonster {
     public Envy[] envy = new Envy[2];
     public Smarty[] smarty = new Smarty[4];
     public Fury[] fury = new Fury[1];
-    public float[][] posx = {{0.0F, 0.0F}, {0.0F}, {0.0F, 0.0F}, {0.0F, 0.0F, 0.0F, 0.0F}, {0.0F}};
-    public float[][] posy = {{0.0F, 0.0F}, {0.0F}, {0.0F, 0.0F}, {0.0F, 0.0F, 0.0F, 0.0F}, {0.0F}};
+    public float[][] posx = {{-100.0F, 200.0F}, {-400.0F}, {0.0F, 0.0F}, {-600.0F, -600.0F, -300.0F, -300.0F}, {0.0F}};
+    public float[][] posy = {{-100.0F, -100.0F}, {0.0F}, {0.0F, 0.0F}, {200.0F, -100.0F, 200.0F, -100.0F}, {0.0F}};
     public int currentMove = 0;
     public QuiLon(float x, float y) {
         super(NAME, ID, 300, 20.0F, 0, 160.0F, 300.0F, IMAGE, x, y);
@@ -65,6 +68,8 @@ public class QuiLon extends AbstractMonster {
     @Override
     public void takeTurn() {
         int slot;
+        logger.info(nextMove);
+        logger.info(currentMove);
         if (nextMove == 1) {
             // Summon Envy + Fury
             slot = getEmptySlot(envy);
@@ -101,7 +106,13 @@ public class QuiLon extends AbstractMonster {
         else if (nextMove == 30) {
             // Summon Check Failed, Attack & Defend 40
             addToBot(new DamageAction(AbstractDungeon.player, damage.get(0)));
-            addToBot(new GainBlockAction(this, this, 40));
+            addToBot(new ApplyPowerAction(AbstractDungeon.player, this, new VulnerablePower(AbstractDungeon.player, 3, true)));
+            addToBot(new ApplyPowerAction(AbstractDungeon.player, this, new WeakPower(AbstractDungeon.player, 3, true)));
+            addToBot(new ApplyPowerAction(AbstractDungeon.player, this, new FrailPower(AbstractDungeon.player, 3, true)));
+            addToBot(new ApplyPowerAction(AbstractDungeon.player, this, new StrengthPower(AbstractDungeon.player, -20)));
+            if (AbstractDungeon.player.hasPower(ArtifactPower.POWER_ID)) {
+                addToBot(new ApplyPowerAction(AbstractDungeon.player, this, new GainStrengthPower(AbstractDungeon.player, 20)));
+            }
         }
         else if (nextMove == 50) {
             // Turn into Stage 2
@@ -116,6 +127,7 @@ public class QuiLon extends AbstractMonster {
             halfDead = false;
             addToBot(new HealAction(this, this, maxHealth));
             getPower(QuiLonPower.POWER_ID).onSpecificTrigger();
+            powers.removeIf(pow -> pow.type == AbstractPower.PowerType.DEBUFF);
         }
         else if (nextMove == 61) {
             // Summon Nila
@@ -150,7 +162,13 @@ public class QuiLon extends AbstractMonster {
             // Summon Check Failed, Attack * 2 & Defend 40
             addToBot(new DamageAction(AbstractDungeon.player, damage.get(0)));
             addToBot(new DamageAction(AbstractDungeon.player, damage.get(0)));
-            addToBot(new GainBlockAction(this, this, 40));
+            addToBot(new ApplyPowerAction(AbstractDungeon.player, this, new VulnerablePower(AbstractDungeon.player, 6, true)));
+            addToBot(new ApplyPowerAction(AbstractDungeon.player, this, new WeakPower(AbstractDungeon.player, 6, true)));
+            addToBot(new ApplyPowerAction(AbstractDungeon.player, this, new FrailPower(AbstractDungeon.player, 6, true)));
+            addToBot(new ApplyPowerAction(AbstractDungeon.player, this, new StrengthPower(AbstractDungeon.player, -40)));
+            if (AbstractDungeon.player.hasPower(ArtifactPower.POWER_ID)) {
+                addToBot(new ApplyPowerAction(AbstractDungeon.player, this, new GainStrengthPower(AbstractDungeon.player, 40)));
+            }
         }
         getMove(0);
     }
@@ -174,7 +192,7 @@ public class QuiLon extends AbstractMonster {
                 checkFailed(1, 1);
             }
             else {
-                setMove((byte)2, Intent.UNKNOWN);
+                setMove((byte)1, Intent.UNKNOWN);
             }
         }
         else if (currentMove == 2) {
@@ -216,7 +234,7 @@ public class QuiLon extends AbstractMonster {
             }
         }
         else if (currentMove == 64) {
-            setMove((byte)64, Intent.ATTACK_BUFF, damage.get(0).base, 5, true);
+            setMove((byte)64, Intent.ATTACK, damage.get(0).base, 5, true);
         }
     }
 
@@ -233,8 +251,11 @@ public class QuiLon extends AbstractMonster {
     @Override
     public void damage(DamageInfo info) {
         super.damage(info);
-        if (currentHealth <= maxHealth * ((QuiLonPower)getPower(QuiLonPower.POWER_ID)).percent) {
+        for (;currentHealth <= maxHealth * 0.01F * ((QuiLonPower)getPower(QuiLonPower.POWER_ID)).percent;) {
             ((QuiLonPower)getPower(QuiLonPower.POWER_ID)).changeStage();
+            if (((QuiLonPower)getPower(QuiLonPower.POWER_ID)).stage >= 4) {
+                break;
+            }
         }
     }
 

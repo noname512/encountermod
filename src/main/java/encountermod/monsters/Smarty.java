@@ -62,11 +62,18 @@ public class Smarty extends AbstractMonster {
         }
         getMove(0);
     }
+
+    @Override
+    public void rollMove() {
+        setMove((byte)2, Intent.ATTACK, damage.get(1).base);
+    }
+
     @Override
     protected void getMove(int i) {
         for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
             if (!m.isDeadOrEscaped() && (m instanceof Smarty) && m != this) {
                 setMove((byte)2, Intent.ATTACK, damage.get(1).base);
+                return;
             }
         }
         setMove((byte)1, Intent.ATTACK, damage.get(0).base);
@@ -85,6 +92,7 @@ public class Smarty extends AbstractMonster {
         }
         if (cnt == 1) {
             mo.setMove((byte)1, Intent.ATTACK, damage.get(0).base);
+            mo.createIntent();
             addToBot(new TextAboveCreatureAction(mo, TextAboveCreatureAction.TextType.INTERRUPTED));
         }
     }

@@ -32,5 +32,16 @@ public class RecordPower extends AbstractPower {
     @Override
     public void updateDescription() {
         description = DESCRIPTIONS[0];
+        boolean first = true;
+        for (AbstractCard c : list) {
+            description += c.name;
+            if (first) {
+                first = false;
+            }
+            else {
+                description += DESCRIPTIONS[1];
+            }
+        }
+        description += DESCRIPTIONS[2];
     }
 }

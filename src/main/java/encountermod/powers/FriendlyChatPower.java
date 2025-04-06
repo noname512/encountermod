@@ -18,6 +18,7 @@ public class FriendlyChatPower extends AbstractPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
     public ArrayList<AbstractCard> list = new ArrayList<>();
+    boolean triggered = false;
     public FriendlyChatPower(AbstractCreature owner) {
         this.ID = POWER_ID;
         this.name = NAME;
@@ -44,6 +45,9 @@ public class FriendlyChatPower extends AbstractPower {
             AbstractDungeon.effectList.add(new DeckPoofEffect((float)Settings.WIDTH - 64.0F * Settings.scale, 64.0F * Settings.scale, false));
             AbstractDungeon.overlayMenu.hideCombatPanels();
             AbstractDungeon.getCurrRoom().endBattle();
+            triggered = true;
+        }
+        if (triggered) {
             return 0;
         }
         return damageAmount;

@@ -52,6 +52,7 @@ public class PORPower extends AbstractPower {
                     break;
                 }
             }
+            updateDescription();
         }
     }
 

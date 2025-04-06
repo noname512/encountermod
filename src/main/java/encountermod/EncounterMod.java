@@ -18,12 +18,14 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.JuzuBracelet;
 import com.megacrit.cardcrawl.rewards.RewardSave;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.custom.CustomMod;
 import encountermod.cards.Empty;
+import encountermod.monsters.QuiLon;
 import encountermod.patches.ExtraRelicRewardPatch;
 import encountermod.patches.IdeaPatch;
 import encountermod.patches.IdeaRewardPatch;
@@ -87,6 +89,7 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
 
     private void initializeSpecialBattle() {
         BaseMod.addCard(new Empty());
+        BaseMod.addMonster("Qui'Lon", () -> new MonsterGroup(new QuiLon(-200.0F, 0.0F)));
     }
 
     private void initializeRewards() {
@@ -235,7 +238,7 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
                 encountermod.events.replacement.MindBloom.class).
                 eventType(EventUtils.EventType.OVERRIDE).
                 bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)).
-                endsWithRewardsUI(false).
+                endsWithRewardsUI(true).
                 overrideEvent(MindBloom.ID).
                 create());
         BaseMod.addEvent(new AddEventParams.Builder(
@@ -243,7 +246,7 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
                 encountermod.events.replacement.SecretPortal.class).
                 eventType(EventUtils.EventType.OVERRIDE).
                 bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)).
-                endsWithRewardsUI(false).
+                endsWithRewardsUI(true).
                 overrideEvent(SecretPortal.ID).
                 create());
         BaseMod.addEvent(new AddEventParams.Builder(
@@ -347,6 +350,10 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
         BaseMod.loadCustomStrings(PowerStrings.class, powerStrings);
         String uiStrings = Gdx.files.internal("resources/encountermod/strings/" + lang + "/ui.json").readString(String.valueOf(StandardCharsets.UTF_8));
         BaseMod.loadCustomStrings(UIStrings.class, uiStrings);
+        String monsterStrings = Gdx.files.internal("resources/encountermod/strings/" + lang + "/monsters.json").readString(String.valueOf(StandardCharsets.UTF_8));
+        BaseMod.loadCustomStrings(MonsterStrings.class, monsterStrings);
+        String cardStrings = Gdx.files.internal("resources/encountermod/strings/" + lang + "/cards.json").readString(String.valueOf(StandardCharsets.UTF_8));
+        BaseMod.loadCustomStrings(CardStrings.class, cardStrings);
     }
 
     private String getLang() {

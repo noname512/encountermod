@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.AbstractImageEvent;
+import com.megacrit.cardcrawl.helpers.MonsterHelper;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
@@ -39,7 +40,7 @@ public class SecretPortal extends AbstractImageEvent {
         }
         if (EncounterMod.ideaCount >= 2)
         {
-            imageEventText.setDialogOption(modStrings.OPTIONS[5], true); // TODO:没做好
+            imageEventText.setDialogOption(modStrings.OPTIONS[2]);
         }
         else
         {
@@ -76,8 +77,10 @@ public class SecretPortal extends AbstractImageEvent {
                         this.imageEventText.updateDialogOption(0, OPTIONS[1]);
                         break;
                     case 2:
+                        this.imageEventText.updateBodyText(modStrings.DESCRIPTIONS[1]);
                         EncounterMod.ideaCount -= 2;
-                        // TODO: 奎隆相关
+                        this.screen = CurScreen.KUILON;
+                        this.imageEventText.updateDialogOption(0, modStrings.OPTIONS[4]);
                         break;
                     case 3:
                         this.imageEventText.updateBodyText(DIALOG_3);
@@ -100,6 +103,11 @@ public class SecretPortal extends AbstractImageEvent {
                 AbstractDungeon.topLevelEffects.add(new FadeWipeParticle());
                 AbstractDungeon.nextRoomTransitionStart();
                 break;
+            case KUILON:
+                AbstractDungeon.getCurrRoom().monsters = MonsterHelper.getEncounter("Qui'Lon");
+                AbstractDungeon.getCurrRoom().rewards.clear();
+                this.enterCombatFromImage();
+                break;
             default:
                 this.openMap();
         }
@@ -120,7 +128,8 @@ public class SecretPortal extends AbstractImageEvent {
     private static enum CurScreen {
         INTRO,
         ACCEPT,
-        LEAVE;
+        LEAVE,
+        KUILON;
 
         private CurScreen() {
         }

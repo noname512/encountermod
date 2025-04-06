@@ -39,6 +39,18 @@ public class POR extends AbstractMonster {
         for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
             if (m instanceof QuiLon) {
                 ((RecordPower)m.getPower(RecordPower.POWER_ID)).list.addAll(((PORPower)(getPower(PORPower.POWER_ID))).list);
+                m.getPower(RecordPower.POWER_ID).updateDescription();
+                m.getPower(QuiLonPower.POWER_ID).onSpecificTrigger();
+            }
+        }
+        AbstractDungeon.getCurrRoom().monsters.monsters.remove(this);
+    }
+
+    @Override
+    public void die() {
+        super.die();
+        for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
+            if (m instanceof QuiLon) {
                 m.getPower(QuiLonPower.POWER_ID).onSpecificTrigger();
             }
         }

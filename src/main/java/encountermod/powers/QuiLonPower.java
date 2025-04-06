@@ -1,5 +1,6 @@
 package encountermod.powers;
 
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.actions.common.SuicideAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -42,19 +43,20 @@ public class QuiLonPower extends AbstractPower{
         }
         if (stage <= 3) {
             canDamage = false;
-            if (((QuiLon)owner).nextMove != 20) {
-                ((QuiLon)owner).currentMove = ((QuiLon)owner).nextMove;
-            }
             ((QuiLon)owner).setMove((byte)20, AbstractMonster.Intent.UNKNOWN);
             ((QuiLon)owner).createIntent();
         }
         else if (stage == 4) {
             for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
                 if (m != owner) {
+                    QuiLon.logger.info("name" + m.name);
                     m.powers.clear();
-                    addToBot(new SuicideAction(m));
+                    m.currentHealth = 0;
+                    m.isDead = true;
                 }
             }
+            AbstractDungeon.getCurrRoom().monsters.monsters.removeIf(m -> m != owner);
+            addToBot(new RemoveSpecificPowerAction(owner, owner, NilaShieldPower.POWER_ID));
             ((QuiLon)owner).setMove((byte)50, AbstractMonster.Intent.BUFF);
             ((QuiLon)owner).createIntent();
         }
@@ -89,7 +91,7 @@ public class QuiLonPower extends AbstractPower{
 
     @Override
     public void updateDescription() {
-        if (stage <= 3) {
+        if (stage < 3) {
             description = DESCRIPTIONS[0] + percent + DESCRIPTIONS[1] + (int)(percent * 0.01F * owner.maxHealth) + DESCRIPTIONS[2];
             description += DESCRIPTIONS[3 + stage];
         }
@@ -108,6 +110,16 @@ public class QuiLonPower extends AbstractPower{
     public float atDamageFinalReceive(float damage, DamageInfo.DamageType type) {
         if (canDamage) {
             return damage;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    @Override
+    public int onAttacked(DamageInfo info, int damageAmount) {
+        if (canDamage) {
+            return damageAmount;
         }
         else {
             return 0;

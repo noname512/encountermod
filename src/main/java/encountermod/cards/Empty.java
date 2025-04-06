@@ -13,7 +13,7 @@ public class Empty extends CustomCard {
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    public static final String IMG = "encountermod/images/cards/Empty.png";
+    public static final String IMG = null; //"encountermod/images/cards/Empty.png";
     public static final int COST = -2;
     public Empty() {
         super(ID, NAME, IMG, COST, DESCRIPTION, CardType.STATUS, CardColor.COLORLESS,CardRarity.BASIC, CardTarget.SELF);

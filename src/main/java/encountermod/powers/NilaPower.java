@@ -1,5 +1,6 @@
 package encountermod.powers;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -12,6 +13,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.vfx.combat.ExplosionSmallEffect;
 import encountermod.cards.Empty;
 import encountermod.monsters.AgginiofNila;
+import encountermod.monsters.QuiLon;
 
 import java.util.ArrayList;
 
@@ -38,13 +40,14 @@ public class NilaPower extends AbstractPower {
     }
 
     @Override
-    public int onPlayerGainedBlock(int blockAmount) {
+    public int onPlayerGainedBlock(float blockAmount) {
+        QuiLon.logger.info("Hello");
         if (blockAmount > 1) {
             flash();
-            addToBot(new HealAction(owner, owner, blockAmount / 2));
-            blockAmount = blockAmount - blockAmount / 2;
+            addToBot(new HealAction(owner, owner, MathUtils.floor(blockAmount / 2)));
+            blockAmount = blockAmount - MathUtils.floor(blockAmount / 2);
         }
-        return blockAmount;
+        return MathUtils.floor(blockAmount);
     }
 
     @Override
@@ -53,13 +56,19 @@ public class NilaPower extends AbstractPower {
         if (amount == 0) {
             AbstractDungeon.effectList.add(new ExplosionSmallEffect(owner.hb.cX, owner.hb.cY));
             addToBot(new DamageAction(AbstractDungeon.player, new DamageInfo(owner, ((AgginiofNila)owner).damage, DamageInfo.DamageType.THORNS)));
-            addToBot(new ApplyPowerAction(AbstractDungeon.player, owner, new SuperWeakPower(AbstractDungeon.player, 5)));
+            addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new SuperWeakPower(AbstractDungeon.player, 5)));
             addToBot(new SuicideAction((AbstractMonster)owner));
         }
+        updateDescription();
     }
 
     @Override
     public float atDamageFinalReceive(float damage, DamageInfo.DamageType type) {
+        return 0;
+    }
+
+    @Override
+    public int onAttacked(DamageInfo info, int damageAmount) {
         return 0;
     }
 }
