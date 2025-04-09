@@ -2,7 +2,6 @@ package encountermod.powers;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.common.*;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -11,11 +10,8 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.vfx.combat.ExplosionSmallEffect;
-import encountermod.cards.Empty;
-import encountermod.monsters.AgginiofNila;
+import encountermod.monsters.AgginiOfNila;
 import encountermod.monsters.QuiLon;
-
-import java.util.ArrayList;
 
 public class NilaPower extends AbstractPower {
     public static final String POWER_ID = "encountermod:NilaPower";
@@ -36,7 +32,7 @@ public class NilaPower extends AbstractPower {
 
     @Override
     public void updateDescription() {
-        description = DESCRIPTIONS[0] + amount + DESCRIPTIONS[1] + ((AgginiofNila)owner).damage + DESCRIPTIONS[2];
+        description = DESCRIPTIONS[0] + amount + DESCRIPTIONS[1] + ((AgginiOfNila)owner).damage + DESCRIPTIONS[2];
     }
 
     @Override
@@ -55,7 +51,7 @@ public class NilaPower extends AbstractPower {
         amount --;
         if (amount == 0) {
             AbstractDungeon.effectList.add(new ExplosionSmallEffect(owner.hb.cX, owner.hb.cY));
-            addToBot(new DamageAction(AbstractDungeon.player, new DamageInfo(owner, ((AgginiofNila)owner).damage, DamageInfo.DamageType.THORNS)));
+            addToBot(new DamageAction(AbstractDungeon.player, new DamageInfo(owner, ((AgginiOfNila)owner).damage, DamageInfo.DamageType.THORNS)));
             addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new SuperWeakPower(AbstractDungeon.player, 5)));
             addToBot(new SuicideAction((AbstractMonster)owner));
         }

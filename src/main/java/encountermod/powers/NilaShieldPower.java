@@ -2,15 +2,12 @@ package encountermod.powers;
 
 import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.status.Wound;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.vfx.combat.ExplosionSmallEffect;
-import encountermod.monsters.AgginiofNila;
+import encountermod.monsters.AgginiOfNila;
 import encountermod.monsters.QuiLon;
 
 public class NilaShieldPower extends AbstractPower {
@@ -42,7 +39,7 @@ public class NilaShieldPower extends AbstractPower {
 
     public void onInflictDamage(DamageInfo info, int damageAmount, AbstractCreature target) {
         if ((info.type == DamageInfo.DamageType.NORMAL) && (target == AbstractDungeon.player)) {
-            for (AgginiofNila nila : ((QuiLon)owner).nila) {
+            for (AgginiOfNila nila : ((QuiLon)owner).nila) {
                 if ((nila == null) || (nila.isDeadOrEscaped())) {
                     continue;
                 }

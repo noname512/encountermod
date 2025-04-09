@@ -1,11 +1,6 @@
 package encountermod.monsters;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.EscapeAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAndDeckAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.status.Dazed;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
@@ -15,15 +10,17 @@ import encountermod.powers.QuiLonPower;
 import encountermod.powers.RecordPower;
 
 public class POR extends AbstractMonster {
-    public static final String ID = "encountermod:PadmāsanaofRebirth";
+    public static final String ID = "encountermod:PadmāsanaOfRebirth";
     public static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings(ID);
     public static final String NAME = monsterStrings.NAME;
-    public static final String[] MOVES = monsterStrings.MOVES;
-    public static final String[] DIALOG = monsterStrings.DIALOG;
-    public static final String IMAGE = null; //"resources/encountermod/images/monsters/POR.png";
+    public static final String IMAGE = null;
     public POR(float x, float y) {
         super(NAME, ID, 100, 20.0F, 0, 160.0F, 300.0F, IMAGE, x, y);
         type = EnemyType.ELITE;
+        loadAnimation("resources/encountermod/images/monsters/enemy_2090_skzjbc/enemy_2090_skzjbc33.atlas", "resources/encountermod/images/monsters/enemy_2090_skzjbc/enemy_2090_skzjbc33.json", 1.5F);
+        state.setAnimation(0, "Start", false);
+        state.addAnimation(0, "Idle", true, 0);
+        flipHorizontal = true;
     }
 
     @Override
@@ -35,7 +32,7 @@ public class POR extends AbstractMonster {
     public void takeTurn() {
         hideHealthBar();
         escaped = true;
-        // TODO: 退场动画
+        state.setAnimation(0, "Die", false);
         for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
             if (m instanceof QuiLon) {
                 ((RecordPower)m.getPower(RecordPower.POWER_ID)).list.addAll(((PORPower)(getPower(PORPower.POWER_ID))).list);
@@ -48,6 +45,7 @@ public class POR extends AbstractMonster {
 
     @Override
     public void die() {
+        state.setAnimation(0, "Die", false);
         super.die();
         for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
             if (m instanceof QuiLon) {

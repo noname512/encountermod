@@ -1,7 +1,6 @@
 package encountermod.powers;
 
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
-import com.megacrit.cardcrawl.actions.common.SuicideAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -38,6 +37,16 @@ public class QuiLonPower extends AbstractPower{
     public void changeStage() {
         flash();
         stage ++;
+        if (stage <= 3) {
+            owner.state.setAnimation(0, "B_Skill_Begin", false);
+            owner.state.addAnimation(0, "B_Skill_Loop", true, 0);
+        } else if (stage == 4) {
+            owner.state.setAnimation(0, "B_Revive_Begin", false);
+            owner.state.addAnimation(0, "B_Revive_Loop", true, 0);
+        } else if (stage == 5) {
+            owner.state.setAnimation(0, "C_Die", false);
+        }
+
         if (percent > 0) {
             percent -= 25;
         }

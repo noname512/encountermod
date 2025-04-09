@@ -1,0 +1,5 @@
+enemy_1128_spmage_2 妒
+enemy_1126_spslme_2 得意
+enemy_1129_spklr_2 盛怒
+enemy_2090_skzjbc 托生莲座
+enemy_2089_skzjkl 奎隆

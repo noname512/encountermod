@@ -6,8 +6,9 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-/src/main/resources/resources/rhinemod/images/**/**/library/
+/src/main/resources/resources/encountermod/images/**/**/library/
 *.dbproj
+*.spine
 
 ### IntelliJ IDEA ###
 /.idea/*

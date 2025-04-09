@@ -1,25 +1,25 @@
 {
   "encountermod:Envy": {
-    "NAME": "妒",
+    "NAME": "复杂的“妒”",
     "MOVES": [],
     "DIALOG": []
   },
   "encountermod:Smarty": {
-    "NAME": "得意",
+    "NAME": "恍惚的“得意”",
     "MOVES": [],
     "DIALOG": []
   },
   "encountermod:Fury": {
-    "NAME": "盛怒",
+    "NAME": "无羁的“盛怒”",
     "MOVES": [],
     "DIALOG": []
   },
-  "encountermod:PadmāsanaofRebirth": {
+  "encountermod:PadmāsanaOfRebirth": {
     "NAME": "托生莲座",
     "MOVES": [],
     "DIALOG": []
   },
-  "encountermod:AgginiofNila": {
+  "encountermod:AgginiOfNila": {
     "NAME": "尼卢火",
     "MOVES": [],
     "DIALOG": []

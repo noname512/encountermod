@@ -1,7 +1,6 @@
 package encountermod.monsters;
 
 import com.megacrit.cardcrawl.actions.common.*;
-import com.megacrit.cardcrawl.actions.defect.RecycleAction;
 import com.megacrit.cardcrawl.actions.unique.CannotLoseAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -14,26 +13,20 @@ import com.megacrit.cardcrawl.powers.*;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import encountermod.actions.SummonEnemyAction;
 import encountermod.powers.FriendlyChatPower;
-import encountermod.powers.PORPower;
 import encountermod.powers.QuiLonPower;
 import encountermod.powers.RecordPower;
 import encountermod.relics.GraffitiOfTheEraOfHope;
-import jdk.javadoc.internal.doclint.Env;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
 
 public class QuiLon extends AbstractMonster {
     public static final String ID = "encountermod:Qui'lon, Avatāra of Mahāsattva";
     public static final Logger logger = LogManager.getLogger(QuiLon.class.getName());
     public static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings(ID);
     public static final String NAME = monsterStrings.NAME;
-    public static final String[] MOVES = monsterStrings.MOVES;
-    public static final String[] DIALOG = monsterStrings.DIALOG;
-    public static final String IMAGE = null; //"resources/encountermod/images/monsters/Quilon.png";
+    public static final String IMAGE = null;
 
-    public AgginiofNila[] nila = new AgginiofNila[2];
+    public AgginiOfNila[] nila = new AgginiOfNila[2];
     public POR[] boat = new POR[1];
     public Envy[] envy = new Envy[2];
     public Smarty[] smarty = new Smarty[4];
@@ -53,13 +46,17 @@ public class QuiLon extends AbstractMonster {
         } else {
             this.damage.add(new DamageInfo(this, 4));
         }
+        loadAnimation("resources/encountermod/images/monsters/enemy_2089_skzjkl/enemy_2089_skzjkl33.atlas", "resources/encountermod/images/monsters/enemy_2089_skzjkl/enemy_2089_skzjkl33.json", 1.5F);
+        state.setAnimation(0, "A_Skill", false);
+        state.addAnimation(0, "A_Idle", true, 0);
+        flipHorizontal = true;
     }
 
     @Override
     public void usePreBattleAction() {
         addToBot(new CannotLoseAction());
-        addToBot(new ApplyPowerAction(this, this , new RecordPower(this)));
-        addToBot(new ApplyPowerAction(this, this , new QuiLonPower(this)));
+        addToBot(new ApplyPowerAction(this, this, new RecordPower(this)));
+        addToBot(new ApplyPowerAction(this, this, new QuiLonPower(this)));
         if (AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)) {   // 以后可以考虑复用
             addToBot(new ApplyPowerAction(AbstractDungeon.player, this, new FriendlyChatPower(AbstractDungeon.player)));
         }
@@ -80,14 +77,18 @@ public class QuiLon extends AbstractMonster {
         else if (nextMove == 2) {
             // Summon Nila
             slot = getEmptySlot(nila);
-            addToBot(new SummonEnemyAction(nila, new AgginiofNila(posx[0][slot], posy[0][slot]), slot));
+            addToBot(new SummonEnemyAction(nila, new AgginiOfNila(posx[0][slot], posy[0][slot]), slot));
         }
         else if (nextMove == 3) {
             // Attack
+            state.setAnimation(0, "B_Attack", false);
+            state.addAnimation(0, "B_Idle", true, 0);
             addToBot(new DamageAction(AbstractDungeon.player, damage.get(0)));
         }
         else if (nextMove == 4) {
             // Attack 5 times
+            state.setAnimation(0, "B_Skill_2", false);
+            state.addAnimation(0, "B_Idle", true, 0);
             addToBot(new DamageAction(AbstractDungeon.player, damage.get(0)));
             addToBot(new DamageAction(AbstractDungeon.player, damage.get(0)));
             addToBot(new DamageAction(AbstractDungeon.player, damage.get(0)));
@@ -105,6 +106,8 @@ public class QuiLon extends AbstractMonster {
         }
         else if (nextMove == 30) {
             // Summon Check Failed, Attack & Defend 40
+            state.setAnimation(0, "B_Attack", false);
+            state.addAnimation(0, "B_Idle", true, 0);
             addToBot(new DamageAction(AbstractDungeon.player, damage.get(0)));
             addToBot(new ApplyPowerAction(AbstractDungeon.player, this, new VulnerablePower(AbstractDungeon.player, 3, true)));
             addToBot(new ApplyPowerAction(AbstractDungeon.player, this, new WeakPower(AbstractDungeon.player, 3, true)));
@@ -116,6 +119,10 @@ public class QuiLon extends AbstractMonster {
         }
         else if (nextMove == 50) {
             // Turn into Stage 2
+            state.setAnimation(0, "B_Revive_End", false);
+            state.addAnimation(0, "C_Revive", false, 0);
+            state.addAnimation(0, "C_Revive_2", false, 0);
+            state.addAnimation(0, "C_Idle", true, 0);
             AbstractPlayer p = AbstractDungeon.player;
             p.hand.clear();
             p.discardPile.clear();
@@ -132,7 +139,7 @@ public class QuiLon extends AbstractMonster {
         else if (nextMove == 61) {
             // Summon Nila
             slot = getEmptySlot(nila);
-            addToBot(new SummonEnemyAction(nila, new AgginiofNila(posx[0][slot], posy[0][slot]), slot));
+            addToBot(new SummonEnemyAction(nila, new AgginiOfNila(posx[0][slot], posy[0][slot]), slot));
         }
         else if (nextMove == 62) {
             // Summon Envy + Smarty * 2
@@ -145,13 +152,17 @@ public class QuiLon extends AbstractMonster {
         }
         else if (nextMove == 63) {
             // Summon Nila And Attack 2 times
+            state.setAnimation(0, "C_Attack", false);
+            state.addAnimation(0, "C_Idle", true, 0);
             slot = getEmptySlot(nila);
-            addToBot(new SummonEnemyAction(nila, new AgginiofNila(posx[0][slot], posy[0][slot]), slot));
+            addToBot(new SummonEnemyAction(nila, new AgginiOfNila(posx[0][slot], posy[0][slot]), slot));
             addToBot(new DamageAction(AbstractDungeon.player, damage.get(0)));
             addToBot(new DamageAction(AbstractDungeon.player, damage.get(0)));
         }
         else if (nextMove == 64) {
             // Attack 5 times
+            state.setAnimation(0, "C_Skill_1", false);
+            state.addAnimation(0, "C_Idle", true, 0);
             addToBot(new DamageAction(AbstractDungeon.player, damage.get(0)));
             addToBot(new DamageAction(AbstractDungeon.player, damage.get(0)));
             addToBot(new DamageAction(AbstractDungeon.player, damage.get(0)));
@@ -160,6 +171,8 @@ public class QuiLon extends AbstractMonster {
         }
         else if (nextMove == 90) {
             // Summon Check Failed, Attack * 2 & Defend 40
+            state.setAnimation(0, "C_Attack", false);
+            state.addAnimation(0, "C_Idle", true, 0);
             addToBot(new DamageAction(AbstractDungeon.player, damage.get(0)));
             addToBot(new DamageAction(AbstractDungeon.player, damage.get(0)));
             addToBot(new ApplyPowerAction(AbstractDungeon.player, this, new VulnerablePower(AbstractDungeon.player, 6, true)));
@@ -251,7 +264,7 @@ public class QuiLon extends AbstractMonster {
     @Override
     public void damage(DamageInfo info) {
         super.damage(info);
-        for (;currentHealth <= maxHealth * 0.01F * ((QuiLonPower)getPower(QuiLonPower.POWER_ID)).percent;) {
+        while (currentHealth <= maxHealth * 0.01F * ((QuiLonPower)getPower(QuiLonPower.POWER_ID)).percent) {
             ((QuiLonPower)getPower(QuiLonPower.POWER_ID)).changeStage();
             if (((QuiLonPower)getPower(QuiLonPower.POWER_ID)).stage >= 4) {
                 break;

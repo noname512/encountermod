@@ -1,19 +1,14 @@
 package encountermod.monsters;
 
-import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAndDeckAction;
 import com.megacrit.cardcrawl.actions.common.SuicideAction;
 import com.megacrit.cardcrawl.actions.utility.TextAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.status.Dazed;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.monsters.exordium.SlimeBoss;
 import com.megacrit.cardcrawl.vfx.combat.ExplosionSmallEffect;
 import encountermod.powers.SmartyPower;
 
@@ -21,9 +16,7 @@ public class Smarty extends AbstractMonster {
     public static final String ID = "encountermod:Smarty";
     public static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings(ID);
     public static final String NAME = monsterStrings.NAME;
-    public static final String[] MOVES = monsterStrings.MOVES;
-    public static final String[] DIALOG = monsterStrings.DIALOG;
-    public static final String IMAGE = null; //"resources/encountermod/images/monsters/smarty.png";
+    public static final String IMAGE = null;
     public Smarty(float x, float y) {
         super(NAME, ID, 26, 20.0F, 0, 160.0F, 300.0F, IMAGE, x, y);
         type = EnemyType.NORMAL;
@@ -39,6 +32,9 @@ public class Smarty extends AbstractMonster {
             this.damage.add(new DamageInfo(this, 5));
             this.damage.add(new DamageInfo(this, 28));
         }
+        loadAnimation("resources/encountermod/images/monsters/enemy_1126_spslme_2/enemy_1126_spslme_233.atlas", "resources/encountermod/images/monsters/enemy_1126_spslme_2/enemy_1126_spslme_233.json", 2.0F);
+        state.setAnimation(0, "Idle", true);
+        flipHorizontal = true;
     }
 
     @Override
@@ -49,6 +45,8 @@ public class Smarty extends AbstractMonster {
     @Override
     public void takeTurn() {
         if (nextMove == 1) {
+            state.setAnimation(0, "Attack", false);
+            state.addAnimation(0, "Idle", true, 0);
             addToBot(new DamageAction(AbstractDungeon.player, damage.get(0)));
         }
         else {
@@ -81,6 +79,7 @@ public class Smarty extends AbstractMonster {
 
     @Override
     public void die() {
+        state.setAnimation(0, "Die", false);
         super.die();
         int cnt = 0;
         AbstractMonster mo = null;

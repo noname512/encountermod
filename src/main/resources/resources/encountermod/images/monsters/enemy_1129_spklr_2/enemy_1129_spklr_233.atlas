@@ -1,0 +1,195 @@
+
+enemy_1129_spklr_233.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+C_Tail
+  rotate: false
+  xy: 433, 1
+  size: 17, 149
+  orig: 17, 149
+  offset: 0, 0
+  index: -1
+C_Hair_B
+  rotate: false
+  xy: 156, 189
+  size: 55, 63
+  orig: 55, 63
+  offset: 0, 0
+  index: -1
+C_L_Arm
+  rotate: false
+  xy: 285, 97
+  size: 44, 112
+  orig: 44, 112
+  offset: 0, 0
+  index: -1
+C_L_Forearm
+  rotate: false
+  xy: 232, 97
+  size: 51, 104
+  orig: 51, 104
+  offset: 0, 0
+  index: -1
+C_L_FingerC
+  rotate: false
+  xy: 342, 31
+  size: 23, 26
+  orig: 23, 26
+  offset: 0, 0
+  index: -1
+C_L_FingerB
+  rotate: false
+  xy: 342, 59
+  size: 23, 26
+  orig: 23, 26
+  offset: 0, 0
+  index: -1
+C_L_FingerA
+  rotate: false
+  xy: 452, 34
+  size: 31, 19
+  orig: 31, 19
+  offset: 0, 0
+  index: -1
+C_L_Foot
+  rotate: false
+  xy: 280, 211
+  size: 58, 31
+  orig: 58, 31
+  offset: 0, 0
+  index: -1
+C_L_Leg
+  rotate: false
+  xy: 383, 101
+  size: 48, 70
+  orig: 48, 70
+  offset: 0, 0
+  index: -1
+C_L_Calf
+  rotate: false
+  xy: 433, 152
+  size: 65, 38
+  orig: 65, 38
+  offset: 0, 0
+  index: -1
+C_Body
+  rotate: false
+  xy: 1, 1
+  size: 153, 188
+  orig: 153, 188
+  offset: 0, 0
+  index: -1
+C_R_Foot
+  rotate: false
+  xy: 452, 1
+  size: 58, 31
+  orig: 58, 31
+  offset: 0, 0
+  index: -1
+C_R_Leg
+  rotate: false
+  xy: 342, 174
+  size: 56, 70
+  orig: 56, 70
+  offset: 0, 0
+  index: -1
+C_R_Calf
+  rotate: false
+  xy: 213, 203
+  size: 65, 38
+  orig: 65, 38
+  offset: 0, 0
+  index: -1
+C_R_FingerII_A
+  rotate: false
+  xy: 342, 1
+  size: 23, 28
+  orig: 23, 28
+  offset: 0, 0
+  index: -1
+C_R_FingerII_C
+  rotate: false
+  xy: 420, 223
+  size: 27, 27
+  orig: 27, 27
+  offset: 0, 0
+  index: -1
+C_R_FingerII_B
+  rotate: false
+  xy: 420, 192
+  size: 26, 29
+  orig: 26, 29
+  offset: 0, 0
+  index: -1
+C_R_FingerI_C
+  rotate: false
+  xy: 482, 55
+  size: 28, 19
+  orig: 28, 19
+  offset: 0, 0
+  index: -1
+C_R_FingerI_B
+  rotate: false
+  xy: 452, 55
+  size: 28, 20
+  orig: 28, 20
+  offset: 0, 0
+  index: -1
+C_R_ForearmII
+  rotate: false
+  xy: 331, 87
+  size: 50, 85
+  orig: 55, 86
+  offset: 0, 1
+  index: -1
+C_R_ForearmI
+  rotate: false
+  xy: 289, 1
+  size: 51, 84
+  orig: 51, 84
+  offset: 0, 0
+  index: -1
+C_R_FingerI_A
+  rotate: false
+  xy: 482, 76
+  size: 25, 20
+  orig: 25, 22
+  offset: 0, 1
+  index: -1
+C_R_Arm
+  rotate: false
+  xy: 383, 1
+  size: 38, 98
+  orig: 38, 99
+  offset: 0, 0
+  index: -1
+C_ArmRing
+  rotate: false
+  xy: 452, 192
+  size: 45, 49
+  orig: 45, 49
+  offset: 0, 0
+  index: -1
+C_Hair_A
+  rotate: false
+  xy: 156, 1
+  size: 131, 94
+  orig: 131, 94
+  offset: 0, 0
+  index: -1
+C_Head
+  rotate: false
+  xy: 156, 97
+  size: 74, 90
+  orig: 74, 91
+  offset: 0, 0
+  index: -1
+C_Ear
+  rotate: false
+  xy: 400, 173
+  size: 18, 60
+  orig: 18, 60
+  offset: 0, 0
+  index: -1
