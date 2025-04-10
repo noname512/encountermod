@@ -10,7 +10,6 @@ import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.helpers.SaveHelper;
 import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
-import com.megacrit.cardcrawl.map.MapEdge;
 import com.megacrit.cardcrawl.map.MapGenerator;
 import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.rooms.*;
@@ -18,6 +17,7 @@ import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 import com.megacrit.cardcrawl.screens.DungeonMapScreen;
 import com.megacrit.cardcrawl.ui.buttons.CancelButton;
 import encountermod.EncounterMod;
+import encountermod.relics.LongingOfTheEraOfDreams;
 import encountermod.relics.VisionsOfTheEraOfProsperity;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
@@ -142,6 +142,9 @@ public class RefreshPatch {
                                         rnd -= roomWeight.get(s);
                                     }
                                 }
+                        }
+                        if (AbstractDungeon.player.hasRelic(LongingOfTheEraOfDreams.ID) && !targetRoomType.equals("Treasure")) {
+                            LongingOfTheEraOfDreams.actorCnt++;
                         }
                         if (targetRoomType.isEmpty()) {
                             logger.warning("Invalid refresh result!");

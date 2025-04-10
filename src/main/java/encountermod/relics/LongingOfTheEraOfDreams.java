@@ -1,12 +1,15 @@
 package encountermod.relics;
 
+import basemod.BaseMod;
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
+import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.blue.*;
 import com.megacrit.cardcrawl.cards.colorless.Bite;
 import com.megacrit.cardcrawl.cards.green.*;
@@ -21,7 +24,7 @@ import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.potions.*;
 import com.megacrit.cardcrawl.relics.*;
 import com.megacrit.cardcrawl.rewards.RewardItem;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 import com.megacrit.cardcrawl.rooms.TreasureRoom;
 import com.megacrit.cardcrawl.shop.ShopScreen;
 import encountermod.EncounterMod;
@@ -29,6 +32,9 @@ import encountermod.patches.RefreshPatch;
 import encountermod.reward.ExtraRelicReward;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class LongingOfTheEraOfDreams extends CustomRelic {
 
@@ -45,8 +51,26 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
     @Override
     public void onEquip() {
         AbstractDungeon.player.gainGold(50);
-        RefreshPatch.roomWeight.put("Treasure", 9);
-        RefreshPatch.totalWeight = 19;
+        RefreshPatch.roomWeight.put("Treasure", 10);
+        RefreshPatch.totalWeight = 20;
+
+        // Reset self-calculate metrics
+        maxBlockAtTurnStart = 0;
+        maxDmgReceived = new HashMap<>();
+        maxFirstDmgTaken = 0;
+        isFirstDmgTaken = false;
+        emptyHandEndTurn = false;
+        maxDmgReceivedElite = 0;
+        maxAttackedCnt = 0;
+        rested = false;
+        actorCnt = 0;
+        totalBattleCnt = 0;
+        totalTurnCnt = 0;
+        recentDmgReceivedCnt = new ArrayList<>();
+        totalDmgReceived = 0;
+        maxTurn1ResCard = 0;
+        totalResCard = 0;
+        recentSmallDmgReceivedCnt = new ArrayList<>();
     }
 
     @Override
@@ -155,6 +179,32 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         if (calcLittleDamage() >= 4) {
                             lst.add(new Boot()); // 发条靴
                         }
+                        if (calcMultiDmg() >= 3) {
+                            lst.add(new Akabeko()); // 赤牛
+                            lst.add(new Vajra()); // 金刚杵
+                        }
+                        if (LongingOfTheEraOfDreams.maxDmgReceived.getOrDefault(1, 0) >= 10) {
+                            lst.add(new Anchor()); // 锚
+                        }
+                        if (LongingOfTheEraOfDreams.emptyHandEndTurn) {
+                            lst.add(new BagOfPreparation()); // 准备背包
+                        }
+                        if (LongingOfTheEraOfDreams.maxDmgReceivedElite >= AbstractDungeon.player.maxHealth * 0.4) {
+                            lst.add(new PreservedInsect()); // 昆虫标本
+                        }
+                        if (LongingOfTheEraOfDreams.maxAttackedCnt >= 14) {
+                            lst.add(new BronzeScales()); // 铜制鳞片
+                        }
+                        if (LongingOfTheEraOfDreams.rested) {
+                            lst.add(new DreamCatcher()); // 捕梦网
+                        }
+                        if (LongingOfTheEraOfDreams.maxTurn1ResCard >= 4) {
+                            lst.add(new Lantern()); // 灯笼
+                            lst.add(new AncientTeaSet()); // 古茶具套装
+                        }
+                        if (LongingOfTheEraOfDreams.totalResCard >= LongingOfTheEraOfDreams.totalTurnCnt * 3) {
+                            lst.add(new HappyFlower()); // 开心小花
+                        }
                         break;
                     case UNCOMMON:
                         if (AbstractDungeon.player.masterDeck.size() <= 7) {
@@ -220,6 +270,21 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         if (AbstractDungeon.player instanceof Defect && checkCables()) {
                             lst.add(new GoldPlatedCables()); // 镀金缆线
                         }
+                        if (AbstractDungeon.player instanceof Watcher && calcEnterUnCalm() >= 1) {
+                            lst.add(new TeardropLocket()); // 泪滴吊坠盒
+                        }
+                        if (LongingOfTheEraOfDreams.maxDmgReceived.getOrDefault(2, 0) >= 14) {
+                            lst.add(new HornCleat()); // 船夹板
+                        }
+                        if (AbstractDungeon.player instanceof Ironclad && LongingOfTheEraOfDreams.recentDmgReceivedCntSum() >= 10) {
+                            lst.add(new SelfFormingClay()); // 自成型黏土
+                        }
+                        if (AbstractDungeon.player instanceof Ironclad && calcICVulnerable() >= 3) {
+                            lst.add(new PaperFrog()); // 纸蛙
+                        }
+                        if (AbstractDungeon.player instanceof TheSilent && calcTSWeak() >= 3) {
+                            lst.add(new PaperCrane()); // 纸鹤
+                        }
                         break;
                     case RARE:
                         if (calcExhaust() >= 5) {
@@ -253,7 +318,7 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         if (calcMaxCost() >= 5) {
                             lst.add(new IceCream()); // 冰淇淋
                         }
-                        if (calcRetain() >= 3) {
+                        if (AbstractDungeon.player instanceof Watcher && calcRetain() >= 3) {
                             lst.add(new CloakClasp()); // 斗篷扣
                         }
                         if (AbstractDungeon.actNum <= 2 && Settings.hasRubyKey) {
@@ -275,13 +340,62 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         if (calcPoisonNum() >= 16) {
                             lst.add(new TheSpecimen()); // 生物样本
                         }
-                        if (calcScry() >= 4) {
+                        if (AbstractDungeon.player instanceof Watcher && calcScry() >= 4) {
                             lst.add(new GoldenEye()); // 黄金眼
+                        }
+                        if (LongingOfTheEraOfDreams.maxBlockAtTurnStart >= 50) {
+                            lst.add(new Calipers()); // 外卡钳
+                        }
+                        if (LongingOfTheEraOfDreams.maxDmgReceived.getOrDefault(3, 0) >= 18) {
+                            lst.add(new CaptainsWheel()); // 舵盘
+                        }
+                        if (LongingOfTheEraOfDreams.maxFirstDmgTaken >= 15) {
+                            lst.add(new FossilizedHelix()); // 螺类化石
+                        }
+                        if (LongingOfTheEraOfDreams.actorCnt >= 4) {
+                            lst.add(new Matryoshka()); // 套娃
+                        }
+                        if (LongingOfTheEraOfDreams.totalTurnCnt >= LongingOfTheEraOfDreams.totalBattleCnt * 4) {
+                            lst.add(new MercuryHourglass()); // 水银沙漏
+                        }
+                        if (AbstractDungeon.player instanceof Defect && checkCables() && LongingOfTheEraOfDreams.recentDmgReceivedCntSum() >= 5) {
+                            lst.add(new EmotionChip()); // 情感芯片
+                        }
+                        if (AbstractDungeon.player.hasRelic(ToughBandages.ID) || AbstractDungeon.player.hasRelic(Tingsha.ID) ||
+                                AbstractDungeon.player.hasRelic(BagOfPreparation.ID) || LongingOfTheEraOfDreams.emptyHandEndTurn) {
+                            lst.add(new GamblingChip()); // 赌博筹码
+                        }
+                        if (LongingOfTheEraOfDreams.recentDmgReceivedCntSum() >= 10) {
+                            lst.add(new TungstenRod()); // 钨合金棍
+                        }
+                        if (LongingOfTheEraOfDreams.totalDmgReceived >= LongingOfTheEraOfDreams.totalBattleCnt * 5) {
+                            lst.add(new IncenseBurner()); // 香炉
+                        }
+                        if (AbstractDungeon.player instanceof Ironclad && calcICVulnerable() >= 3) {
+                            lst.add(new ChampionsBelt()); // 冠军腰带
+                        }
+                        if (LongingOfTheEraOfDreams.recentSmallDmgReceivedCntSum() >= 3) {
+                            lst.add(new Torii()); // 鸟居
                         }
                         break;
                     default:
                         AbstractDungeon.getCurrRoom().addRelicToRewards(new RedCirclet());
                         return SpireReturn.Continue();
+                }
+                if (BaseMod.hasModID("wishdale")) {
+                    if (AbstractDungeon.player.chosenClass.name().equals("WISHDALE_ZC") && tier == RelicTier.RARE) {
+                        lst.add(BaseMod.getCustomRelic("wishdalemod:RoaringHand"));
+                    }
+                    if (AbstractDungeon.player.currentHealth <= 10 || AbstractDungeon.player.currentHealth <= AbstractDungeon.player.maxHealth * 0.1) {
+                        if (tier == RelicTier.UNCOMMON) {
+                            lst.add(BaseMod.getCustomRelic("wishdalemod:Guowangdexinqiang"));
+                            lst.add(BaseMod.getCustomRelic("wishdalemod:Guowangdeyanshen"));
+                        } else if (tier == RelicTier.RARE) {
+                            lst.add(BaseMod.getCustomRelic("wishdalemod:Guowangdekaijia"));
+                            lst.add(BaseMod.getCustomRelic("wishdalemod:Zhuwangdeguanmian"));
+                            lst.add(BaseMod.getCustomRelic("wishdalemod:GuowangdeHujie"));
+                        }
+                    }
                 }
                 lst.removeIf(r -> AbstractDungeon.player.hasRelic(r.relicId));
                 if (lst.isEmpty()) {
@@ -549,7 +663,160 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                     return true;
             return false;
         }
+
+        static final HashSet<String> multiDmgCards = new HashSet<>(Arrays.asList(
+                "Bane", "Dagger Spray", "Eviscerate", "Finisher", "Glass Knife", "Pummel", "Riddle With Holes", "Rip and Tear", "Skewer", "Sword Boomerang", "Thunder Strike",
+                "Twin Strike", "Whirlwind", "Tantrum", "FlyingSleeves", "Ragnarok", "Expunger", "Blade Dance", "Storm of Steel", "ReachHeaven", "rhinemod:ReflectionInWater",
+                "rhinemod:UnusedBoxingGloves", "rhinemod:LightPenetratingClouds", "rhinemod:Disorder", "nearlmod:Maxims", "nearlmod:FallingShield", "nearlmod:SweepWrong"));
+        private static int calcMultiDmg() {
+            int cnt = 0;
+            for (AbstractCard c : AbstractDungeon.player.masterDeck.group)
+                if (multiDmgCards.contains(c.cardID) || (c instanceof CloakAndDagger && c.upgraded))
+                    cnt++;
+            return cnt;
+        }
+
+        static final HashSet<String> enterUnCalmCards = new HashSet<>(Arrays.asList(
+                "Tantrum", "Eruption", "Crescendo", "Vengeance", "Indignation", "Blasphemy", "EmptyFist", "EmptyMind", "EmptyBody"
+        ));
+        private static int calcEnterUnCalm() {
+            int cnt = 0;
+            for (AbstractCard c : AbstractDungeon.player.masterDeck.group)
+                if (enterUnCalmCards.contains(c.cardID))
+                    cnt++;
+            return cnt;
+        }
+
+        static final HashSet<String> ICVulnerableCards = new HashSet<>(Arrays.asList(
+                "Bash", "Beam Cell", "Shockwave", "Terror", "Thunderclap", "Trip", "Uppercut", "CrushJoints", "Indignation"
+        ));
+        private static int calcICVulnerable() {
+            int cnt = 0;
+            for (AbstractCard c : AbstractDungeon.player.masterDeck.group)
+                if (ICVulnerableCards.contains(c.cardID))
+                    cnt++;
+            return cnt;
+        }
+
+        static final HashSet<String> TSWeakCards = new HashSet<>(Arrays.asList(
+                "Blind", "Clothesline", "Crippling Poison", "Go for the Eyes", "Intimidate", "Leg Sweep", "Malaise", "Neutralize",
+                "Shockwave", "Sucker Punch", "Uppercut", "WaveOfTheHand", "SashWhip", "rhinemod:RadiationFlash"
+        ));
+        private static int calcTSWeak() {
+            int cnt = 0;
+            for (AbstractCard c : AbstractDungeon.player.masterDeck.group)
+                if (TSWeakCards.contains(c.cardID))
+                    cnt++;
+            return cnt;
+        }
     }
 
+    // Self-calculate metrics
+    public static int maxBlockAtTurnStart = 0;
+    public static HashMap<Integer, Integer> maxDmgReceived = new HashMap<>(); // pur turn
+    public static int maxFirstDmgTaken = 0;
+    public static boolean isFirstDmgTaken = false;
+    public static boolean emptyHandEndTurn = false;
+    public static int maxDmgReceivedElite = 0; // pur battle
+    public static int attackedCnt = 0;
+    public static int maxAttackedCnt = 0;
+    public static boolean rested = false;
+    public static int actorCnt = 0;
+    public static int totalBattleCnt = 0;
+    public static int totalTurnCnt = 0;
+    public static int dmgReceivedCnt = 0;
+    public static ArrayList<Integer> recentDmgReceivedCnt = new ArrayList<>();
+    public static int totalDmgReceived = 0;
+    public static int maxTurn1ResCard = 0;
+    public static int totalResCard = 0;
+    public static int smallDmgReceivedCnt = 0;
+    public static ArrayList<Integer> recentSmallDmgReceivedCnt = new ArrayList<>();
 
+    @Override
+    public void atTurnStart() {
+        maxBlockAtTurnStart = Math.max(maxBlockAtTurnStart, AbstractDungeon.player.currentBlock);
+        int turn = GameActionManager.turn;
+        if (maxDmgReceived.containsKey(turn)) {
+            maxDmgReceived.put(turn, Math.max(maxDmgReceived.get(turn), GameActionManager.damageReceivedThisTurn));
+        } else {
+            maxDmgReceived.put(turn, GameActionManager.damageReceivedThisTurn);
+        }
+    }
+
+    @Override
+    public void atBattleStart() {
+        isFirstDmgTaken = true;
+        attackedCnt = 0;
+        dmgReceivedCnt = 0;
+        smallDmgReceivedCnt = 0;
+    }
+
+    @Override
+    public void onLoseHp(int damageAmount) {
+        if (isFirstDmgTaken) {
+            maxFirstDmgTaken = Math.max(maxFirstDmgTaken, damageAmount);
+            isFirstDmgTaken = false;
+        }
+    }
+
+    @Override
+    public void onPlayerEndTurn() {
+        if (GameActionManager.turn == 1 && AbstractDungeon.player.hand.isEmpty()) {
+            emptyHandEndTurn = true;
+        }
+        int cnt = 0;
+        for (AbstractCard c : AbstractDungeon.player.hand.group)
+            if (c.cost >= 0 && !c.selfRetain)
+                cnt++;
+        if (GameActionManager.turn == 1) {
+            maxTurn1ResCard = Math.max(maxTurn1ResCard, cnt);
+        }
+        totalResCard += cnt;
+    }
+
+    @Override
+    public void onVictory() {
+        if (AbstractDungeon.getCurrRoom() instanceof MonsterRoomElite) {
+            maxDmgReceivedElite = Math.max(maxDmgReceivedElite, GameActionManager.damageReceivedThisCombat);
+        }
+        totalBattleCnt++;
+        totalTurnCnt += GameActionManager.turn;
+        totalDmgReceived += GameActionManager.damageReceivedThisCombat;
+        recentDmgReceivedCnt.add(dmgReceivedCnt);
+        if (recentDmgReceivedCnt.size() > 3) recentDmgReceivedCnt.remove(0);
+        recentSmallDmgReceivedCnt.add(smallDmgReceivedCnt);
+        if (recentSmallDmgReceivedCnt.size() > 3) recentSmallDmgReceivedCnt.remove(0);
+    }
+
+    @Override
+    public int onAttacked(DamageInfo info, int damageAmount) {
+        if (info.type == DamageInfo.DamageType.NORMAL) {
+            attackedCnt++;
+            maxAttackedCnt = Math.max(maxAttackedCnt, attackedCnt);
+            dmgReceivedCnt++;
+            if (damageAmount <= 5) {
+                smallDmgReceivedCnt++;
+            }
+        }
+        return damageAmount;
+    }
+
+    @Override
+    public void onRest() {
+        rested = true;
+    }
+
+    public static int recentDmgReceivedCntSum() {
+        int ret = 0;
+        for (Integer i : recentDmgReceivedCnt)
+            ret += i;
+        return ret;
+    }
+
+    public static int recentSmallDmgReceivedCntSum() {
+        int ret = 0;
+        for (Integer i : recentSmallDmgReceivedCnt)
+            ret += i;
+        return ret;
+    }
 }
