@@ -13,9 +13,7 @@ public class AgginiOfNila extends AbstractMonster {
     public static final String ID = "encountermod:AgginiOfNila";
     public static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings(ID);
     public static final String NAME = monsterStrings.NAME;
-    public static final String[] MOVES = monsterStrings.MOVES;
-    public static final String[] DIALOG = monsterStrings.DIALOG;
-    public static final String IMAGE = null;
+    public static final String IMAGE = "resources/encountermod/images/monsters/AgginiOfNila.png";
     public int damage;
     AbstractMonster quiLon;
     public AgginiOfNila(float x, float y) {
