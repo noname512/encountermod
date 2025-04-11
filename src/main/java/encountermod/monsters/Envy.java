@@ -15,7 +15,7 @@ public class Envy extends AbstractMonster {
     public static final String NAME = monsterStrings.NAME;
     public static final String IMAGE = null;
     public Envy(float x, float y) {
-        super(NAME, ID, 35, 20.0F, 0, 160.0F, 300.0F, IMAGE, x, y);
+        super(NAME, ID, 35, 20.0F, 0, 180.0F, 260.0F, IMAGE, x, y);
         type = EnemyType.NORMAL;
         if (AbstractDungeon.ascensionLevel >= 7)
             setHp(40);

@@ -1,5 +1,6 @@
 package encountermod.powers;
 
+import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.OnReceivePowerPower;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -11,11 +12,12 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rewards.RewardItem;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.combat.DeckPoofEffect;
 import encountermod.monsters.QuiLon;
 import encountermod.reward.IdeaReward;
 
-public class QuiLonPower extends AbstractPower{
+public class QuiLonPower extends AbstractPower implements OnReceivePowerPower {
     public static final String POWER_ID = "encountermod:EmbodimentOfTrikāya";
     public static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     public static final String NAME = powerStrings.NAME;
@@ -62,11 +64,13 @@ public class QuiLonPower extends AbstractPower{
                     m.powers.clear();
                     m.currentHealth = 0;
                     m.isDead = true;
+                    m.isDying = true;
                 }
             }
             AbstractDungeon.getCurrRoom().monsters.monsters.removeIf(m -> m != owner);
-            addToBot(new RemoveSpecificPowerAction(owner, owner, NilaShieldPower.POWER_ID));
-            ((QuiLon)owner).setMove((byte)50, AbstractMonster.Intent.BUFF);
+            owner.powers.removeIf(p -> p.ID.equals(NilaShieldPower.POWER_ID));
+            QuiLon.logger.info("PowerID" + NilaShieldPower.POWER_ID);
+            ((QuiLon)owner).setMove(QuiLon.MOVES[4], (byte)50, AbstractMonster.Intent.BUFF);
             ((QuiLon)owner).createIntent();
         }
         if (stage == 1) {
@@ -111,6 +115,8 @@ public class QuiLonPower extends AbstractPower{
 
     @Override
     public void onSpecificTrigger() {
+        owner.state.setAnimation(0, "B_Skill_End", false);
+        owner.state.addAnimation(0, "B_Idle", true, 0);
         canDamage = true;
         updateDescription();
     }
@@ -133,5 +139,13 @@ public class QuiLonPower extends AbstractPower{
         else {
             return 0;
         }
+    }
+    @Override
+    public boolean onReceivePower(AbstractPower var1, AbstractCreature var2, AbstractCreature var3)
+    {
+        if (!canDamage) {
+            return false;
+        }
+        return true;
     }
 }

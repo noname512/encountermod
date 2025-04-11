@@ -18,7 +18,7 @@ public class Smarty extends AbstractMonster {
     public static final String NAME = monsterStrings.NAME;
     public static final String IMAGE = null;
     public Smarty(float x, float y) {
-        super(NAME, ID, 26, 20.0F, 0, 160.0F, 300.0F, IMAGE, x, y);
+        super(NAME, ID, 26, 20.0F, 0, 120.0F, 200.0F, IMAGE, x, y);
         type = EnemyType.NORMAL;
         if (AbstractDungeon.ascensionLevel >= 7)
             setHp(30);

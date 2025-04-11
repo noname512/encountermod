@@ -1,6 +1,7 @@
 package encountermod.powers;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.OnReceivePowerPower;
 import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -13,7 +14,7 @@ import com.megacrit.cardcrawl.vfx.combat.ExplosionSmallEffect;
 import encountermod.monsters.AgginiOfNila;
 import encountermod.monsters.QuiLon;
 
-public class NilaPower extends AbstractPower {
+public class NilaPower extends AbstractPower implements OnReceivePowerPower {
     public static final String POWER_ID = "encountermod:NilaPower";
     public static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     public static final String NAME = powerStrings.NAME;
@@ -37,7 +38,6 @@ public class NilaPower extends AbstractPower {
 
     @Override
     public int onPlayerGainedBlock(float blockAmount) {
-        QuiLon.logger.info("Hello");
         if (blockAmount > 1) {
             flash();
             addToBot(new HealAction(owner, owner, MathUtils.floor(blockAmount / 2)));
@@ -66,5 +66,11 @@ public class NilaPower extends AbstractPower {
     @Override
     public int onAttacked(DamageInfo info, int damageAmount) {
         return 0;
+    }
+
+    @Override
+    public boolean onReceivePower(AbstractPower var1, AbstractCreature var2, AbstractCreature var3)
+    {
+        return false;
     }
 }

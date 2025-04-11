@@ -17,7 +17,7 @@ public class AgginiOfNila extends AbstractMonster {
     public int damage;
     AbstractMonster quiLon;
     public AgginiOfNila(float x, float y) {
-        super(NAME, ID, 28, 20.0F, 0, 160.0F, 300.0F, IMAGE, x, y);
+        super(NAME, ID, 28, 20.0F, 0, 160.0F, 160.0F, IMAGE, x, y);
         type = EnemyType.NORMAL;
         if (AbstractDungeon.ascensionLevel >= 7)
             setHp(30);
@@ -35,14 +35,14 @@ public class AgginiOfNila extends AbstractMonster {
 
     @Override
     public void usePreBattleAction() {
-        addToBot(new ApplyPowerAction(this, this, new NilaPower(this, 4)));
+        addToBot(new ApplyPowerAction(this, this, new NilaPower(this, 5)));
         for (AbstractMonster m:AbstractDungeon.getCurrRoom().monsters.monsters) {
             if (m instanceof QuiLon) {
                 quiLon = m;
                 break;
             }
         }
-        addToBot(new ApplyPowerAction(quiLon, this, new NilaShieldPower(quiLon, 1, damage)));
+        addToBot(new ApplyPowerAction(quiLon, quiLon, new NilaShieldPower(quiLon, 1, damage)));
     }
 
     @Override
@@ -51,8 +51,10 @@ public class AgginiOfNila extends AbstractMonster {
         if (currentHealth == maxHealth) {
             hideHealthBar();
             escaped = true;
+            isEscaping = true;
             // TODO: 退场动画
             addToBot(new ReducePowerAction(quiLon, quiLon, NilaShieldPower.POWER_ID, 1));
+            AbstractDungeon.getCurrRoom().monsters.monsters.remove(this);
         }
     }
 

@@ -89,7 +89,7 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
 
     private void initializeSpecialBattle() {
         BaseMod.addCard(new Empty());
-        BaseMod.addMonster("Qui'Lon", () -> new MonsterGroup(new QuiLon(-200.0F, 0.0F)));
+        BaseMod.addMonster("Qui'Lon", () -> new MonsterGroup(new QuiLon(200.0F, 0.0F)));
     }
 
     private void initializeRewards() {

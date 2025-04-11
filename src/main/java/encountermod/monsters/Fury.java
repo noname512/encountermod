@@ -15,7 +15,7 @@ public class Fury extends AbstractMonster {
     public static final String NAME = monsterStrings.NAME;
     public static final String IMAGE = null;
     public Fury(float x, float y) {
-        super(NAME, ID, 70, 20.0F, 0, 160.0F, 300.0F, IMAGE, x, y);
+        super(NAME, ID, 70, 20.0F, 0, 200.0F, 300.0F, IMAGE, x, y);
         type = EnemyType.NORMAL;
         if (AbstractDungeon.ascensionLevel >= 7)
             setHp(80);

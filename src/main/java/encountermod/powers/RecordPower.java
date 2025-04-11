@@ -34,13 +34,13 @@ public class RecordPower extends AbstractPower {
         description = DESCRIPTIONS[0];
         boolean first = true;
         for (AbstractCard c : list) {
-            description += c.name;
             if (first) {
                 first = false;
             }
             else {
                 description += DESCRIPTIONS[1];
             }
+            description += c.name;
         }
         description += DESCRIPTIONS[2];
     }

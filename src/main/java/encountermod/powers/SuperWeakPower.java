@@ -20,6 +20,7 @@ public class SuperWeakPower extends AbstractPower {
         this.name = NAME;
         this.type = PowerType.DEBUFF;
         this.owner = owner;
+        this.amount = amount;
         region128 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage("resources/encountermod/images/powers/HatredPower 84.png"), 0, 0, 84, 84);
         region48 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage("resources/encountermod/images/powers/HatredPower 32.png"), 0, 0, 32, 32);
         updateDescription();
@@ -36,9 +37,9 @@ public class SuperWeakPower extends AbstractPower {
             justApplied = false;
         } else {
             if (this.amount == 0) {
-                this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, "Weakened"));
+                this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, ID));
             } else {
-                this.addToBot(new ReducePowerAction(this.owner, this.owner, "Weakened", 1));
+                this.addToBot(new ReducePowerAction(this.owner, this.owner, ID, 1));
             }
 
         }
