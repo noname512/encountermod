@@ -8,6 +8,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
+import com.megacrit.cardcrawl.blights.AbstractBlight;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.blue.*;
@@ -21,9 +22,12 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.localization.RelicStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.potions.*;
+import com.megacrit.cardcrawl.powers.MinionPower;
 import com.megacrit.cardcrawl.relics.*;
 import com.megacrit.cardcrawl.rewards.RewardItem;
+import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 import com.megacrit.cardcrawl.rooms.TreasureRoom;
 import com.megacrit.cardcrawl.shop.ShopScreen;
@@ -31,6 +35,7 @@ import encountermod.EncounterMod;
 import encountermod.patches.RefreshPatch;
 import encountermod.reward.ExtraRelicReward;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -71,6 +76,9 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
         maxTurn1ResCard = 0;
         totalResCard = 0;
         recentSmallDmgReceivedCnt = new ArrayList<>();
+        maxNonBossTurn = 0;
+        killMinionCnt = 0;
+        maxExhaustCardCnt = 0;
     }
 
     @Override
@@ -263,7 +271,7 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         if (AbstractDungeon.player instanceof TheSilent && checkNinjaScroll()) {
                             lst.add(new NinjaScroll()); // 忍术卷轴
                         }
-                        if (AbstractDungeon.actNum < 24) {
+                        if (AbstractDungeon.floorNum < 24) {
                             lst.add(new SingingBowl()); // 颂钵
                             lst.add(new QuestionCard()); // 问号牌
                         }
@@ -397,6 +405,92 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         }
                     }
                 }
+                if (BaseMod.hasModID("nearlmod")) {
+                    if (AbstractDungeon.player.chosenClass.name().equals("NEARL_CLASS")) {
+                        if (calcFriendType() >= 3 && tier == RelicTier.RARE) {
+                            lst.add(BaseMod.getCustomRelic("nearlmod:EmergencyCallBook")); // 应急通讯指南
+                        }
+                        if (calcUseLight() >= 4 && tier == RelicTier.UNCOMMON) {
+                            lst.add(BaseMod.getCustomRelic("nearlmod:UpgradedCoreCaster")); // 改良施术单元
+                        }
+                        if (calcNeedDreadnought() >= 3 && tier == RelicTier.COMMON) {
+                            lst.add(BaseMod.getCustomRelic("nearlmod:BackupEquipment")); // 备选装备
+                        }
+                        if (AbstractDungeon.player.currentHealth <= AbstractDungeon.player.maxHealth * 0.3 && tier == RelicTier.UNCOMMON) {
+                            lst.add(BaseMod.getCustomRelic("nearlmod:FirstAidMode")); // 急救模式
+                        }
+                        if (AbstractDungeon.player.currentHealth <= AbstractDungeon.player.maxHealth * 0.3 && tier == RelicTier.RARE) {
+                            lst.add(BaseMod.getCustomRelic("nearlmod:KnightFamily")); // “骑士家族”
+                        }
+                    }
+                    if (calcMaxCardType() >= AbstractDungeon.player.masterDeck.size() * 0.7 && tier == RelicTier.UNCOMMON) {
+                        lst.add(BaseMod.getCustomRelic("nearlmod:KnightFiction")); // 骑士小说
+                    }
+                    if (AbstractDungeon.floorNum < 24 || calcSummonAurora() > 0 && tier == RelicTier.UNCOMMON) {
+                        lst.add(BaseMod.getCustomRelic("nearlmod:HandOfConqueror")); // 刻勋之手
+                    }
+                }
+                if (BaseMod.hasModID("rhinemod")) {
+                    if (AbstractDungeon.player.chosenClass.name().equals("RHINE_CLASS")) {
+                        if (calcAffinity(0, 1, 0, 0) >= AbstractDungeon.player.masterDeck.size() * 0.4 && tier == RelicTier.UNCOMMON) {
+                            lst.add(BaseMod.getCustomRelic("rhinemod:RhineChargeSuit")); // 莱茵充能护服
+                        }
+                        if ((calcAffinity(0, 1, 1, 0) >= AbstractDungeon.player.masterDeck.size() * 0.6 || calcUseFlowingShape() > 0) && tier == RelicTier.RARE) {
+                            lst.add(BaseMod.getCustomRelic("rhinemod:PeppermintChapstick")); // 薄荷味润唇膏
+                        }
+                        if ((AbstractDungeon.player.maxHealth <= 50 || calcPaleFir() > 0) && tier == RelicTier.COMMON) {
+                            lst.add(BaseMod.getCustomRelic("rhinemod:OrangeStorm")); // 橙味风暴
+                        }
+                    }
+                    if (LongingOfTheEraOfDreams.totalTurnCnt >= LongingOfTheEraOfDreams.totalBattleCnt * 3 && tier == RelicTier.RARE) {
+                        lst.add(BaseMod.getCustomRelic("rhinemod:AwakenModel")); // “唤醒”模型
+                    }
+                    if (AbstractDungeon.player.gold >= 500 && tier == RelicTier.RARE) {
+                        lst.add(BaseMod.getCustomRelic("rhinemod:Stargate")); // 星门
+                    }
+                    if (AbstractDungeon.player.currentHealth <= AbstractDungeon.player.maxHealth * 0.3 && tier == RelicTier.UNCOMMON) {
+                        lst.add(BaseMod.getCustomRelic("rhinemod:PittsAssortedFruits")); // 皮特水果什锦
+                    }
+                }
+                if (BaseMod.hasModID("samirg")) {
+                    if (tier == RelicTier.UNCOMMON) {
+                        if (AbstractDungeon.player.hasBlight("samirg:IrreversibleMatrix") && AbstractDungeon.player.getBlight("samirg:IrreversibleMatrix").counter >= 3) {
+                            lst.add(BaseMod.getCustomRelic("samirg:UrsasBlade")); // 乌萨斯断刃
+                        }
+                        if (AbstractDungeon.player.hasBlight("samirg:ConvergentConsumption01") || AbstractDungeon.player.hasBlight("samirg:ConvergentConsumption02")) {
+                            lst.add(BaseMod.getCustomRelic("samirg:RitualBell")); // 仪式铃
+                        }
+                        if (AbstractDungeon.player.maxHealth >= 80) {
+                            lst.add(BaseMod.getCustomRelic("samirg:LiveWood")); // 活木甲
+                        }
+                        if (AbstractDungeon.player.masterDeck.size() >= 30) {
+                            lst.add(BaseMod.getCustomRelic("samirg:RockHorn")); // 岩角号
+                            lst.add(BaseMod.getCustomRelic("samirg:ImmortalTorch")); // 不灭的火炬
+                        }
+                    } else if (tier == RelicTier.RARE) {
+                        if (calcSamirgBlight() >= 5) {
+                            lst.add(BaseMod.getCustomRelic("samirg:HunterSee")); // 猎人的洞察
+                        }
+                        if (calcAttackCard() >= AbstractDungeon.player.masterDeck.size() * 0.4) {
+                            lst.add(BaseMod.getCustomRelic("samirg:HandOfBurst")); // 溃决之手
+                        }
+                        if (calcPowerCard() >= 3) {
+                            lst.add(BaseMod.getCustomRelic("samirg:HandOfOpportunity")); // 应机之手
+                        }
+                        if (LongingOfTheEraOfDreams.maxNonBossTurn >= 10) {
+                            lst.add(BaseMod.getCustomRelic("samirg:HandOfHardness")); // 坚实之手
+                        }
+                        if (LongingOfTheEraOfDreams.killMinionCnt >= 10) {
+                            lst.add(BaseMod.getCustomRelic("samirg:HandOfExplosion")); // 炸裂之手
+                        }
+                        if (calcAttackCard() <= AbstractDungeon.player.masterDeck.size() * 0.2 || calcSkillCard() <= AbstractDungeon.player.masterDeck.size() * 0.3) {
+                            lst.add(BaseMod.getCustomRelic("samirg:HandOfRapidness")); // 极速之手
+                        }
+                        if (LongingOfTheEraOfDreams.maxExhaustCardCnt >= 20) {
+                            lst.add(BaseMod.getCustomRelic("samirg:HandOfClean")); // 尘净之手
+                        }
+                    }
+                }
                 lst.removeIf(r -> AbstractDungeon.player.hasRelic(r.relicId));
                 if (lst.isEmpty()) {
                     AbstractDungeon.getCurrRoom().addRelicToRewards(new CultistMask());
@@ -493,6 +587,10 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                 if (c.type == AbstractCard.CardType.ATTACK)
                     cnt++;
             return cnt;
+        }
+
+        private static int calcMaxCardType() {
+            return Math.max(Math.max(calcAttackCard(), calcSkillCard()), calcPowerCard());
         }
 
         private static int calcUnattackCard() {
@@ -709,6 +807,117 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                     cnt++;
             return cnt;
         }
+
+        private static int calcFriendType() {
+            int cnt = 0;
+            HashSet<String> friends = new HashSet<>();
+            if (AbstractDungeon.player.hasRelic("nearlmod:Marigold")) {
+                friends.add("nearlmod:Viviana");
+            }
+            for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+                if (c.cardID.equals("nearlmod:PersonalCharm")) {
+                    cnt++;
+                    continue;
+                }
+                if (c.cardID.equals("nearlmod:TheReturn")) {
+                    friends.add("nearlmod:Shining");
+                }
+                try {
+                    Field field = c.getClass().getDeclaredField("belongFriend");
+                    field.setAccessible(true);
+                    Object type = field.get(c);
+                    if (type instanceof String) {
+                        friends.add((String) type);
+                    }
+                } catch (Exception e) {
+                    // do nothing
+                }
+            }
+            cnt += friends.size();
+            return cnt;
+        }
+
+        private static int calcUseLight() {
+            int cnt = 0;
+            for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+                for (AbstractCard.CardTags tag : c.tags) {
+                    if (tag.name().equals("USE_LIGHT")) {
+                        cnt++;
+                        break;
+                    }
+                }
+            }
+            return cnt;
+        }
+
+        private static int calcNeedDreadnought() {
+            int cnt = 0;
+            for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+                if (c.rawDescription.contains("无畏 ：") || c.rawDescription.contains("Dreadnought :")) {
+                    cnt++;
+                }
+            }
+            return cnt;
+        }
+
+        private static int calcSummonAurora() {
+            int cnt = 0;
+            for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+                if (c.cardID.equals("nearlmod:FearNoCold") || c.cardID.equals("nearlmod:FindYourWayThroughTheSnow")) {
+                    cnt++;
+                }
+            }
+            return cnt;
+        }
+
+        private static int getAffinity(AbstractCard c) {
+            try {
+                Field field = c.getClass().getDeclaredField("realBranch");
+                field.setAccessible(true);
+                return (int) field.get(c);
+            } catch (Exception e) {
+                return 0;
+            }
+        }
+
+        private static int calcAffinity(int... args) {
+            int cnt = 0;
+            for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+                cnt += args[getAffinity(c)];
+            }
+            return cnt;
+        }
+
+        private static int calcUseFlowingShape() {
+            int cnt = 0;
+            for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+                if (c.cardID.equals("rhinemod:MultiEcho") || c.cardID.equals("rhinemod:FlowCombo") || c.cardID.equals("rhinemod:ResourceEconomization")) {
+                    cnt++;
+                }
+            }
+            return cnt;
+        }
+
+        private static int calcPaleFir() {
+            int cnt = 0;
+            for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+                if (c.cardID.equals("rhinemod:EcologicalInteraction") || (getAffinity(c) == 3 &&
+                    (c.cardID.equals("rhinemod:AcademicResearch") || c.cardID.equals("rhinemod:HeadquarterBuilding") || c.cardID.equals("rhinemod:TechnologyRisingStar")))) {
+                    cnt++;
+                }
+            }
+            return cnt;
+        }
+
+        private static int calcSamirgBlight() {
+            int cnt = 0;
+            for (AbstractBlight b : AbstractDungeon.player.blights) {
+                if (b.blightID.startsWith("samirg:")) {
+                    cnt++;
+                }
+            }
+            return cnt;
+        }
     }
 
     // Self-calculate metrics
@@ -731,6 +940,10 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
     public static int totalResCard = 0;
     public static int smallDmgReceivedCnt = 0;
     public static ArrayList<Integer> recentSmallDmgReceivedCnt = new ArrayList<>();
+    public static int maxNonBossTurn = 0;
+    public static int killMinionCnt = 0;
+    public static int exhaustCardCnt = 0;
+    public static int maxExhaustCardCnt = 0;
 
     @Override
     public void atTurnStart() {
@@ -749,6 +962,7 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
         attackedCnt = 0;
         dmgReceivedCnt = 0;
         smallDmgReceivedCnt = 0;
+        exhaustCardCnt = 0;
     }
 
     @Override
@@ -781,11 +995,15 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
         }
         totalBattleCnt++;
         totalTurnCnt += GameActionManager.turn;
+        if (!(AbstractDungeon.getCurrRoom() instanceof MonsterRoomBoss)) {
+            maxNonBossTurn = Math.max(maxNonBossTurn, GameActionManager.turn);
+        }
         totalDmgReceived += GameActionManager.damageReceivedThisCombat;
         recentDmgReceivedCnt.add(dmgReceivedCnt);
         if (recentDmgReceivedCnt.size() > 3) recentDmgReceivedCnt.remove(0);
         recentSmallDmgReceivedCnt.add(smallDmgReceivedCnt);
         if (recentSmallDmgReceivedCnt.size() > 3) recentSmallDmgReceivedCnt.remove(0);
+        maxExhaustCardCnt = Math.max(maxExhaustCardCnt, exhaustCardCnt);
     }
 
     @Override
@@ -818,5 +1036,17 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
         for (Integer i : recentSmallDmgReceivedCnt)
             ret += i;
         return ret;
+    }
+
+    @Override
+    public void onMonsterDeath(AbstractMonster m) {
+        if (m.hasPower(MinionPower.POWER_ID)) {
+            killMinionCnt++;
+        }
+    }
+
+    @Override
+    public void onExhaust(AbstractCard card) {
+        exhaustCardCnt++;
     }
 }
