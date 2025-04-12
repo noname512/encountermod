@@ -967,7 +967,7 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
 
     @Override
     public void onLoseHp(int damageAmount) {
-        if (isFirstDmgTaken) {
+        if (damageAmount > 0 && isFirstDmgTaken) {
             maxFirstDmgTaken = Math.max(maxFirstDmgTaken, damageAmount);
             isFirstDmgTaken = false;
         }
@@ -1011,9 +1011,11 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
         if (info.type == DamageInfo.DamageType.NORMAL) {
             attackedCnt++;
             maxAttackedCnt = Math.max(maxAttackedCnt, attackedCnt);
-            dmgReceivedCnt++;
-            if (damageAmount <= 5) {
-                smallDmgReceivedCnt++;
+            if (damageAmount > 0) {
+                dmgReceivedCnt++;
+                if (damageAmount <= 5) {
+                    smallDmgReceivedCnt++;
+                }
             }
         }
         return damageAmount;
