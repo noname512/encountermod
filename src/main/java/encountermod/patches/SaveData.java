@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.rooms.EmptyRoom;
 import com.megacrit.cardcrawl.saveAndContinue.SaveAndContinue;
 import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 import encountermod.EncounterMod;
+import encountermod.relics.LongingOfTheEraOfDreams;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
 import javassist.expr.ExprEditor;
@@ -17,6 +18,7 @@ import javassist.expr.MethodCall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -47,7 +49,34 @@ public class SaveData {
         public boolean ecm_is_last_op_refresh = false;
         public boolean ecm_first_room_chosen = false;
         public int ecm_max_refresh_num = 1;
+
+        // metrics from longing of the era of dreams below
+        public int ecm_max_block_at_turn_start = 0;
+        public HashMap<Integer, Integer> ecm_max_dmg_received = new HashMap<>();
+        public int ecm_max_first_dmg_taken = 0;
+        public boolean ecm_is_first_dmg_taken = false;
+        public boolean ecm_empty_hand_end_turn = false;
+        public int ecm_max_dmg_received_elite = 0;
+        public int ecm_attacked_cnt = 0;
+        public int ecm_max_attacked_cnt = 0;
+        public boolean ecm_rested = false;
+        public int ecm_actor_cnt = 0;
+        public int ecm_total_battle_cnt = 0;
+        public int ecm_total_turn_cnt = 0;
+        public int ecm_dmg_received_cnt = 0;
+        public ArrayList<Integer> ecm_recent_dmg_received_cnt = new ArrayList<>();
+        public int ecm_total_dmg_received = 0;
+        public int ecm_max_turn_1_res_card = 0;
+        public int ecm_total_res_card = 0;
+        public int ecm_small_dmg_received_cnt = 0;
+        public ArrayList<Integer> ecm_recent_small_dmg_received_cnt = new ArrayList<>();
+        public int ecm_max_non_boss_turn = 0;
+        public int ecm_kill_minion_cnt = 0;
+        public int ecm_exhaust_card_cnt = 0;
+        public int ecm_max_exhaust_card_cnt = 0;
     }
+
+    public static ExtraData exSaveData = new ExtraData();
 
     public static int idea_count = 0;
     public static int idea_prob = 0;
@@ -66,17 +95,39 @@ public class SaveData {
     public static class SaveTheSaveData {
         @SpirePostfixPatch
         public static void Postfix(SaveFile _inst, SaveFile.SaveType type) {
-            idea_count = EncounterMod.ideaCount;
-            idea_prob = EncounterMod.prob;
-            is_first_event = EncounterMod.firstEvent;
-            refresh_num_dungeon = RefreshPatch.refreshNumDungeon;
-            rng_used_num = RefreshPatch.rngUsedNum;
-            room_weight = new HashMap<>(RefreshPatch.roomWeight);
-            total_weight = RefreshPatch.totalWeight;
-            is_last_op_refresh = EncounterMod.isLastOpRefresh;
-            first_room_chosen = AbstractDungeon.firstRoomChosen;
-            max_refresh_num = RefreshPatch.maxRefreshNum;
-            SaveData.logger.info("Extra Data Saved!");
+            exSaveData.ecm_idea_count = EncounterMod.ideaCount;
+            exSaveData.ecm_idea_prob = EncounterMod.prob;
+            exSaveData.ecm_is_first_event = EncounterMod.firstEvent;
+            exSaveData.ecm_refresh_num_dungeon = RefreshPatch.refreshNumDungeon;
+            exSaveData.ecm_rng_used_num = RefreshPatch.rngUsedNum;
+            exSaveData.ecm_room_weight = new HashMap<>(RefreshPatch.roomWeight);
+            exSaveData.ecm_total_weight = RefreshPatch.totalWeight;
+            exSaveData.ecm_is_last_op_refresh = EncounterMod.isLastOpRefresh;
+            exSaveData.ecm_first_room_chosen = AbstractDungeon.firstRoomChosen;
+            exSaveData.ecm_max_refresh_num = RefreshPatch.maxRefreshNum;
+            exSaveData.ecm_max_block_at_turn_start = LongingOfTheEraOfDreams.maxBlockAtTurnStart;
+            exSaveData.ecm_max_dmg_received = LongingOfTheEraOfDreams.maxDmgReceived;
+            exSaveData.ecm_max_first_dmg_taken = LongingOfTheEraOfDreams.maxFirstDmgTaken;
+            exSaveData.ecm_is_first_dmg_taken = LongingOfTheEraOfDreams.isFirstDmgTaken;
+            exSaveData.ecm_max_dmg_received_elite = LongingOfTheEraOfDreams.maxDmgReceivedElite;
+            exSaveData.ecm_empty_hand_end_turn = LongingOfTheEraOfDreams.emptyHandEndTurn;
+            exSaveData.ecm_attacked_cnt = LongingOfTheEraOfDreams.attackedCnt;
+            exSaveData.ecm_max_attacked_cnt = LongingOfTheEraOfDreams.maxAttackedCnt;
+            exSaveData.ecm_rested = LongingOfTheEraOfDreams.rested;
+            exSaveData.ecm_actor_cnt = LongingOfTheEraOfDreams.actorCnt;
+            exSaveData.ecm_total_battle_cnt = LongingOfTheEraOfDreams.totalBattleCnt;
+            exSaveData.ecm_total_turn_cnt = LongingOfTheEraOfDreams.totalTurnCnt;
+            exSaveData.ecm_dmg_received_cnt = LongingOfTheEraOfDreams.dmgReceivedCnt;
+            exSaveData.ecm_recent_dmg_received_cnt = LongingOfTheEraOfDreams.recentDmgReceivedCnt;
+            exSaveData.ecm_total_dmg_received = LongingOfTheEraOfDreams.totalDmgReceived;
+            exSaveData.ecm_max_turn_1_res_card = LongingOfTheEraOfDreams.maxTurn1ResCard;
+            exSaveData.ecm_total_res_card = LongingOfTheEraOfDreams.totalResCard;
+            exSaveData.ecm_small_dmg_received_cnt = LongingOfTheEraOfDreams.smallDmgReceivedCnt;
+            exSaveData.ecm_recent_small_dmg_received_cnt = LongingOfTheEraOfDreams.recentSmallDmgReceivedCnt;
+            exSaveData.ecm_max_non_boss_turn = LongingOfTheEraOfDreams.maxNonBossTurn;
+            exSaveData.ecm_kill_minion_cnt = LongingOfTheEraOfDreams.killMinionCnt;
+            exSaveData.ecm_exhaust_card_cnt = LongingOfTheEraOfDreams.exhaustCardCnt;
+            exSaveData.ecm_max_exhaust_card_cnt = LongingOfTheEraOfDreams.maxExhaustCardCnt;
         }
     }
 
@@ -84,17 +135,16 @@ public class SaveData {
     public static class SaveDataToFile {
         @SpireInsertPatch(locator = Locator.class, localvars = {"params"})
         public static void Insert(SaveFile save, HashMap<Object, Object> params) {
-            params.put("ecm_idea_count", idea_count);
-            params.put("ecm_idea_prob", idea_prob);
-            params.put("ecm_is_first_event", is_first_event);
-            params.put("ecm_node_refresh_data", nodeRefreshData);
-            params.put("ecm_refresh_num_dungeon", refresh_num_dungeon);
-            params.put("ecm_rng_used_num", rng_used_num);
-            params.put("ecm_room_weight", room_weight);
-            params.put("ecm_total_weight", total_weight);
-            params.put("ecm_is_last_op_refresh", is_last_op_refresh);
-            params.put("ecm_first_room_chosen", first_room_chosen);
-            params.put("ecm_max_refresh_num", max_refresh_num);
+            try {
+                for (Field field : ExtraData.class.getFields()) {
+                    field.setAccessible(true);
+                    Object value = field.get(exSaveData);
+                    params.put(field.getName(), value);
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            SaveData.logger.info("Extra Data Saved!");
         }
 
         private static class Locator extends SpireInsertLocator {
@@ -110,19 +160,8 @@ public class SaveData {
         @SpireInsertPatch(locator = Locator.class, localvars = {"gson", "savestr"})
         public static void Insert(String path, Gson gson, String savestr) {
             try {
-                ExtraData data = gson.fromJson(savestr, ExtraData.class);
+                exSaveData = gson.fromJson(savestr, ExtraData.class);
                 fromSaveFile = true;
-                nodeRefreshData = new ArrayList<>(data.ecm_node_refresh_data);
-                idea_count = data.ecm_idea_count;
-                idea_prob = data.ecm_idea_prob;
-                is_first_event = data.ecm_is_first_event;
-                refresh_num_dungeon = data.ecm_refresh_num_dungeon;
-                rng_used_num = data.ecm_rng_used_num;
-                room_weight = new HashMap<>(data.ecm_room_weight);
-                total_weight = data.ecm_total_weight;
-                is_last_op_refresh = data.ecm_is_last_op_refresh;
-                first_room_chosen = data.ecm_first_room_chosen;
-                max_refresh_num = data.ecm_max_refresh_num;
                 SaveData.logger.info("Loaded encountermod save data successfully");
             } catch (Exception e) {
                 SaveData.logger.error("Fail to load rhinemod save data.");
@@ -142,15 +181,37 @@ public class SaveData {
     public static class loadSavePatch {
         @SpirePostfixPatch
         public static void Postfix(AbstractDungeon _inst, SaveFile file) {
-            EncounterMod.ideaCount = idea_count;
-            EncounterMod.prob = idea_prob;
-            EncounterMod.firstEvent = is_first_event;
-            RefreshPatch.refreshNumDungeon = refresh_num_dungeon;
-            RefreshPatch.rngUsedNum = rng_used_num;
-            RefreshPatch.roomWeight = new HashMap<>(room_weight);
-            RefreshPatch.totalWeight = total_weight;
-            EncounterMod.isLastOpRefresh = is_last_op_refresh;
-            RefreshPatch.maxRefreshNum = max_refresh_num;
+            EncounterMod.ideaCount = exSaveData.ecm_idea_count;
+            EncounterMod.prob = exSaveData.ecm_idea_prob;
+            EncounterMod.firstEvent = exSaveData.ecm_is_first_event;
+            RefreshPatch.refreshNumDungeon = exSaveData.ecm_refresh_num_dungeon;
+            RefreshPatch.rngUsedNum = exSaveData.ecm_rng_used_num;
+            RefreshPatch.roomWeight = exSaveData.ecm_room_weight;
+            RefreshPatch.totalWeight = exSaveData.ecm_total_weight;
+            EncounterMod.isLastOpRefresh = exSaveData.ecm_is_last_op_refresh;
+            RefreshPatch.maxRefreshNum = exSaveData.ecm_max_refresh_num;
+            LongingOfTheEraOfDreams.maxBlockAtTurnStart = exSaveData.ecm_max_block_at_turn_start;
+            LongingOfTheEraOfDreams.maxDmgReceived = exSaveData.ecm_max_dmg_received;
+            LongingOfTheEraOfDreams.maxFirstDmgTaken = exSaveData.ecm_max_first_dmg_taken;
+            LongingOfTheEraOfDreams.isFirstDmgTaken = exSaveData.ecm_is_first_dmg_taken;
+            LongingOfTheEraOfDreams.maxDmgReceivedElite = exSaveData.ecm_max_dmg_received_elite;
+            LongingOfTheEraOfDreams.emptyHandEndTurn = exSaveData.ecm_empty_hand_end_turn;
+            LongingOfTheEraOfDreams.attackedCnt = exSaveData.ecm_attacked_cnt;
+            LongingOfTheEraOfDreams.maxAttackedCnt = exSaveData.ecm_max_attacked_cnt;
+            LongingOfTheEraOfDreams.rested = exSaveData.ecm_rested;
+            LongingOfTheEraOfDreams.actorCnt = exSaveData.ecm_actor_cnt;
+            LongingOfTheEraOfDreams.totalBattleCnt = exSaveData.ecm_total_battle_cnt;
+            LongingOfTheEraOfDreams.totalTurnCnt = exSaveData.ecm_total_turn_cnt;
+            LongingOfTheEraOfDreams.dmgReceivedCnt = exSaveData.ecm_dmg_received_cnt;
+            LongingOfTheEraOfDreams.recentDmgReceivedCnt = exSaveData.ecm_recent_dmg_received_cnt;
+            LongingOfTheEraOfDreams.totalDmgReceived = exSaveData.ecm_total_dmg_received;
+            LongingOfTheEraOfDreams.maxTurn1ResCard = exSaveData.ecm_max_turn_1_res_card;
+            LongingOfTheEraOfDreams.totalResCard = exSaveData.ecm_total_res_card;
+            LongingOfTheEraOfDreams.smallDmgReceivedCnt = exSaveData.ecm_small_dmg_received_cnt;
+            LongingOfTheEraOfDreams.recentSmallDmgReceivedCnt = exSaveData.ecm_recent_small_dmg_received_cnt;
+            LongingOfTheEraOfDreams.maxNonBossTurn = exSaveData.ecm_max_non_boss_turn;
+            LongingOfTheEraOfDreams.killMinionCnt = exSaveData.ecm_kill_minion_cnt;
+            LongingOfTheEraOfDreams.exhaustCardCnt = exSaveData.ecm_exhaust_card_cnt;
             SaveData.logger.info("Save loaded.");
         }
     }
