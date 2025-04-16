@@ -228,7 +228,7 @@ public class QuiLon extends AbstractMonster {
             }
         }
         if (currentMove == 0) {
-            setMove(MOVES[4], (byte)0, Intent.UNKNOWN);
+            setMove(MOVES[2], (byte)0, Intent.UNKNOWN);
         }
         else if (currentMove == 1) {
             if ((getSpace(envy) < 1) || (getSpace(fury) < 1)) {

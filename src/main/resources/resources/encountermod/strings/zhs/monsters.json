@@ -28,5 +28,10 @@
     "NAME": "奎隆，摩诃萨埵权化",
     "MOVES": ["惩五戒","棒喝","不着相","呼吸法","菩萨辩"],
     "DIALOG": []
+  },
+  "encountermod:SpinesOfEpoch": {
+    "NAME": "年代之刺",
+    "MOVES": [],
+    "DIALOG": []
   }
 }
