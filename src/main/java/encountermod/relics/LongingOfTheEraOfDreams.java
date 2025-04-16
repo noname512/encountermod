@@ -236,7 +236,7 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         if (AbstractDungeon.player.gold >= 500) {
                             lst.add(new Courier()); // 送货员
                         }
-                        if (AbstractDungeon.actNum == 1 && (AbstractDungeon.player instanceof TheSilent || AbstractDungeon.player.getClass().getName().contains("RhineLab"))) {
+                        if (AbstractDungeon.actNum == 1 && (AbstractDungeon.player instanceof TheSilent || AbstractDungeon.player.chosenClass.name().equals("RHINE_CLASS"))) {
                             lst.add(new ToxicEgg2()); // 毒素之蛋
                         }
                         if (AbstractDungeon.actNum == 1 && (AbstractDungeon.player instanceof Ironclad)) {
@@ -390,7 +390,7 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         AbstractDungeon.getCurrRoom().addRelicToRewards(new RedCirclet());
                         return SpireReturn.Continue();
                 }
-                if (BaseMod.hasModID("wishdale")) {
+                if (BaseMod.hasModID("wishdale:")) {
                     if (AbstractDungeon.player.chosenClass.name().equals("WISHDALE_ZC") && tier == RelicTier.RARE) {
                         lst.add(BaseMod.getCustomRelic("wishdalemod:RoaringHand"));
                     }
@@ -405,7 +405,7 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         }
                     }
                 }
-                if (BaseMod.hasModID("nearlmod")) {
+                if (BaseMod.hasModID("nearlmod:")) {
                     if (AbstractDungeon.player.chosenClass.name().equals("NEARL_CLASS")) {
                         if (calcFriendType() >= 3 && tier == RelicTier.RARE) {
                             lst.add(BaseMod.getCustomRelic("nearlmod:EmergencyCallBook")); // 应急通讯指南
@@ -430,7 +430,7 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         lst.add(BaseMod.getCustomRelic("nearlmod:HandOfConqueror")); // 刻勋之手
                     }
                 }
-                if (BaseMod.hasModID("rhinemod")) {
+                if (BaseMod.hasModID("rhinemod:")) {
                     if (AbstractDungeon.player.chosenClass.name().equals("RHINE_CLASS")) {
                         if (calcAffinity(0, 1, 0, 0) >= AbstractDungeon.player.masterDeck.size() * 0.4 && tier == RelicTier.UNCOMMON) {
                             lst.add(BaseMod.getCustomRelic("rhinemod:RhineChargeSuit")); // 莱茵充能护服
@@ -452,7 +452,7 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         lst.add(BaseMod.getCustomRelic("rhinemod:PittsAssortedFruits")); // 皮特水果什锦
                     }
                 }
-                if (BaseMod.hasModID("samirg")) {
+                if (BaseMod.hasModID("samirg:")) {
                     if (tier == RelicTier.UNCOMMON) {
                         if (AbstractDungeon.player.hasBlight("samirg:IrreversibleMatrix") && AbstractDungeon.player.getBlight("samirg:IrreversibleMatrix").counter >= 3) {
                             lst.add(BaseMod.getCustomRelic("samirg:UrsasBlade")); // 乌萨斯断刃
