@@ -32,7 +32,7 @@ public class QuiLon extends AbstractMonster {
     public Envy[] envy = new Envy[2];
     public Smarty[] smarty = new Smarty[4];
     public Fury[] fury = new Fury[1];
-    public float[][] posx = {{0.0F, 0.0F}, {-600.0F}, {-200.0F, -200.0F}, {-800.0F, -800.0F, -400.0F, -400.0F}, {-600.0F}};
+    public float[][] posx = {{0.0F, 0.0F}, {-600.0F}, {-200.0F, -200.0F}, {-400.0F, -400.0F, -800.0F, -800.0F}, {-600.0F}};
     public float[][] posy = {{300.0F, 0.0F}, {450.0F}, {300.0F, -100.0F}, {200.0F, -100.0F, 200.0F, -100.0F}, {0.0F}};
     public int currentMove = -1;
     public QuiLon(float x, float y) {
