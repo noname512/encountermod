@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.dungeons.TheBeyond;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.*;
@@ -45,6 +46,7 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+import static basemod.BaseMod.addMonster;
 import static com.megacrit.cardcrawl.helpers.RelicLibrary.getRelic;
 
 @SpireInitializer
@@ -60,6 +62,8 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
     public static boolean firstEvent;
     public static boolean isLastOpRefresh;
     public static String MOD_ID = "encountermod";
+
+    public boolean isDemo = false;
 
     public EncounterMod() {
         BaseMod.subscribe(this);
@@ -90,6 +94,9 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
     private void initializeSpecialBattle() {
         BaseMod.addCard(new Empty());
         BaseMod.addMonster("Qui'Lon", () -> new MonsterGroup(new QuiLon(200.0F, 0.0F)));
+        if (isDemo) {
+            BaseMod.addBoss(TheBeyond.ID, "Qui'Lon", "images/ui/map/boss/heart.png", "images/ui/map/bossOutline/heart.png");
+        }
     }
 
     private void initializeRewards() {
@@ -223,6 +230,22 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
                 bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)).
                 endsWithRewardsUI(false).
                 overrideEvent(TheMausoleum.ID).
+                create());
+        BaseMod.addEvent(new AddEventParams.Builder(
+                encountermod.events.replacement.Colosseum.ID,
+                encountermod.events.replacement.Colosseum.class).
+                eventType(EventUtils.EventType.OVERRIDE).
+                bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)).
+                endsWithRewardsUI(true).
+                overrideEvent(Colosseum.ID).
+                create());
+        BaseMod.addEvent(new AddEventParams.Builder(
+                encountermod.events.replacement.ForgottenAltar.ID,
+                encountermod.events.replacement.ForgottenAltar.class).
+                eventType(EventUtils.EventType.OVERRIDE).
+                bonusCondition(() -> AbstractDungeon.player.hasRelic(GraffitiOfTheEraOfHope.ID)).
+                endsWithRewardsUI(false).
+                overrideEvent(ForgottenAltar.ID).
                 create());
 
         BaseMod.addEvent(new AddEventParams.Builder(

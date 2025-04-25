@@ -16,7 +16,7 @@ public class Empty extends CustomCard {
     public static final String IMG = null; //"encountermod/images/cards/Empty.png";
     public static final int COST = -2;
     public Empty() {
-        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.STATUS, CardColor.COLORLESS,CardRarity.BASIC, CardTarget.SELF);
+        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.STATUS, CardColor.COLORLESS,CardRarity.SPECIAL, CardTarget.SELF);
     }
 
     @Override

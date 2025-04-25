@@ -109,7 +109,7 @@
       "万物来源于创造。"
     ],
     "OPTIONS": [
-      "[灵感] 获得4构想 。"
+      "[灵感] #y获得4构想 。"
     ]
   },
   "encountermod:Nest": {
@@ -151,6 +151,24 @@
     ],
     "OPTIONS": [
       "[为棺材默哀] 获得 #g3构想 。"
+    ]
+  },
+  "encountermod:Colosseum": {
+    "NAME": "竞技场",
+    "DESCRIPTIONS": [
+      "当所有人都集中在对方选手身上时，你直接溜了。"
+    ],
+    "OPTIONS": [
+      "[逃跑] 消耗 #r1 构想 。",
+      "[离开]",
+      "[挑衅] 与 #r第一勇士 战斗，赢得 #g海量奖赏 。"
+    ]
+  },
+  "encountermod:Forgotten Altar": {
+    "NAME": "被遗忘的祭坛",
+    "DESCRIPTIONS": [
+    ],
+    "OPTIONS": [
     ]
   },
 
