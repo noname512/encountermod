@@ -35,7 +35,7 @@ public class SpinesOfEpoch extends AbstractMonster {
             maxHealth -= AbstractDungeon.actNum * 20;
         }
         else {
-            maxHealth -= 35;
+            maxHealth -= 30;
             maxHealth -= AbstractDungeon.floorNum;
             maxHealth -= AbstractDungeon.actNum * 10;
         }
