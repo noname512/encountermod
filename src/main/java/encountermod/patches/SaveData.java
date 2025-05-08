@@ -78,18 +78,8 @@ public class SaveData {
 
     public static ExtraData exSaveData = new ExtraData();
 
-    public static int idea_count = 0;
-    public static int idea_prob = 0;
-    public static boolean is_first_event = false;
     public static ArrayList<NodeRefreshSave> nodeRefreshData = new ArrayList<>();
-    public static int refresh_num_dungeon = 0;
-    public static int rng_used_num = 0;
     public static boolean fromSaveFile;
-    public static HashMap<String, Integer> room_weight = new HashMap<>();
-    public static int total_weight = 0;
-    public static boolean is_last_op_refresh = false;
-    public static boolean first_room_chosen = false;
-    public static int max_refresh_num = 1;
 
     @SpirePatch(clz = SaveFile.class, method = "<ctor>", paramtypez = {SaveFile.SaveType.class})
     public static class SaveTheSaveData {
@@ -234,18 +224,17 @@ public class SaveData {
             AbstractDungeon.dungeonMapScreen.dismissable = false;
             AbstractDungeon.rs = AbstractDungeon.RenderScene.NORMAL;
             AbstractDungeon.previousScreen = null;
-            if (first_room_chosen) {
+            if (AbstractDungeon.firstRoomChosen) {
                 AbstractDungeon.currMapNode = AbstractDungeon.nextRoom;
             }
             AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMPLETE;
-            AbstractDungeon.firstRoomChosen = first_room_chosen;
             AbstractDungeon.dungeonMapScreen.open(false);
             AbstractDungeon.scene.randomizeScene();
         }
 
         @SpirePostfixPatch
         public static void Postfix(AbstractDungeon _inst, SaveFile saveFile) {
-            if (EncounterMod.isLastOpRefresh && !first_room_chosen) {
+            if (EncounterMod.isLastOpRefresh && !AbstractDungeon.firstRoomChosen) {
                 AbstractDungeon.currMapNode = new MapRoomNode(0, -1);
                 AbstractDungeon.currMapNode.room = new EmptyRoom();
             }

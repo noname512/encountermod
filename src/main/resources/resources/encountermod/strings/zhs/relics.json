@@ -19,6 +19,11 @@
     "FLAVOR": "萨卡兹，传说之中遥远的种族，我当然没见过它们。",
     "DESCRIPTIONS": ["拾取时立刻获得 #g180 金币，每一层首次刷新必定为商店且不消耗 #y构想 ，商品价格降低 #g30% 。"]
   },
+  "encountermod:SufferingOfTheEraOfCatastrophe": {
+    "NAME": "天灾时代的苦难",
+    "FLAVOR": "",
+    "DESCRIPTIONS": ["战斗中有概率出现 #y年代之刺 ，击败时掉落 #y构想 。部分节点可以消耗 #r2 #y构想 以横向移动。"]
+  },
   "encountermod:SpiritHunterEarl": {
     "NAME": "探灵伯爵",
     "FLAVOR": "阿尔布雷希特·冯·蹊兽，蔷花圆号之塔的伯爵，愿为您效劳，承诺给您带回失落的财宝、隐藏的智慧！",

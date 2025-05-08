@@ -11,15 +11,19 @@ import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.dungeons.TheBeyond;
+import com.megacrit.cardcrawl.events.exordium.*;
+import com.megacrit.cardcrawl.events.city.*;
+import com.megacrit.cardcrawl.events.beyond.*;
+import com.megacrit.cardcrawl.events.shrines.*;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
+import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.JuzuBracelet;
 import com.megacrit.cardcrawl.rewards.RewardSave;
@@ -27,18 +31,11 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.custom.CustomMod;
 import encountermod.cards.Empty;
 import encountermod.monsters.QuiLon;
-import encountermod.patches.ExtraRelicRewardPatch;
-import encountermod.patches.IdeaPatch;
-import encountermod.patches.IdeaRewardPatch;
-import encountermod.patches.RefreshPatch;
+import encountermod.patches.*;
 import encountermod.reward.ExtraRelicReward;
 import encountermod.reward.IdeaReward;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import com.megacrit.cardcrawl.events.exordium.*;
-import com.megacrit.cardcrawl.events.city.*;
-import com.megacrit.cardcrawl.events.beyond.*;
-import com.megacrit.cardcrawl.events.shrines.*;
 import encountermod.events.*;
 import encountermod.relics.*;
 
@@ -46,7 +43,6 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-import static basemod.BaseMod.addMonster;
 import static com.megacrit.cardcrawl.helpers.RelicLibrary.getRelic;
 
 @SpireInitializer
@@ -62,6 +58,8 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
     public static boolean firstEvent;
     public static boolean isLastOpRefresh;
     public static String MOD_ID = "encountermod";
+    public static Random refreshRng;
+    public static Random myMapRng;
 
     public boolean isDemo = true;
 
@@ -86,6 +84,7 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
         TEXT = uiString.TEXT;
         RefreshPatch.initPosition();
         IdeaPatch.topEffect = new ArrayList<>();
+        HorizonEdgePatch.moveCost = 2;
         initializeEvents();
         initializeRewards();
         initializeSpecialBattle();
@@ -122,6 +121,7 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
         BaseMod.addEvent(new AddEventParams.Builder(Encounter.ID, Encounter.class).
                 eventType(EventUtils.EventType.ONE_TIME).
                 endsWithRewardsUI(false).
+                spawnCondition(() -> false).
                 create());
 
         // Replacement
@@ -360,6 +360,7 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
         BaseMod.addRelic(new HatredOfTheEraOfVendetta(), RelicType.SHARED);
         BaseMod.addRelic(new LongingOfTheEraOfDreams(), RelicType.SHARED);
         BaseMod.addRelic(new VisionsOfTheEraOfProsperity(), RelicType.SHARED);
+        BaseMod.addRelic(new SufferingOfTheEraOfCatastrophe(), RelicType.SHARED);
     }
 
     @Override
