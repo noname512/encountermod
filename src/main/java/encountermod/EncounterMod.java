@@ -63,7 +63,7 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
     public static boolean isLastOpRefresh;
     public static String MOD_ID = "encountermod";
 
-    public boolean isDemo = false;
+    public boolean isDemo = true;
 
     public EncounterMod() {
         BaseMod.subscribe(this);
