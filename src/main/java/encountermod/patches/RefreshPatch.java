@@ -23,14 +23,11 @@ import javassist.CannotCompileException;
 import javassist.CtBehavior;
 import javassist.expr.ExprEditor;
 import javassist.expr.MethodCall;
-import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.logging.Logger;
 
 public class RefreshPatch {
-    private static final org.slf4j.Logger log = LoggerFactory.getLogger(RefreshPatch.class);
-
     @SpirePatch(clz = MapRoomNode.class, method = SpirePatch.CLASS)
     public static class OptFields {
         public static SpireField<Hitbox> refreshHb = new SpireField<>(() -> new Hitbox(25.0F * Settings.scale, 25.0F * Settings.scale));

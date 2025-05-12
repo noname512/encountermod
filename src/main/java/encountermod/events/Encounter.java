@@ -12,10 +12,7 @@ import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import encountermod.EncounterMod;
-import encountermod.relics.GraffitiOfTheEraOfHope;
-import encountermod.relics.HatredOfTheEraOfVendetta;
-import encountermod.relics.LongingOfTheEraOfDreams;
-import encountermod.relics.VisionsOfTheEraOfProsperity;
+import encountermod.relics.*;
 
 
 public class Encounter extends AbstractImageEvent {
@@ -31,16 +28,17 @@ public class Encounter extends AbstractImageEvent {
     }
     public Encounter() {
         super(NAME, DESCRIPTIONS[0], "resources/encountermod/images/event/Encounter.png");
-        this.imageEventText.setDialogOption(OPTIONS[0], false, new GraffitiOfTheEraOfHope());
-        this.imageEventText.setDialogOption(OPTIONS[1], false, new HatredOfTheEraOfVendetta());
-        this.imageEventText.setDialogOption(OPTIONS[2], false, new LongingOfTheEraOfDreams());
-        this.imageEventText.setDialogOption(OPTIONS[3], false, new VisionsOfTheEraOfProsperity());
-        this.imageEventText.setDialogOption(OPTIONS[4]);
+        imageEventText.setDialogOption(OPTIONS[0], false, new GraffitiOfTheEraOfHope());
+        imageEventText.setDialogOption(OPTIONS[1], false, new HatredOfTheEraOfVendetta());
+        imageEventText.setDialogOption(OPTIONS[2], false, new LongingOfTheEraOfDreams());
+        imageEventText.setDialogOption(OPTIONS[3], false, new VisionsOfTheEraOfProsperity());
+        imageEventText.setDialogOption(OPTIONS[4], false, new SufferingOfTheEraOfCatastrophe());
+//        imageEventText.setDialogOption(OPTIONS[5]);
     }
 
     @Override
     protected void buttonEffect(int buttonPressed) {
-        if (this.screen == CurScreen.INTRO) {
+        if (screen == CurScreen.INTRO) {
             AbstractRelic relic;
             imageEventText.updateBodyText(DESCRIPTIONS[buttonPressed + 1]);
             screen = CurScreen.LEAVE;
@@ -65,9 +63,14 @@ public class Encounter extends AbstractImageEvent {
                     logMetricObtainRelic(NAME, "Visions of the Era of Prosperity", relic);
                     AbstractDungeon.getCurrRoom().spawnRelicAndObtain(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F, relic);
                     break;
+                case 4:
+                    relic = new SufferingOfTheEraOfCatastrophe();
+                    logMetricObtainRelic(NAME, "Suffering of the Era of Catastrophe", relic);
+                    AbstractDungeon.getCurrRoom().spawnRelicAndObtain(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F, relic);
+                    break;
             }
-            this.imageEventText.updateDialogOption(0, OPTIONS[4]);
-            this.imageEventText.clearRemainingOptions();
+            imageEventText.updateDialogOption(0, OPTIONS[5]);
+            imageEventText.clearRemainingOptions();
         }
         openMap();
     }
