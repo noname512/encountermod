@@ -22,8 +22,8 @@ public class SpinesOfEpoch extends AbstractMonster {
             maxHealth -= 20;
         }
         else if (AbstractDungeon.ascensionLevel >= 7) {
-            maxHealth -= 30;
-            maxHealth -= AbstractDungeon.actNum * 5;
+            maxHealth -= 20;
+            maxHealth -= AbstractDungeon.actNum * 15;
         }
         else if (AbstractDungeon.ascensionLevel >= 2) {
             maxHealth -= 20;
