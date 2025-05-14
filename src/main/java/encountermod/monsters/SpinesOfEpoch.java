@@ -1,5 +1,6 @@
 package encountermod.monsters;
 
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.cards.status.VoidCard;
 import com.megacrit.cardcrawl.cards.tempCards.Insight;
@@ -25,13 +26,14 @@ public class SpinesOfEpoch extends AbstractMonster {
             maxHealth -= AbstractDungeon.actNum * 5;
         }
         else if (AbstractDungeon.ascensionLevel >= 2) {
-            maxHealth -= 25;
-            maxHealth -= AbstractDungeon.actNum * 20;
+            maxHealth -= 20;
+            maxHealth -= AbstractDungeon.floorNum;
+            maxHealth -= AbstractDungeon.actNum * 15;
         }
         else {
-            maxHealth -= 30;
+            maxHealth -= 20;
             maxHealth -= AbstractDungeon.floorNum;
-            maxHealth -= AbstractDungeon.actNum * 10;
+            maxHealth -= AbstractDungeon.actNum * 20;
         }
         currentHealth = maxHealth;
         type = EnemyType.NORMAL;
@@ -41,7 +43,12 @@ public class SpinesOfEpoch extends AbstractMonster {
     @Override
     public void takeTurn() {
         if (nextMove == 1) {
-            addToBot(new MakeTempCardInDrawPileAction(new VoidCard(), 1, true, false));
+            if (AbstractDungeon.ascensionLevel >= 2) {
+                addToBot(new MakeTempCardInDrawPileAction(new VoidCard(), 1, true, false));
+            }
+            else {
+                addToBot(new MakeTempCardInDiscardAction(new VoidCard(), 1));
+            }
         }
         else {
             addToBot(new MakeTempCardInDrawPileAction(new Insight(), 1, true, false));
