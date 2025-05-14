@@ -25,7 +25,7 @@ public class HorizonEdgePatch {
     }
 
     public static void generateHorizontalEdge(float chance) {
-        for (int i = 1; i < AbstractDungeon.map.size() - 1; i++) {
+        for (int i = 1; i < AbstractDungeon.map.size(); i++) {
             ArrayList<MapRoomNode> nodes = AbstractDungeon.map.get(i);
             for (int j = 0; j < nodes.size() - 1; j++)
                 if (nodes.get(j).getRoom() != null && nodes.get(j).hasEdges() && EncounterMod.myMapRng.randomBoolean(chance)) {
@@ -124,10 +124,10 @@ public class HorizonEdgePatch {
         }
     }
 
-    @SpirePatch(clz = AbstractDungeon.class, method = "populatePathTaken")
+    @SpirePatch(clz = AbstractDungeon.class, method = "generateMap")
     public static class populatePathTakenPatch {
-        @SpirePrefixPatch
-        public static void Prefix() {
+        @SpirePostfixPatch
+        public static void Postfix() {
             if (AbstractDungeon.player.hasRelic(SufferingOfTheEraOfCatastrophe.ID)) {
                 generateHorizontalEdge(SufferingOfTheEraOfCatastrophe.CHANCE);
             }
