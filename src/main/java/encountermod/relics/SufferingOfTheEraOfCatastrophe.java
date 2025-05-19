@@ -18,6 +18,7 @@ import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 import encountermod.monsters.SpinesOfEpoch;
 import encountermod.patches.HorizonEdgePatch;
+import encountermod.patches.RefreshPatch;
 
 public class SufferingOfTheEraOfCatastrophe extends CustomRelic {
     public static final String ID = "encountermod:SufferingOfTheEraOfCatastrophe";
@@ -36,6 +37,13 @@ public class SufferingOfTheEraOfCatastrophe extends CustomRelic {
         if (AbstractDungeon.id.equals("Exordium") || AbstractDungeon.id.equals("TheCity") || AbstractDungeon.id.equals("TheBeyond")) {
             HorizonEdgePatch.generateHorizontalEdge(CHANCE);
         }
+        HorizonEdgePatch.moveCost = 1;
+    }
+
+    @Override
+    public void onUnequip() {
+        // Remove_HorizontalEdge
+        HorizonEdgePatch.moveCost = 2;
     }
 
     @Override

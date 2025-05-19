@@ -74,6 +74,7 @@ public class SaveData {
         public int ecm_kill_minion_cnt = 0;
         public int ecm_exhaust_card_cnt = 0;
         public int ecm_max_exhaust_card_cnt = 0;
+        public int ecm_horizon_move_cost = 0;
     }
 
     public static ExtraData exSaveData = new ExtraData();
@@ -118,6 +119,7 @@ public class SaveData {
             exSaveData.ecm_kill_minion_cnt = LongingOfTheEraOfDreams.killMinionCnt;
             exSaveData.ecm_exhaust_card_cnt = LongingOfTheEraOfDreams.exhaustCardCnt;
             exSaveData.ecm_max_exhaust_card_cnt = LongingOfTheEraOfDreams.maxExhaustCardCnt;
+            exSaveData.ecm_horizon_move_cost = HorizonEdgePatch.moveCost;
         }
     }
 
@@ -202,6 +204,7 @@ public class SaveData {
             LongingOfTheEraOfDreams.maxNonBossTurn = exSaveData.ecm_max_non_boss_turn;
             LongingOfTheEraOfDreams.killMinionCnt = exSaveData.ecm_kill_minion_cnt;
             LongingOfTheEraOfDreams.exhaustCardCnt = exSaveData.ecm_exhaust_card_cnt;
+            HorizonEdgePatch.moveCost = exSaveData.ecm_horizon_move_cost;
             SaveData.logger.info("Save loaded.");
         }
     }

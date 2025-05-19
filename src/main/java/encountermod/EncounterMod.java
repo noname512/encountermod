@@ -84,7 +84,6 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
         TEXT = uiString.TEXT;
         RefreshPatch.initPosition();
         IdeaPatch.topEffect = new ArrayList<>();
-        HorizonEdgePatch.moveCost = 2;
         initializeEvents();
         initializeRewards();
         initializeSpecialBattle();
