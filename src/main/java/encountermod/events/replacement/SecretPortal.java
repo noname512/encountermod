@@ -72,6 +72,7 @@ public class SecretPortal extends AbstractImageEvent {
                         this.imageEventText.updateBodyText(modStrings.DESCRIPTIONS[0]);
                         EncounterMod.ideaCount --;
                         this.screen = CurScreen.LEAVE;
+                        logMetric("SecretPortal", "Took Reward");
                         AbstractRelic relic = AbstractDungeon.returnRandomScreenlessRelic(AbstractRelic.RelicTier.RARE);
                         AbstractDungeon.getCurrRoom().spawnRelicAndObtain((float)Settings.WIDTH / 2.0F, (float)Settings.HEIGHT / 2.0F, relic);
                         this.imageEventText.updateDialogOption(0, OPTIONS[1]);
@@ -79,6 +80,7 @@ public class SecretPortal extends AbstractImageEvent {
                     case 2:
                         this.imageEventText.updateBodyText(modStrings.DESCRIPTIONS[1]);
                         EncounterMod.ideaCount -= 2;
+                        logMetric("SecretPortal", "Fight");
                         this.screen = CurScreen.KUILON;
                         this.imageEventText.updateDialogOption(0, modStrings.OPTIONS[4]);
                         break;

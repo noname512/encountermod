@@ -61,7 +61,7 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
     public static Random refreshRng;
     public static Random myMapRng;
 
-    public boolean isDemo = true;
+    public boolean isDemo = false;
 
     public EncounterMod() {
         BaseMod.subscribe(this);
@@ -121,6 +121,12 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
                 eventType(EventUtils.EventType.ONE_TIME).
                 endsWithRewardsUI(false).
                 spawnCondition(() -> false).
+                create());
+        BaseMod.addEvent(new AddEventParams.Builder(FixedEra.ID, FixedEra.class).
+                eventType(EventUtils.EventType.NORMAL).
+                endsWithRewardsUI(false).
+                dungeonID("TheCity").
+                dungeonID("TheBeyond").
                 create());
 
         // Replacement

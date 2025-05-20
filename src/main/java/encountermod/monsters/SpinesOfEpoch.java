@@ -1,5 +1,6 @@
 package encountermod.monsters;
 
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.cards.status.VoidCard;
@@ -8,6 +9,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import encountermod.powers.NotImportantPower;
 import encountermod.reward.IdeaReward;
 
 public class SpinesOfEpoch extends AbstractMonster {
@@ -41,6 +43,11 @@ public class SpinesOfEpoch extends AbstractMonster {
     }
 
     @Override
+    public void usePreBattleAction() {
+        addToBot(new ApplyPowerAction(this, this, new NotImportantPower(this)));
+    }
+
+    @Override
     public void takeTurn() {
         if (nextMove == 1) {
             if (AbstractDungeon.ascensionLevel >= 2) {
@@ -54,12 +61,6 @@ public class SpinesOfEpoch extends AbstractMonster {
             addToBot(new MakeTempCardInDrawPileAction(new Insight(), 1, true, false));
         }
         getMove(0);
-    }
-
-    @Override
-    public void die() {
-        super.die();
-        AbstractDungeon.getCurrRoom().rewards.add(new IdeaReward());
     }
 
     @Override

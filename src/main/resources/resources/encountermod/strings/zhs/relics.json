@@ -22,7 +22,7 @@
   "encountermod:SufferingOfTheEraOfCatastrophe": {
     "NAME": "天灾时代的苦难",
     "FLAVOR": "推荐超模mod拾取，对于常规角色高进阶时可能难度过高！",
-    "DESCRIPTIONS": ["战斗中有概率出现 #y年代之刺 ，击败时掉落 #y构想 。所有节点均可以仅消耗 #r1 #y构想 横向移动。"]
+    "DESCRIPTIONS": ["战斗中有概率出现 #y年代之刺 ，击败时掉落 #y构想 。#y所有 节点均可以消耗 #r2 #y构想 横向移动。"]
   },
   "encountermod:SpiritHunterEarl": {
     "NAME": "探灵伯爵",

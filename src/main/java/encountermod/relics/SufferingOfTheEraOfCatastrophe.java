@@ -37,7 +37,7 @@ public class SufferingOfTheEraOfCatastrophe extends CustomRelic {
         if (AbstractDungeon.id.equals("Exordium") || AbstractDungeon.id.equals("TheCity") || AbstractDungeon.id.equals("TheBeyond")) {
             HorizonEdgePatch.generateHorizontalEdge(CHANCE);
         }
-        HorizonEdgePatch.moveCost = 1;
+        HorizonEdgePatch.moveCost = 2;
     }
 
     @Override
@@ -60,17 +60,25 @@ public class SufferingOfTheEraOfCatastrophe extends CustomRelic {
             }
         float rng = AbstractDungeon.monsterRng.random(1, 10);
         if (AbstractDungeon.getCurrRoom() instanceof MonsterRoomBoss) {
-            addToTop(new SpawnMonsterAction(new SpinesOfEpoch(leftX - 100.0F, 0.0F), false));
+            AbstractMonster spines = new SpinesOfEpoch(leftX - 100.F, 0.0F);
+            spines.usePreBattleAction();
+            addToTop(new SpawnMonsterAction(spines, false));
             if (rng <= 3) {
-                addToTop(new SpawnMonsterAction(new SpinesOfEpoch(leftX - 200.0F, 0.0F), false));
+                AbstractMonster spine2 = new SpinesOfEpoch(leftX - 300.F, 0.0F);
+                spine2.usePreBattleAction();
+                addToTop(new SpawnMonsterAction(spine2, false));
             }
         } else if (AbstractDungeon.getCurrRoom() instanceof MonsterRoomElite) {
             if (rng <= 6) {
-                addToTop(new SpawnMonsterAction(new SpinesOfEpoch(leftX - 100.0F, 0.0F), false));
+                AbstractMonster spines = new SpinesOfEpoch(leftX - 100.F, 0.0F);
+                spines.usePreBattleAction();
+                addToTop(new SpawnMonsterAction(spines, false));
             }
         } else if (AbstractDungeon.getCurrRoom() instanceof MonsterRoom) {
             if (rng <= 3) {
-                addToTop(new SpawnMonsterAction(new SpinesOfEpoch(leftX - 100.0F, 0.0F), false));
+                AbstractMonster spines = new SpinesOfEpoch(leftX - 100.F, 0.0F);
+                spines.usePreBattleAction();
+                addToTop(new SpawnMonsterAction(spines, false));
             }
         }
     }
