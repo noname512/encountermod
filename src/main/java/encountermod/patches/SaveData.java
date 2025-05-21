@@ -89,6 +89,7 @@ public class SaveData {
             exSaveData.ecm_idea_count = EncounterMod.ideaCount;
             exSaveData.ecm_idea_prob = EncounterMod.prob;
             exSaveData.ecm_is_first_event = EncounterMod.firstEvent;
+            exSaveData.ecm_node_refresh_data = nodeRefreshData;
             exSaveData.ecm_refresh_num_dungeon = RefreshPatch.refreshNumDungeon;
             exSaveData.ecm_rng_used_num = RefreshPatch.rngUsedNum;
             exSaveData.ecm_room_weight = new HashMap<>(RefreshPatch.roomWeight);
@@ -176,12 +177,14 @@ public class SaveData {
             EncounterMod.ideaCount = exSaveData.ecm_idea_count;
             EncounterMod.prob = exSaveData.ecm_idea_prob;
             EncounterMod.firstEvent = exSaveData.ecm_is_first_event;
+            nodeRefreshData = exSaveData.ecm_node_refresh_data;
             RefreshPatch.refreshNumDungeon = exSaveData.ecm_refresh_num_dungeon;
             RefreshPatch.rngUsedNum = exSaveData.ecm_rng_used_num;
             RefreshPatch.roomWeight = exSaveData.ecm_room_weight;
             RefreshPatch.totalWeight = exSaveData.ecm_total_weight;
             EncounterMod.isLastOpRefresh = exSaveData.ecm_is_last_op_refresh;
             RefreshPatch.maxRefreshNum = exSaveData.ecm_max_refresh_num;
+            AbstractDungeon.firstRoomChosen = exSaveData.ecm_first_room_chosen;
             LongingOfTheEraOfDreams.maxBlockAtTurnStart = exSaveData.ecm_max_block_at_turn_start;
             LongingOfTheEraOfDreams.maxDmgReceived = exSaveData.ecm_max_dmg_received;
             LongingOfTheEraOfDreams.maxFirstDmgTaken = exSaveData.ecm_max_first_dmg_taken;
@@ -204,6 +207,7 @@ public class SaveData {
             LongingOfTheEraOfDreams.maxNonBossTurn = exSaveData.ecm_max_non_boss_turn;
             LongingOfTheEraOfDreams.killMinionCnt = exSaveData.ecm_kill_minion_cnt;
             LongingOfTheEraOfDreams.exhaustCardCnt = exSaveData.ecm_exhaust_card_cnt;
+            LongingOfTheEraOfDreams.maxExhaustCardCnt = exSaveData.ecm_max_exhaust_card_cnt;
             HorizonEdgePatch.moveCost = exSaveData.ecm_horizon_move_cost;
             SaveData.logger.info("Save loaded.");
         }
