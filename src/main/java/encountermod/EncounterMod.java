@@ -350,6 +350,7 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
 
         // uncommon.
         BaseMod.addRelic(new RevenantRemains(), RelicType.SHARED);
+        BaseMod.addRelic(new PersonalPaintbrush(), RelicType.SHARED);
 
         // rare.
         BaseMod.addRelic(new SpiritHunterEarl(), RelicType.SHARED);
