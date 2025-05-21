@@ -1,18 +1,18 @@
 package encountermod.powers;
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.OnReceivePowerPower;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rewards.RewardItem;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.combat.DeckPoofEffect;
 import encountermod.monsters.QuiLon;
 import encountermod.reward.IdeaReward;
@@ -30,9 +30,8 @@ public class QuiLonPower extends AbstractPower implements OnReceivePowerPower {
         this.name = NAME;
         this.type = AbstractPower.PowerType.BUFF;
         this.owner = owner;
-        loadRegion("curiosity");
-        // region128 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage("resources/encountermod/images/powers/HatredPower 84.png"), 0, 0, 84, 84);
-        // region48 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage("resources/encountermod/images/powers/HatredPower 32.png"), 0, 0, 32, 32);
+        region128 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage("resources/encountermod/images/powers/EmbodimentOfTrikāya 84.png"), 0, 0, 84, 84);
+        region48 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage("resources/encountermod/images/powers/EmbodimentOfTrikāya 32.png"), 0, 0, 32, 32);
         updateDescription();
     }
 
@@ -60,7 +59,7 @@ public class QuiLonPower extends AbstractPower implements OnReceivePowerPower {
         else if (stage == 4) {
             for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
                 if (m != owner) {
-                    QuiLon.logger.info("name" + m.name);
+                    QuiLon.logger.info("name " + m.name);
                     m.powers.clear();
                     m.currentHealth = 0;
                     m.isDead = true;
@@ -83,7 +82,7 @@ public class QuiLonPower extends AbstractPower implements OnReceivePowerPower {
             AbstractDungeon.getCurrRoom().addCardToRewards();
         }
         else if (stage == 4) {
-            AbstractDungeon.getCurrRoom().rewards.add(new RewardItem(AbstractDungeon.returnRandomPotion()));;
+            AbstractDungeon.getCurrRoom().rewards.add(new RewardItem(AbstractDungeon.returnRandomPotion()));
             AbstractDungeon.getCurrRoom().addGoldToRewards(50);
         }
         else if (stage == 5) {
@@ -123,29 +122,16 @@ public class QuiLonPower extends AbstractPower implements OnReceivePowerPower {
 
     @Override
     public float atDamageFinalReceive(float damage, DamageInfo.DamageType type) {
-        if (canDamage) {
-            return damage;
-        }
-        else {
-            return 0;
-        }
+        return canDamage? damage : 0;
     }
 
     @Override
     public int onAttacked(DamageInfo info, int damageAmount) {
-        if (canDamage) {
-            return damageAmount;
-        }
-        else {
-            return 0;
-        }
+        return canDamage? damageAmount : 0;
     }
+
     @Override
-    public boolean onReceivePower(AbstractPower var1, AbstractCreature var2, AbstractCreature var3)
-    {
-        if (!canDamage) {
-            return false;
-        }
-        return true;
+    public boolean onReceivePower(AbstractPower var1, AbstractCreature var2, AbstractCreature var3) {
+        return canDamage;
     }
 }

@@ -1,10 +1,12 @@
 package encountermod.powers;
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import encountermod.monsters.AgginiOfNila;
@@ -15,7 +17,7 @@ public class NilaShieldPower extends AbstractPower {
     public static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
-    public int nilaDamage = 0;
+    public int nilaDamage;
     public NilaShieldPower(AbstractCreature owner, int amount) {
         this(owner, amount, 0);
     }
@@ -26,9 +28,8 @@ public class NilaShieldPower extends AbstractPower {
         this.owner = owner;
         this.amount = amount;
         nilaDamage = damage;
-        loadRegion("curiosity");
-        // region128 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage("resources/encountermod/images/powers/HatredPower 84.png"), 0, 0, 84, 84);
-        // region48 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage("resources/encountermod/images/powers/HatredPower 32.png"), 0, 0, 32, 32);
+        region128 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage("resources/encountermod/images/powers/NilaShieldPower 84.png"), 0, 0, 84, 84);
+        region48 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage("resources/encountermod/images/powers/NilaShieldPower 32.png"), 0, 0, 32, 32);
         updateDescription();
     }
 
