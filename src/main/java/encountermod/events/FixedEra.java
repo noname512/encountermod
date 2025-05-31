@@ -29,7 +29,7 @@ public class FixedEra extends AbstractImageEvent {
         INTRO, LEAVE
     }
     public FixedEra() {
-        super(NAME, DESCRIPTIONS[0], "resources/encountermod/images/event/Encounter.png");
+        super(NAME, DESCRIPTIONS[0], "resources/encountermod/images/event/EpochalRevision.png");
         if (EncounterMod.ideaCount >= 1) {
             imageEventText.setDialogOption(OPTIONS[0], false);
             imageEventText.setDialogOption(OPTIONS[1], false);

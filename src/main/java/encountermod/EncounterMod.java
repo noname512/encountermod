@@ -128,6 +128,10 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
                 dungeonID("TheCity").
                 dungeonID("TheBeyond").
                 create());
+        BaseMod.addEvent(new AddEventParams.Builder(LostAndFound.ID, LostAndFound.class).
+                eventType(EventUtils.EventType.ONE_TIME).
+                endsWithRewardsUI(false).
+                create());
 
         // Replacement
         BaseMod.addEvent(new AddEventParams.Builder(
