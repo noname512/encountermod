@@ -130,6 +130,7 @@ public class MindBloom extends AbstractImageEvent {
                             AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(curse, (float)Settings.WIDTH / 2.0F, (float)Settings.HEIGHT / 2.0F));
                             this.imageEventText.updateDialogOption(0, OPTIONS[4]);
                         }
+                        break;
                     case 3:
                         this.imageEventText.updateBodyText(modStrings.DESCRIPTIONS[0]);
                         this.screen = CurScreen.LEAVE;
