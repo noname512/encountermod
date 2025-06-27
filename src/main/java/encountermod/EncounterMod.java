@@ -8,6 +8,7 @@ import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
+import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -19,6 +20,7 @@ import com.megacrit.cardcrawl.events.exordium.*;
 import com.megacrit.cardcrawl.events.city.*;
 import com.megacrit.cardcrawl.events.beyond.*;
 import com.megacrit.cardcrawl.events.shrines.*;
+import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.*;
@@ -39,6 +41,7 @@ import org.apache.logging.log4j.Logger;
 import encountermod.events.*;
 import encountermod.relics.*;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -60,6 +63,8 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
     public static String MOD_ID = "encountermod";
     public static Random refreshRng;
     public static Random myMapRng;
+    private static SpireConfig config;
+    public static boolean challengeSpines;
 
     public boolean isDemo = false;
 
@@ -84,9 +89,39 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
         TEXT = uiString.TEXT;
         RefreshPatch.initPosition();
         IdeaPatch.topEffect = new ArrayList<>();
+        initializeConfigs();
         initializeEvents();
         initializeRewards();
         initializeSpecialBattle();
+    }
+
+    private void initializeConfigs() {
+        Properties defaultProperties = new Properties();
+        defaultProperties.setProperty("challengeSpines", Boolean.toString(false));
+        try {
+            config = new SpireConfig("encountermod", "encounterConfig", defaultProperties);
+            EncounterMod.challengeSpines = config.getBool("challengeSpines");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        UIStrings uiString = CardCrawlGame.languagePack.getUIString("encountermod:Config");
+        ModPanel settingsPanel = new ModPanel();
+        ModLabeledToggleButton challengeSpinesLabel = new ModLabeledToggleButton(uiString.TEXT[0], 380.0F, 740.0F,
+                Settings.CREAM_COLOR, FontHelper.charDescFont, EncounterMod.challengeSpines, settingsPanel,
+                label -> {},
+                button -> {
+                    EncounterMod.challengeSpines = button.enabled;
+                    config.setString("challengeSpines", Boolean.toString(button.enabled));
+                    try {
+                        config.save();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+        );
+        settingsPanel.addUIElement(challengeSpinesLabel);
+        BaseMod.registerModBadge(ImageMaster.loadImage("img/BaseModBadge.png"), "encounterMod", "_noname512, absi2011, moranzc", "Settings", settingsPanel);
     }
 
     private void initializeSpecialBattle() {
