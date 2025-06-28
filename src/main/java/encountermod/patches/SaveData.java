@@ -49,6 +49,7 @@ public class SaveData {
         public boolean ecm_is_last_op_refresh = false;
         public boolean ecm_first_room_chosen = false;
         public int ecm_max_refresh_num = 1;
+        public int ecm_horizon_move_cost = 0;
 
         // metrics from longing of the era of dreams below
         public int ecm_max_block_at_turn_start = 0;
@@ -74,7 +75,15 @@ public class SaveData {
         public int ecm_kill_minion_cnt = 0;
         public int ecm_exhaust_card_cnt = 0;
         public int ecm_max_exhaust_card_cnt = 0;
-        public int ecm_horizon_move_cost = 0;
+        public int ecm_card_played = 0;
+        public int ecm_card_played_cnt = 0;
+        public int ecm_max_card_played = 0;
+        public int ecm_damage_deal_turn = 0;
+        public int ecm_max_turn_1_damage_deal = 0;
+        public boolean ecm_no_block_this_turn = false;
+        public int ecm_damage_taken_ot_6_cnt = 0;
+        public int ecm_damage_taken_ot_4_cnt = 0;
+        public int ecm_damage_taken_ot = 0;
     }
 
     public static ExtraData exSaveData = new ExtraData();
@@ -97,6 +106,8 @@ public class SaveData {
             exSaveData.ecm_is_last_op_refresh = EncounterMod.isLastOpRefresh;
             exSaveData.ecm_first_room_chosen = AbstractDungeon.firstRoomChosen;
             exSaveData.ecm_max_refresh_num = RefreshPatch.maxRefreshNum;
+            exSaveData.ecm_horizon_move_cost = HorizonEdgePatch.moveCost;
+
             exSaveData.ecm_max_block_at_turn_start = LongingOfTheEraOfDreams.maxBlockAtTurnStart;
             exSaveData.ecm_max_dmg_received = LongingOfTheEraOfDreams.maxDmgReceived;
             exSaveData.ecm_max_first_dmg_taken = LongingOfTheEraOfDreams.maxFirstDmgTaken;
@@ -120,7 +131,15 @@ public class SaveData {
             exSaveData.ecm_kill_minion_cnt = LongingOfTheEraOfDreams.killMinionCnt;
             exSaveData.ecm_exhaust_card_cnt = LongingOfTheEraOfDreams.exhaustCardCnt;
             exSaveData.ecm_max_exhaust_card_cnt = LongingOfTheEraOfDreams.maxExhaustCardCnt;
-            exSaveData.ecm_horizon_move_cost = HorizonEdgePatch.moveCost;
+            exSaveData.ecm_card_played = LongingOfTheEraOfDreams.cardPlayed;
+            exSaveData.ecm_card_played_cnt = LongingOfTheEraOfDreams.cardPlayedCnt;
+            exSaveData.ecm_max_card_played = LongingOfTheEraOfDreams.maxCardPlayed;
+            exSaveData.ecm_damage_deal_turn = LongingOfTheEraOfDreams.damageDealTurn;
+            exSaveData.ecm_max_turn_1_damage_deal = LongingOfTheEraOfDreams.maxTurn1DamageDeal;
+            exSaveData.ecm_no_block_this_turn = LongingOfTheEraOfDreams.noBlockThisTurn;
+            exSaveData.ecm_damage_taken_ot_6_cnt = LongingOfTheEraOfDreams.damageTakenOT6Cnt;
+            exSaveData.ecm_damage_taken_ot_4_cnt = LongingOfTheEraOfDreams.damageTakenOT4Cnt;
+            exSaveData.ecm_damage_taken_ot = LongingOfTheEraOfDreams.damageTakenOT;
         }
     }
 
@@ -185,6 +204,8 @@ public class SaveData {
             EncounterMod.isLastOpRefresh = exSaveData.ecm_is_last_op_refresh;
             RefreshPatch.maxRefreshNum = exSaveData.ecm_max_refresh_num;
             AbstractDungeon.firstRoomChosen = exSaveData.ecm_first_room_chosen;
+            HorizonEdgePatch.moveCost = exSaveData.ecm_horizon_move_cost;
+
             LongingOfTheEraOfDreams.maxBlockAtTurnStart = exSaveData.ecm_max_block_at_turn_start;
             LongingOfTheEraOfDreams.maxDmgReceived = exSaveData.ecm_max_dmg_received;
             LongingOfTheEraOfDreams.maxFirstDmgTaken = exSaveData.ecm_max_first_dmg_taken;
@@ -208,7 +229,15 @@ public class SaveData {
             LongingOfTheEraOfDreams.killMinionCnt = exSaveData.ecm_kill_minion_cnt;
             LongingOfTheEraOfDreams.exhaustCardCnt = exSaveData.ecm_exhaust_card_cnt;
             LongingOfTheEraOfDreams.maxExhaustCardCnt = exSaveData.ecm_max_exhaust_card_cnt;
-            HorizonEdgePatch.moveCost = exSaveData.ecm_horizon_move_cost;
+            LongingOfTheEraOfDreams.cardPlayed = exSaveData.ecm_card_played;
+            LongingOfTheEraOfDreams.cardPlayedCnt = exSaveData.ecm_card_played_cnt;
+            LongingOfTheEraOfDreams.maxCardPlayed = exSaveData.ecm_max_card_played;
+            LongingOfTheEraOfDreams.damageDealTurn = exSaveData.ecm_damage_deal_turn;
+            LongingOfTheEraOfDreams.maxTurn1DamageDeal = exSaveData.ecm_max_turn_1_damage_deal;
+            LongingOfTheEraOfDreams.noBlockThisTurn = exSaveData.ecm_no_block_this_turn;
+            LongingOfTheEraOfDreams.damageTakenOT6Cnt = exSaveData.ecm_damage_taken_ot_6_cnt;
+            LongingOfTheEraOfDreams.damageTakenOT4Cnt = exSaveData.ecm_damage_taken_ot_4_cnt;
+            LongingOfTheEraOfDreams.damageTakenOT = exSaveData.ecm_damage_taken_ot;
             SaveData.logger.info("Save loaded.");
         }
     }

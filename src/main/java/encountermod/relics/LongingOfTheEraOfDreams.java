@@ -17,6 +17,7 @@ import com.megacrit.cardcrawl.cards.green.*;
 import com.megacrit.cardcrawl.cards.red.*;
 import com.megacrit.cardcrawl.cards.tempCards.*;
 import com.megacrit.cardcrawl.characters.*;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -79,6 +80,11 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
         maxNonBossTurn = 0;
         killMinionCnt = 0;
         maxExhaustCardCnt = 0;
+        cardPlayedCnt = 0;
+        maxCardPlayed = 0;
+        maxTurn1DamageDeal = 0;
+        damageTakenOT4Cnt = 0;
+        damageTakenOT6Cnt = 0;
     }
 
     @Override
@@ -213,6 +219,22 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         if (LongingOfTheEraOfDreams.totalResCard >= LongingOfTheEraOfDreams.totalTurnCnt * 3) {
                             lst.add(new HappyFlower()); // 开心小花
                         }
+                        if (AbstractDungeon.getCurrMapNode().y <= 8) {
+                            lst.add(new JuzuBracelet()); // 佛珠手链
+                            lst.add(new TinyChest()); // 小宝箱
+                        }
+                        if (AbstractDungeon.id.equals("Exordium") && !AbstractDungeon.player.hasRelic(Ectoplasm.ID)) {
+                            lst.add(new MawBank()); // 巨口储蓄罐
+                        }
+                        if (AbstractDungeon.player.currentHealth <= AbstractDungeon.player.maxHealth * 0.5) {
+                            lst.add(new MealTicket()); // 餐券
+                        }
+                        if (LongingOfTheEraOfDreams.maxTurn1DamageDeal >= 40) {
+                            lst.add(new BagOfMarbles()); // 弹珠袋
+                        }
+                        if (LongingOfTheEraOfDreams.damageTakenOT6Cnt >= 2) {
+                            lst.add(new Orichalcum()); // 奥利哈钢
+                        }
                         break;
                     case UNCOMMON:
                         if (AbstractDungeon.player.masterDeck.size() <= 7) {
@@ -271,7 +293,7 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         if (AbstractDungeon.player instanceof TheSilent && checkNinjaScroll()) {
                             lst.add(new NinjaScroll()); // 忍术卷轴
                         }
-                        if (AbstractDungeon.floorNum < 24) {
+                        if (AbstractDungeon.id.equals("Exordium") || (AbstractDungeon.id.equals("TheCity") && AbstractDungeon.getCurrMapNode().y <= 8)) {
                             lst.add(new SingingBowl()); // 颂钵
                             lst.add(new QuestionCard()); // 问号牌
                         }
@@ -292,6 +314,23 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         }
                         if (AbstractDungeon.player instanceof TheSilent && calcTSWeak() >= 3) {
                             lst.add(new PaperCrane()); // 纸鹤
+                        }
+                        if (AbstractDungeon.id.equals("Exordium") || AbstractDungeon.id.equals("TheCity")) {
+                            lst.add(new PersonalPaintbrush()); // 随身画笔
+                        }
+                        if (AbstractDungeon.getCurrMapNode().y >= 11) {
+                            lst.add(new Pantograph()); // 缩放仪
+                        }
+                        if (LongingOfTheEraOfDreams.maxCardPlayed >= 8) {
+                            lst.add(new InkBottle()); // 墨水瓶
+                        }
+                        if (AbstractDungeon.id.equals("TheBeyond")) {
+                            lst.add(new BottledFlame()); // 瓶装火焰
+                            lst.add(new BottledLightning()); // 瓶装闪电
+                            lst.add(new BottledTornado()); // 瓶装旋风
+                        }
+                        if (!AbstractDungeon.player.hasRelic(Sozu.ID)) {
+                            lst.add(new WhiteBeast()); // 白兽雕像
                         }
                         break;
                     case RARE:
@@ -333,13 +372,13 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                             lst.add(new Girya()); // 壶铃
                             lst.add(new Shovel()); // 铲子
                         }
-                        if (AbstractDungeon.floorNum < 24) {
+                        if (AbstractDungeon.id.equals("Exordium") || (AbstractDungeon.id.equals("TheCity") && AbstractDungeon.getCurrMapNode().y <= 8)) {
                             lst.add(new PrayerWheel()); // 转经轮
                         }
                         if (AbstractDungeon.player.gold <= 300) {
                             lst.add(new OldCoin()); // 古钱币
                         }
-                        if (AbstractDungeon.floorNum < 40) {
+                        if (AbstractDungeon.id.equals("Exordium") || AbstractDungeon.id.equals("TheCity") || (AbstractDungeon.id.equals("TheBeyond") && AbstractDungeon.getCurrMapNode().y <= 8)) {
                             lst.add(new WingBoots()); // 羽翼之靴
                         }
                         if (AbstractDungeon.player instanceof Ironclad && checkMagicFlower()) {
@@ -384,6 +423,12 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         }
                         if (LongingOfTheEraOfDreams.recentSmallDmgReceivedCntSum() >= 3) {
                             lst.add(new Torii()); // 鸟居
+                        }
+                        if (LongingOfTheEraOfDreams.cardPlayedCnt <= (LongingOfTheEraOfDreams.totalTurnCnt - LongingOfTheEraOfDreams.totalBattleCnt) * 2.5) {
+                            lst.add(new Pocketwatch()); // 怀表
+                        }
+                        if (LongingOfTheEraOfDreams.damageTakenOT4Cnt >= 10) {
+                            lst.add(new ThreadAndNeedle()); // 针线
                         }
                         break;
                     default:
@@ -944,6 +989,15 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
     public static int killMinionCnt = 0;
     public static int exhaustCardCnt = 0;
     public static int maxExhaustCardCnt = 0;
+    public static int cardPlayed = 0;
+    public static int cardPlayedCnt = 0; // not include last turn
+    public static int maxCardPlayed = 0;
+    public static int damageDealTurn = 0;
+    public static int maxTurn1DamageDeal = 0;
+    public static boolean noBlockThisTurn = false;
+    public static int damageTakenOT6Cnt = 0;
+    public static int damageTakenOT4Cnt = 0;
+    public static int damageTakenOT = 0;
 
     @Override
     public void atTurnStart() {
@@ -954,6 +1008,11 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
         } else {
             maxDmgReceived.put(turn, GameActionManager.damageReceivedThisTurn);
         }
+        cardPlayedCnt += cardPlayed;
+        cardPlayed = 0;
+        damageDealTurn = 0;
+        if (damageTakenOT >= 4) damageTakenOT4Cnt++;
+        if (damageTakenOT >= 6 && noBlockThisTurn) damageTakenOT6Cnt++;
     }
 
     @Override
@@ -963,6 +1022,7 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
         dmgReceivedCnt = 0;
         smallDmgReceivedCnt = 0;
         exhaustCardCnt = 0;
+        cardPlayed = 0;
     }
 
     @Override
@@ -984,8 +1044,11 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                 cnt++;
         if (GameActionManager.turn == 1) {
             maxTurn1ResCard = Math.max(maxTurn1ResCard, cnt);
+            maxTurn1DamageDeal = Math.max(maxTurn1DamageDeal, damageDealTurn);
         }
         totalResCard += cnt;
+        damageTakenOT = 0;
+        noBlockThisTurn = (AbstractDungeon.player.currentBlock == 0);
     }
 
     @Override
@@ -1017,6 +1080,7 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                     smallDmgReceivedCnt++;
                 }
             }
+            damageTakenOT += damageAmount;
         }
         return damageAmount;
     }
@@ -1050,5 +1114,16 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
     @Override
     public void onExhaust(AbstractCard card) {
         exhaustCardCnt++;
+    }
+
+    @Override
+    public void onPlayCard(AbstractCard c, AbstractMonster m) {
+        cardPlayed++;
+        maxCardPlayed = Math.max(maxCardPlayed, cardPlayed);
+    }
+
+    @Override
+    public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
+        damageDealTurn += damageAmount;
     }
 }
