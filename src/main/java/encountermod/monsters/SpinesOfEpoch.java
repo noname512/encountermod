@@ -20,13 +20,13 @@ public class SpinesOfEpoch extends AbstractMonster {
     public SpinesOfEpoch(float x, float y) {
         super(NAME, ID, 1, 0, 0, 140.0F, 140.0F, IMAGE, x, y);
         maxHealth = AbstractDungeon.floorNum * 2 + AbstractDungeon.actNum * 40 - 20;
-        if (AbstractDungeon.ascensionLevel <= 1 || !EncounterMod.challengeSpines) {
+        if (AbstractDungeon.ascensionLevel < 2) {
             maxHealth -= AbstractDungeon.floorNum;
             maxHealth -= AbstractDungeon.actNum * 20;
-        } else if (AbstractDungeon.ascensionLevel <= 6) {
+        } else if (AbstractDungeon.ascensionLevel < 7 || !EncounterMod.challengeSpines) {
             maxHealth -= AbstractDungeon.floorNum;
             maxHealth -= AbstractDungeon.actNum * 15;
-        } else if (AbstractDungeon.ascensionLevel <= 16) {
+        } else if (AbstractDungeon.ascensionLevel < 17) {
             maxHealth -= AbstractDungeon.actNum * 15;
         }
         currentHealth = maxHealth;
