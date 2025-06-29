@@ -21,9 +21,15 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.localization.RelicStrings;
+import com.megacrit.cardcrawl.map.DungeonMap;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.monsters.city.TheCollector;
+import com.megacrit.cardcrawl.monsters.exordium.Hexaghost;
+import com.megacrit.cardcrawl.monsters.exordium.SlimeBoss;
+import com.megacrit.cardcrawl.monsters.exordium.TheGuardian;
 import com.megacrit.cardcrawl.potions.*;
 import com.megacrit.cardcrawl.powers.MinionPower;
 import com.megacrit.cardcrawl.relics.*;
@@ -33,6 +39,7 @@ import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 import com.megacrit.cardcrawl.rooms.TreasureRoom;
 import com.megacrit.cardcrawl.shop.ShopScreen;
 import encountermod.EncounterMod;
+import encountermod.monsters.QuiLon;
 import encountermod.patches.RefreshPatch;
 import encountermod.reward.ExtraRelicReward;
 
@@ -41,6 +48,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.stream.Collector;
 
 public class LongingOfTheEraOfDreams extends CustomRelic {
 
@@ -235,6 +243,9 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         if (LongingOfTheEraOfDreams.damageTakenOT6Cnt >= 2) {
                             lst.add(new Orichalcum()); // 奥利哈钢
                         }
+                        if (Settings.hasEmeraldKey && Settings.hasRubyKey && Settings.hasSapphireKey) {
+                            lst.add(new CentennialPuzzle()); // 百年积木
+                        }
                         break;
                     case UNCOMMON:
                         if (AbstractDungeon.player.masterDeck.size() <= 7) {
@@ -331,6 +342,9 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         }
                         if (!AbstractDungeon.player.hasRelic(Sozu.ID)) {
                             lst.add(new WhiteBeast()); // 白兽雕像
+                        }
+                        if (possibleUsefulForGremlinHorn()) {
+                            lst.add(new GremlinHorn()); // 地精之角
                         }
                         break;
                     case RARE:
@@ -429,6 +443,15 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         }
                         if (LongingOfTheEraOfDreams.damageTakenOT4Cnt >= 10) {
                             lst.add(new ThreadAndNeedle()); // 针线
+                        }
+                        if ((AbstractDungeon.player.masterDeck.size() >= 20) || (AbstractDungeon.player.isCursed())) {
+                            lst.add(new PeacePipe()); // 宁静烟斗
+                        }
+                        if (possibleUsefulForGinger()) {
+                            lst.add(new Ginger()); // 生姜
+                        }
+                        if (possibleUsefulForTurnip()) {
+                            lst.add(new Turnip()); // 萝卜
                         }
                         break;
                     default:
@@ -851,6 +874,117 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                 if (TSWeakCards.contains(c.cardID))
                     cnt++;
             return cnt;
+        }
+
+        private static boolean possibleUsefulForGremlinHorn() {
+            String BossName = AbstractDungeon.bossKey;
+            if (BossName.equals("The Guardian") || BossName.equals("Hexaghost") || BossName.equals("Champ") || BossName.equals("Time Eater") || BossName.equals("The Heart") || BossName.equals("The Sky")) {
+                return false;
+            }
+            return true;
+        }
+
+        private static boolean possibleUsefulForGinger() {
+            String BossName = AbstractDungeon.bossKey;
+            if (BossName.equals("The Guardian") || BossName.equals("Champ") || BossName.equals("Collector") || BossName.equals("Time Eater") || BossName.equals("The Heart") || BossName.equals("Qui'Lon")) {
+                return false;
+            }
+            return true;
+        }
+
+        private static boolean possibleUsefulForTurnip() {
+            String BossName = AbstractDungeon.bossKey;
+            if (BossName.equals("Champ") || BossName.equals("Collector") || BossName.equals("Time Eater") || BossName.equals("The Heart") || BossName.equals("Qui'Lon")) {
+                return false;
+            }
+            return true;
+        }
+
+        private static int getBossHp() {
+            String BossName = AbstractDungeon.bossKey;
+            if (BossName.equals("The Guardian")) {
+                if (AbstractDungeon.ascensionLevel >= 9) {
+                    return 250;
+                }
+                else {
+                    return 240;
+                }
+            } else if (BossName.equals("Hexaghost")) {
+                if (AbstractDungeon.ascensionLevel >= 9) {
+                    return 264;
+                }
+                else {
+                    return 250;
+                }
+            } else if (BossName.equals("Slime Boss")) {
+                if (AbstractDungeon.ascensionLevel >= 9) {
+                    return 150;
+                }
+                else {
+                    return 140;
+                }
+            } else if (BossName.equals("Collector")) {
+                if (AbstractDungeon.ascensionLevel >= 9) {
+                    return 300;
+                }
+                else {
+                    return 282;
+                }
+            } else if (BossName.equals("Automaton")) {
+                if (AbstractDungeon.ascensionLevel >= 9) {
+                    return 320;
+                }
+                else {
+                    return 300;
+                }
+            } else if (BossName.equals("Champ")) {
+                if (AbstractDungeon.ascensionLevel >= 9) {
+                    return 440;
+                }
+                else {
+                    return 420;
+                }
+            } else if (BossName.equals("Awakened One")) {
+                if (AbstractDungeon.ascensionLevel >= 9) {
+                    return 320;
+                }
+                else {
+                    return 300;
+                }
+            } else if (BossName.equals("Time Eater")) {
+                if (AbstractDungeon.ascensionLevel >= 9) {
+                    return 480;
+                }
+                else {
+                    return 456;
+                }
+            } else if (BossName.equals("Donu and Deca")) {
+                if (AbstractDungeon.ascensionLevel >= 9) {
+                    return 265;
+                }
+                else {
+                    return 250;
+                }
+            } else if (BossName.equals("The Heart")) {
+                if (AbstractDungeon.ascensionLevel >= 9) {
+                    return 800;
+                }
+                else {
+                    return 750;
+                }
+            } else if (BossName.equals("Qui'Lon")){
+                if (AbstractDungeon.ascensionLevel >= 9) {
+                    return 320;
+                }
+                else {
+                    return 300;
+                }
+            }
+            else {
+                return 100 + AbstractDungeon.actNum * 100;
+                // Ignore StarPod.
+                // Just simulation.
+            }
         }
 
         private static int calcFriendType() {
