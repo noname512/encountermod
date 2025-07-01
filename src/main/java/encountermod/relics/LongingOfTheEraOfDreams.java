@@ -21,15 +21,9 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.localization.RelicStrings;
-import com.megacrit.cardcrawl.map.DungeonMap;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.monsters.city.TheCollector;
-import com.megacrit.cardcrawl.monsters.exordium.Hexaghost;
-import com.megacrit.cardcrawl.monsters.exordium.SlimeBoss;
-import com.megacrit.cardcrawl.monsters.exordium.TheGuardian;
 import com.megacrit.cardcrawl.potions.*;
 import com.megacrit.cardcrawl.powers.MinionPower;
 import com.megacrit.cardcrawl.relics.*;
@@ -39,7 +33,6 @@ import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 import com.megacrit.cardcrawl.rooms.TreasureRoom;
 import com.megacrit.cardcrawl.shop.ShopScreen;
 import encountermod.EncounterMod;
-import encountermod.monsters.QuiLon;
 import encountermod.patches.RefreshPatch;
 import encountermod.reward.ExtraRelicReward;
 
@@ -48,7 +41,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.stream.Collector;
 
 public class LongingOfTheEraOfDreams extends CustomRelic {
 
@@ -93,6 +85,8 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
         maxTurn1DamageDeal = 0;
         damageTakenOT4Cnt = 0;
         damageTakenOT6Cnt = 0;
+        dungeonTurnCnt = new HashMap<>();
+        dungeonDmgCnt = new HashMap<>();
     }
 
     @Override
@@ -453,6 +447,9 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         if (possibleUsefulForTurnip()) {
                             lst.add(new Turnip()); // 萝卜
                         }
+                        if (LongingOfTheEraOfDreams.dungeonDmgCnt.get(AbstractDungeon.id) * 7 <= LongingOfTheEraOfDreams.dungeonTurnCnt.get(AbstractDungeon.id) * getBossHp()) {
+                            lst.add(new StoneCalendar()); // 历石
+                        }
                         break;
                     default:
                         AbstractDungeon.getCurrRoom().addRelicToRewards(new RedCirclet());
@@ -498,17 +495,18 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         lst.add(BaseMod.getCustomRelic("nearlmod:HandOfConqueror")); // 刻勋之手
                     }
                 }
-                if (BaseMod.hasModID("rhinemod:")) {
-                    if (AbstractDungeon.player.chosenClass.name().equals("RHINE_CLASS")) {
-                        if (calcAffinity(0, 1, 0, 0) >= AbstractDungeon.player.masterDeck.size() * 0.4 && tier == RelicTier.UNCOMMON) {
-                            lst.add(BaseMod.getCustomRelic("rhinemod:RhineChargeSuit")); // 莱茵充能护服
-                        }
-                        if ((calcAffinity(0, 1, 1, 0) >= AbstractDungeon.player.masterDeck.size() * 0.6 || calcUseFlowingShape() > 0) && tier == RelicTier.RARE) {
-                            lst.add(BaseMod.getCustomRelic("rhinemod:PeppermintChapstick")); // 薄荷味润唇膏
-                        }
-                        if ((AbstractDungeon.player.maxHealth <= 50 || calcPaleFir() > 0) && tier == RelicTier.COMMON) {
-                            lst.add(BaseMod.getCustomRelic("rhinemod:OrangeStorm")); // 橙味风暴
-                        }
+                if (BaseMod.hasModID("rhinemod:") && AbstractDungeon.player.chosenClass.name().equals("RHINE_CLASS")) {
+                    if (calcAffinity(0, 1, 0, 0) >= AbstractDungeon.player.masterDeck.size() * 0.4 && tier == RelicTier.UNCOMMON) {
+                        lst.add(BaseMod.getCustomRelic("rhinemod:RhineChargeSuit")); // 莱茵充能护服
+                    }
+                    if ((calcAffinity(0, 1, 1, 0) >= AbstractDungeon.player.masterDeck.size() * 0.6 || calcUseFlowingShape() > 0) && tier == RelicTier.RARE) {
+                        lst.add(BaseMod.getCustomRelic("rhinemod:PeppermintChapstick")); // 薄荷味润唇膏
+                    }
+                    if ((AbstractDungeon.player.maxHealth <= 50 || calcPaleFir() > 0) && tier == RelicTier.COMMON) {
+                        lst.add(BaseMod.getCustomRelic("rhinemod:OrangeStorm")); // 橙味风暴
+                    }
+                    if (AbstractDungeon.getCurrMapNode().y >= 11 && tier == RelicTier.RARE) {
+                        lst.add(BaseMod.getCustomRelic("rhinemod:FlameEmitter")); // 火焰放射器
                     }
                     if (LongingOfTheEraOfDreams.totalTurnCnt >= LongingOfTheEraOfDreams.totalBattleCnt * 3 && tier == RelicTier.RARE) {
                         lst.add(BaseMod.getCustomRelic("rhinemod:AwakenModel")); // “唤醒”模型
@@ -553,7 +551,7 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         }
                         if (calcAttackCard() <= AbstractDungeon.player.masterDeck.size() * 0.2 || calcSkillCard() <= AbstractDungeon.player.masterDeck.size() * 0.3) {
                             lst.add(BaseMod.getCustomRelic("samirg:HandOfRapidness")); // 极速之手
-                        }
+                            }
                         if (LongingOfTheEraOfDreams.maxExhaustCardCnt >= 20) {
                             lst.add(BaseMod.getCustomRelic("samirg:HandOfClean")); // 尘净之手
                         }
@@ -902,86 +900,20 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
 
         private static int getBossHp() {
             String BossName = AbstractDungeon.bossKey;
-            if (BossName.equals("The Guardian")) {
-                if (AbstractDungeon.ascensionLevel >= 9) {
-                    return 250;
-                }
-                else {
-                    return 240;
-                }
-            } else if (BossName.equals("Hexaghost")) {
-                if (AbstractDungeon.ascensionLevel >= 9) {
-                    return 264;
-                }
-                else {
-                    return 250;
-                }
-            } else if (BossName.equals("Slime Boss")) {
-                if (AbstractDungeon.ascensionLevel >= 9) {
-                    return 150;
-                }
-                else {
-                    return 140;
-                }
-            } else if (BossName.equals("Collector")) {
-                if (AbstractDungeon.ascensionLevel >= 9) {
-                    return 300;
-                }
-                else {
-                    return 282;
-                }
-            } else if (BossName.equals("Automaton")) {
-                if (AbstractDungeon.ascensionLevel >= 9) {
-                    return 320;
-                }
-                else {
-                    return 300;
-                }
-            } else if (BossName.equals("Champ")) {
-                if (AbstractDungeon.ascensionLevel >= 9) {
-                    return 440;
-                }
-                else {
-                    return 420;
-                }
-            } else if (BossName.equals("Awakened One")) {
-                if (AbstractDungeon.ascensionLevel >= 9) {
-                    return 320;
-                }
-                else {
-                    return 300;
-                }
-            } else if (BossName.equals("Time Eater")) {
-                if (AbstractDungeon.ascensionLevel >= 9) {
-                    return 480;
-                }
-                else {
-                    return 456;
-                }
-            } else if (BossName.equals("Donu and Deca")) {
-                if (AbstractDungeon.ascensionLevel >= 9) {
-                    return 265;
-                }
-                else {
-                    return 250;
-                }
-            } else if (BossName.equals("The Heart")) {
-                if (AbstractDungeon.ascensionLevel >= 9) {
-                    return 800;
-                }
-                else {
-                    return 750;
-                }
-            } else if (BossName.equals("Qui'Lon")){
-                if (AbstractDungeon.ascensionLevel >= 9) {
-                    return 320;
-                }
-                else {
-                    return 300;
-                }
-            }
-            else {
-                return 100 + AbstractDungeon.actNum * 100;
+            boolean asc = AbstractDungeon.ascensionLevel >= 9;
+            switch (BossName) {
+                case "The Guardian": return asc? 250 : 240;
+                case "Hexaghost": return asc? 264 : 250;
+                case "Slime Boss": return asc? 150 : 140;
+                case "Collector": return asc? 300 : 282;
+                case "Automaton": return asc? 320 : 300;
+                case "Champ": return asc? 440 : 420;
+                case "Awakened One": return asc? 320 : 300;
+                case "Time Eater": return asc? 480 : 456;
+                case "Donu and Deca": return asc? 265 : 250;
+                case "The Heart": return asc? 800 : 750;
+                case "Qui'Lon": return asc? 320 : 300;
+                default: return 100 + AbstractDungeon.actNum * 100;
                 // Ignore StarPod.
                 // Just simulation.
             }
@@ -1132,9 +1064,13 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
     public static int damageTakenOT6Cnt = 0;
     public static int damageTakenOT4Cnt = 0;
     public static int damageTakenOT = 0;
+    public static HashMap<String, Integer> dungeonTurnCnt = new HashMap<>();
+    public static HashMap<String, Integer> dungeonDmgCnt = new HashMap<>();
 
     @Override
     public void atTurnStart() {
+        totalTurnCnt++;
+        dungeonTurnCnt.put(AbstractDungeon.id, dungeonTurnCnt.get(AbstractDungeon.id) + 1);
         maxBlockAtTurnStart = Math.max(maxBlockAtTurnStart, AbstractDungeon.player.currentBlock);
         int turn = GameActionManager.turn;
         if (maxDmgReceived.containsKey(turn)) {
@@ -1191,7 +1127,6 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
             maxDmgReceivedElite = Math.max(maxDmgReceivedElite, GameActionManager.damageReceivedThisCombat);
         }
         totalBattleCnt++;
-        totalTurnCnt += GameActionManager.turn;
         if (!(AbstractDungeon.getCurrRoom() instanceof MonsterRoomBoss)) {
             maxNonBossTurn = Math.max(maxNonBossTurn, GameActionManager.turn);
         }
@@ -1259,5 +1194,6 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
     @Override
     public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
         damageDealTurn += damageAmount;
+        dungeonDmgCnt.put(AbstractDungeon.id, dungeonDmgCnt.get(AbstractDungeon.id) + damageAmount);
     }
 }

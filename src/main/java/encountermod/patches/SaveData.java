@@ -84,6 +84,8 @@ public class SaveData {
         public int ecm_damage_taken_ot_6_cnt = 0;
         public int ecm_damage_taken_ot_4_cnt = 0;
         public int ecm_damage_taken_ot = 0;
+        public HashMap<String, Integer> ecm_dungeon_turn_cnt = new HashMap<>();
+        public HashMap<String, Integer> ecm_dungeon_dmg_cnt = new HashMap<>();
     }
 
     public static ExtraData exSaveData = new ExtraData();
@@ -140,6 +142,8 @@ public class SaveData {
             exSaveData.ecm_damage_taken_ot_6_cnt = LongingOfTheEraOfDreams.damageTakenOT6Cnt;
             exSaveData.ecm_damage_taken_ot_4_cnt = LongingOfTheEraOfDreams.damageTakenOT4Cnt;
             exSaveData.ecm_damage_taken_ot = LongingOfTheEraOfDreams.damageTakenOT;
+            exSaveData.ecm_dungeon_turn_cnt = LongingOfTheEraOfDreams.dungeonTurnCnt;
+            exSaveData.ecm_dungeon_dmg_cnt = LongingOfTheEraOfDreams.dungeonDmgCnt;
         }
     }
 
@@ -238,6 +242,8 @@ public class SaveData {
             LongingOfTheEraOfDreams.damageTakenOT6Cnt = exSaveData.ecm_damage_taken_ot_6_cnt;
             LongingOfTheEraOfDreams.damageTakenOT4Cnt = exSaveData.ecm_damage_taken_ot_4_cnt;
             LongingOfTheEraOfDreams.damageTakenOT = exSaveData.ecm_damage_taken_ot;
+            LongingOfTheEraOfDreams.dungeonTurnCnt = exSaveData.ecm_dungeon_turn_cnt;
+            LongingOfTheEraOfDreams.dungeonDmgCnt = exSaveData.ecm_dungeon_dmg_cnt;
             SaveData.logger.info("Save loaded.");
         }
     }
