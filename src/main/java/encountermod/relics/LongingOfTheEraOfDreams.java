@@ -57,8 +57,8 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
     @Override
     public void onEquip() {
         AbstractDungeon.player.gainGold(50);
-        RefreshPatch.roomWeight.put("Treasure", 10);
-        RefreshPatch.totalWeight = 20;
+        RefreshPatch.roomWeight.put("Treasure", 12);
+        RefreshPatch.totalWeight = 22;
 
         // Reset self-calculate metrics
         maxBlockAtTurnStart = 0;
