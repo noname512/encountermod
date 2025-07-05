@@ -37,6 +37,14 @@ public class Encounter extends AbstractImageEvent {
     }
 
     @Override
+    public void onEnterRoom() {
+        EncounterMod.firstEvent = false;
+        AbstractDungeon.eventList.remove(ID);
+        AbstractDungeon.specialOneTimeEventList.remove(ID);
+        AbstractDungeon.shrineList.remove(ID);
+    }
+
+    @Override
     protected void buttonEffect(int buttonPressed) {
         if (screen == CurScreen.INTRO) {
             AbstractRelic relic;
@@ -80,10 +88,6 @@ public class Encounter extends AbstractImageEvent {
         @SpirePrefixPatch
         public static SpireReturn<?> Prefix(Random rng) {
             if (EncounterMod.firstEvent) {
-                EncounterMod.firstEvent = false;
-                AbstractDungeon.eventList.remove(ID);
-                AbstractDungeon.specialOneTimeEventList.remove(ID);
-                AbstractDungeon.shrineList.remove(ID);
                 return SpireReturn.Return(new Encounter());
             }
             return SpireReturn.Continue();
