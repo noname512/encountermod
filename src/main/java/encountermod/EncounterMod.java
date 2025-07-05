@@ -24,7 +24,14 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
+import com.megacrit.cardcrawl.monsters.beyond.Exploder;
+import com.megacrit.cardcrawl.monsters.beyond.Repulsor;
+import com.megacrit.cardcrawl.monsters.beyond.Spiker;
+import com.megacrit.cardcrawl.monsters.exordium.GremlinNob;
+import com.megacrit.cardcrawl.monsters.exordium.GremlinThief;
+import com.megacrit.cardcrawl.monsters.exordium.GremlinWarrior;
 import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.JuzuBracelet;
@@ -33,6 +40,7 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.custom.CustomMod;
 import encountermod.cards.Empty;
 import encountermod.monsters.QuiLon;
+import encountermod.monsters.SpinesOfEpoch;
 import encountermod.patches.*;
 import encountermod.reward.ExtraRelicReward;
 import encountermod.reward.IdeaReward;
@@ -127,6 +135,10 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
     private void initializeSpecialBattle() {
         BaseMod.addCard(new Empty());
         BaseMod.addMonster("Qui'Lon", () -> new MonsterGroup(new QuiLon(200.0F, 0.0F)));
+        BaseMod.addMonster("Hatred 1", () -> new MonsterGroup(new AbstractMonster[] {new Exploder(-200.0F, 0.0F), new Repulsor(0.0F, 0.0F)}));
+        BaseMod.addMonster("Hatred 2", () -> new MonsterGroup(new AbstractMonster[] {new GremlinThief(-600.0F, 0.0F), new GremlinWarrior(-400.0F, 0.0F), new Exploder(-200.0F, 0.0F), new Spiker(0.0F, 0.0F)}));
+        BaseMod.addMonster("Hatred 3", () -> new MonsterGroup(new AbstractMonster[] {new Spiker(-600.0F, 0.0F), new Spiker(-400.0F, 0.0F), new GremlinThief(-200.0F, 0.0F), new GremlinNob(0.0F, 0.0F)}));
+        BaseMod.addMonster("Catastrophe Fight", () -> new MonsterGroup(new AbstractMonster[] {new SpinesOfEpoch(0.0F, 0.0F)}));
         if (isDemo) {
             BaseMod.addBoss(TheBeyond.ID, "Qui'Lon", "images/ui/map/boss/heart.png", "images/ui/map/bossOutline/heart.png");
         }
@@ -162,6 +174,10 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
                 endsWithRewardsUI(false).
                 dungeonID("TheCity").
                 dungeonID("TheBeyond").
+                create());
+        BaseMod.addEvent(new AddEventParams.Builder(InaugurationCeremony.ID, InaugurationCeremony.class).
+                eventType(EventUtils.EventType.NORMAL).
+                endsWithRewardsUI(true).
                 create());
         BaseMod.addEvent(new AddEventParams.Builder(LostAndFound.ID, LostAndFound.class).
                 eventType(EventUtils.EventType.ONE_TIME).
