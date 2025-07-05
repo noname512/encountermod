@@ -39,28 +39,28 @@ public class InaugurationCeremony extends AbstractImageEvent {
         }
         else if (AbstractDungeon.player.hasRelic(HatredOfTheEraOfVendetta.ID)) {
             imageEventText.setDialogOption(OPTIONS[2], false);
-            imageEventText.setDialogOption(OPTIONS[7], false);
+            imageEventText.setDialogOption(OPTIONS[3], false);
             options = 1;
         }
         else if (AbstractDungeon.player.hasRelic(LongingOfTheEraOfDreams.ID)) {
             ideaGet = 4;
-            imageEventText.setDialogOption(OPTIONS[0] + ideaGet + OPTIONS[3], false);
+            imageEventText.setDialogOption(OPTIONS[4] + ideaGet + OPTIONS[5], false);
             options = 2;
         }
         else if (AbstractDungeon.player.hasRelic(VisionsOfTheEraOfProsperity.ID)) {
             ideaGet = 4;
-            imageEventText.setDialogOption(OPTIONS[0] + ideaGet + OPTIONS[4] + goldAmount + OPTIONS[5], false);
+            imageEventText.setDialogOption(OPTIONS[6] + ideaGet + OPTIONS[7] + goldAmount + OPTIONS[8], false);
             options = 3;
         }
         else if (AbstractDungeon.player.hasRelic(SufferingOfTheEraOfCatastrophe.ID)) {
             noCardsInRewards = true;
-            imageEventText.setDialogOption(OPTIONS[6], false);
+            imageEventText.setDialogOption(OPTIONS[9], false);
             options = 4;
         }
         else {
             ideaGet = 5;
             imageEventText.setDialogOption(OPTIONS[0] + ideaGet + OPTIONS[1], false);
-            options = 5;
+            options = 0;
         }
     }
 
@@ -101,7 +101,7 @@ public class InaugurationCeremony extends AbstractImageEvent {
                 }
             }
             else if (buttonPressed == 1) {
-                imageEventText.updateBodyText(DESCRIPTIONS[7]);
+                imageEventText.updateBodyText(DESCRIPTIONS[6]);
                 screen = CurScreen.LEAVE;
             }
             if (screen == CurScreen.LEAVE) {

@@ -49,5 +49,11 @@
     "DESCRIPTIONS": [
       "这名敌人无需击败也可结束战斗。如果成功击败，可以获得 #g2 #y构想 。"
     ]
+  },
+  "encountermod:CounterPower": {
+    "NAME": "撤离倒计时！",
+    "DESCRIPTIONS": [
+      "这名敌人无法被攻击或者添加buff。你将在 #b", " 回合后撤离。"
+    ]
   }
 }
