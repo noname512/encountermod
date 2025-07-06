@@ -10,15 +10,21 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.RelicStrings;
+import com.megacrit.cardcrawl.map.MapEdge;
+import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.MonsterRoom;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
+import encountermod.EncounterMod;
 import encountermod.monsters.SpinesOfEpoch;
 import encountermod.patches.HorizonEdgePatch;
 import encountermod.patches.RefreshPatch;
+import encountermod.vfx.HorizonMapEdge;
+
+import java.util.ArrayList;
 
 public class SufferingOfTheEraOfCatastrophe extends CustomRelic {
     public static final String ID = "encountermod:SufferingOfTheEraOfCatastrophe";
@@ -43,6 +49,41 @@ public class SufferingOfTheEraOfCatastrophe extends CustomRelic {
     @Override
     public void onUnequip() {
         // Remove_HorizontalEdge
+        if (AbstractDungeon.id.equals("Exordium") || AbstractDungeon.id.equals("TheCity") || AbstractDungeon.id.equals("TheBeyond")) {
+            for (int i = 1; i < AbstractDungeon.map.size(); i++) {
+                ArrayList<MapRoomNode> nodes = AbstractDungeon.map.get(i);
+                for (int j = 0; j < nodes.size() - 1; j++)
+                    if (nodes.get(j).getRoom() != null && nodes.get(j).hasEdges()) {
+                        MapRoomNode curNode = nodes.get(j);
+                        int k = j + 1;
+                        while (k < nodes.size() && (nodes.get(k).getRoom() == null || !nodes.get(k).hasEdges())) k++;
+                        if (k >= nodes.size()) break;
+                        MapRoomNode nxtNode = nodes.get(k);
+                        MapEdge remove = null;
+                        for (MapEdge e : curNode.getEdges()) {
+                            if ((e.dstX == nxtNode.x) && (e.dstY == nxtNode.y)) {
+                                remove = e;
+                                break;
+                            }
+                        }
+                        if (remove != null) {
+                            curNode.delEdge(remove);
+                        }
+                        remove = null;
+                        for (MapEdge e : nxtNode.getEdges()) {
+                            if ((e.dstX == curNode.x) && (e.dstY == curNode.y)) {
+                                remove = e;
+                                break;
+                            }
+                        }
+                        if (remove != null) {
+                            nxtNode.delEdge(remove);
+                        }
+                        HorizonEdgePatch.OptFields.l_edge.set(curNode, null);
+                        HorizonEdgePatch.OptFields.r_edge.set(nxtNode, null);
+                    }
+            }
+        }
         HorizonEdgePatch.moveCost = 2;
     }
 
