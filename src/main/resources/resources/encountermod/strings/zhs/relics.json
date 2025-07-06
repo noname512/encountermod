@@ -2,46 +2,46 @@
   "encountermod:GraffitiOfTheEraOfHope": {
     "NAME": "希望时代的涂鸦",
     "FLAVOR": "我是个提卡兹孤儿，爸爸妈妈死于天灾，是隔壁的菲林叔叔一家收养了我，把我当作家里的一分子。我可以问心无愧地说，我是先民的后代。",
-    "DESCRIPTIONS": ["拾取时立刻获得 #g2 #y构想 ，刷新时较低概率变为战斗节点，且不会出现精英战斗节点。在部分事件中提供额外选项。"]
+    "DESCRIPTIONS": ["拾取时立刻获得 #b2 #y构想 ，刷新时较低概率变为战斗节点，且不会出现精英战斗节点。在部分事件中提供额外选项。"]
   },
   "encountermod:HatredOfTheEraOfVendetta": {
     "NAME": "死仇时代的恨意",
     "FLAVOR": "我的妹妹被血魔咬死，爸爸被食腐者带走，妈妈带着我逃了出来。我绝不会向萨卡兹妥协，就算要忏悔，也得等到它们彻底消失再说。",
-    "DESCRIPTIONS": ["所有角色的攻击提高至 #g120% ，刷新时更高概率变为精英战斗节点。战斗胜利时有额外 #g20% 的概率获得 #y构想 。"]
+    "DESCRIPTIONS": ["所有角色的攻击提高至 #b120% ，刷新时更高概率变为精英战斗节点。战斗胜利时有额外 #b20% 的概率获得 #y构想 。"]
   },
   "encountermod:LongingOfTheEraOfDreams": {
     "NAME": "美愿时代的留恋",
     "FLAVOR": "听说萨卡兹能够实现任何愿望，于是我执着地探求他们的秘密，如今看来，这成了他们苦难的开端。",
-    "DESCRIPTIONS": ["拾取时立刻获得 #g50 金币，刷新时更高概率变为宝箱节点，宝箱会尽量提供适配遗物且可以用构想换取额外遗物。"]
+    "DESCRIPTIONS": ["拾取时立刻获得 #b50 #y金币，刷新时更高概率变为宝箱节点，宝箱会尽量提供适配遗物且可以用构想换取额外遗物。"]
   },
   "encountermod:VisionsOfTheEraOfProsperity": {
     "NAME": "繁荣时代的畅想",
     "FLAVOR": "萨卡兹，传说之中遥远的种族，我当然没见过它们。",
-    "DESCRIPTIONS": ["拾取时立刻获得 #g180 金币，每一层首次刷新必定为商店且不消耗 #y构想 ，商品价格降低 #g30% 。"]
+    "DESCRIPTIONS": ["拾取时立刻获得 #b180 #y金币，每一层首次刷新必定为商店且不消耗 #y构想 ，商品价格降低 #b30% 。"]
   },
   "encountermod:SufferingOfTheEraOfCatastrophe": {
     "NAME": "天灾时代的苦难",
     "FLAVOR": "据说萨卡兹招来了天灾，快跑啊！",
-    "DESCRIPTIONS": ["战斗中有概率出现 #y年代之刺 ，击败时掉落 #y构想 。 #y所有 节点均可以消耗 #r2 #y构想 横向移动。"]
+    "DESCRIPTIONS": ["战斗中有概率出现 #y年代之刺 ，击败时掉落 #y构想 。 所有节点均可以消耗 #b2 #y构想 横向移动。"]
   },
   "encountermod:SpiritHunterEarl": {
     "NAME": "探灵伯爵",
     "FLAVOR": "阿尔布雷希特·冯·蹊兽，蔷花圆号之塔的伯爵，愿为您效劳，承诺给您带回失落的财宝、隐藏的智慧！",
-    "DESCRIPTIONS": ["战斗胜利时有额外 #g30% 的概率获得 #y构想 。经过非战斗节点后有 #g20% 概率获得 #y构想。"]
+    "DESCRIPTIONS": ["战斗胜利时有额外 #b30% 的概率获得 #y构想 。经过非战斗节点后有 #b20% 概率获得 #y构想。"]
   },
   "encountermod:RevenantRemains": {
     "NAME": "死魂灵残躯",
     "FLAVOR": "失去身体，成为彷徨的幽魂。这就是部分萨卡兹为了族群的未来自愿付出的代价。",
-    "DESCRIPTIONS": ["拾取时立刻获得 #g1 #y构想 ，每个节点可刷新次数 #g+1 。"]
+    "DESCRIPTIONS": ["拾取时立刻获得 #b1 #y构想 ，每个节点可刷新次数 #b+1 。"]
   },
   "encountermod:BagOfIdeas": {
     "NAME": "一袋构想",
     "FLAVOR": "像“这里要盖一座桥”“那里要种上花”“该把这墙炸开”这类想法，就适合装进袋子里，这样当需要的时候就可以拿出来用。",
-    "DESCRIPTIONS": ["拾取时立刻获得 #g3 #y构想 。"]
+    "DESCRIPTIONS": ["拾取时立刻获得 #b3 #y构想 。"]
   },
   "encountermod:PersonalPaintbrush": {
     "NAME": "随身画笔",
     "FLAVOR": "画家拿上这支笔，蘸着自己画下一幅杰作，让见到画的人心甘情愿再来添上一笔。",
-    "DESCRIPTIONS": ["每当你 #y休息 时，获得 #g1 #y构想 。"]
+    "DESCRIPTIONS": ["每当你 #y休息 时，获得 #b1 #y构想 。"]
   }
 }

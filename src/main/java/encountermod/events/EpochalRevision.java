@@ -1,24 +1,17 @@
 package encountermod.events;
 
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.AbstractImageEvent;
-import com.megacrit.cardcrawl.helpers.EventHelper;
 import com.megacrit.cardcrawl.localization.EventStrings;
-import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.TinyHouse;
 import encountermod.EncounterMod;
-import encountermod.patches.IdeaPatch;
-import encountermod.relics.*;
 
 
-public class FixedEra extends AbstractImageEvent {
-    public static final String ID = "encountermod:Fixed Era";
+public class EpochalRevision extends AbstractImageEvent {
+    public static final String ID = "encountermod:EpochalRevision";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(ID);
     public static final String NAME = eventStrings.NAME;
     public static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
@@ -28,7 +21,7 @@ public class FixedEra extends AbstractImageEvent {
     private enum CurScreen {
         INTRO, LEAVE
     }
-    public FixedEra() {
+    public EpochalRevision() {
         super(NAME, DESCRIPTIONS[0], "resources/encountermod/images/event/EpochalRevision.png");
         if (EncounterMod.ideaCount >= 1) {
             imageEventText.setDialogOption(OPTIONS[0], false);

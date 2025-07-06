@@ -1,0 +1,7 @@
+{
+  "encountermod:Empty": {
+    "NAME": "Empty",
+    "DESCRIPTION": "Unplayable. NL Whenever this card is drawn, lose [E].",
+    "UPGRADE_DESCRIPTION": ""
+  }
+}

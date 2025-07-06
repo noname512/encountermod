@@ -1,109 +1,317 @@
 {
-  "rhinemod:SkyEvent": {
-    "NAME": "The Sky",
-    "DESCRIPTIONS": ["站在塔的高处，再一次望向天空，漫天繁星。这里确实很高，从这里向上无疑会节省很多力气。你们看向星空，看着错误的轨道，继续向着塔顶……"],
-    "OPTIONS": ["[前进！]"]
-  },
-  "rhinemod:MysteriousInvent": {
-    "NAME": "Mysterious Invent",
+  "encountermod:Encounter": {
+    "NAME": "Fated Encounter",
     "DESCRIPTIONS": [
-      "你碰到了一群看起来像是科考队的人，她们希望能够登上塔顶，并计划在塔顶尝试突破那神秘的天际屏障。",
-      "她们将一个徽章形状的物品放在了你的手上。",
-      "她们向你表达了感激，并给了你一些金币作为预报酬。",
-      "你摇了摇头，这个委托难度太高，而你不想做一个言而无信的人。"
+      "The black beast clamps its jaws down on its prey's throat, until it stops struggling and goes limp. Suddenly, it sees a flash of gold, a creature it has never seen before on the wastes. Under the sun, the strange creature's mane shines, its fangs and claws powerful. Curious, the black beast puts down the prey, locks eyes with the creature, and...",
+      "Thousands of years later, the different races have become indistinguishable. Cooperation is how both sides can win—this is what everyone agrees on.",
+      "When Sarkaz kill their prey, their prey's descendants will kill the Sarkaz in return. Kill or be killed, a third option does not exist on Terra.",
+      "In that moment, the Teekaz hears an earnest wish: the creature before it desires to end its hunger. The Teekaz grants this wish, offering its prey to the beast, which then dies from overindulgence, becoming the Teekaz's meal. Sadly, those who followed only remembered the Teekaz granting wishes. They wished and wished, until both they and the Teekaz met their ruin.",
+      "As time passed, both sides realized that such a stalemate was meaningless and began to develop separately. Now in Kazdel, there is even a group of people so idle that they can tell stories to Revenants by the Furnace.",
+      "Storms rage and crystals scatter; the Teekaz and the Elders evade the Catastrophe, as they would for thousands of years to come. On this land, only suffering and death endure.",
+      "And so, it would be a few more days later before the fated encounter between the Teekaz and the Elders."
     ],
     "OPTIONS": [
-      "[共同行动] #g使本局游戏走向不同的结局。",
-      "[帮忙处理腐化之心] #g获得 #g",
-      " #g金币。",
-      "[离开]",
-      "[离开]"
+      "[Shares its prey with the creature] #gObtain #gDoodle #gof #gHope",
+      "[Pounces at the creature] #gObtain #gTalons #gof #gHatred",
+      "[Answers the creature's wishes] #gObtain #gLamp #gof #gWishes",
+      "[Pretends not to see] #gObtain #gVision #gof #gProsperity",
+      "[Gazes into the storm ahead] #gObtain #gSuffering #gof #gCatastrophe",
+      "[Leave]",
+      "[Runs away with its prey in its jaws]Leave"
     ]
   },
-  "rhinemod:AmongstTheStars": {
-    "NAME": "Amongst The Stars",
+  "encountermod:EpochalRevision": {
+    "NAME": "Epochal Revision",
     "DESCRIPTIONS": [
-      "The dome enveloping the ceiling suddenly opens itself. False starlight floods the Tower. NL On the planetarium before you, the stars begin to move erratically. Just like in countless experiments before, no matter how many times you try, they just refuse to stay on the right track. NL From here, open the sky above, and only then can the truth be perceived.",
-      "Silver liquid spews out from the planetarium, and in an instant, all the planets are thrown out of their orbits, rushing towards a single position at a speed too fast for the naked eye. The entire galaxy pours down on you. You have weathered the storm. You cross the galaxy. The true sky is within reach.",
-      "You'd like to gaze at the stars together, just like you did before. NL ... NL The sky is beautiful.",
-      "You still have time to turn back, before you hit the barrier. Sacrifice should not be approved, even justified and inevitable. A real pioneer should be clearing the way for all humanity, instead of jumping headfirst into the abyss, never to return."
+      "\"Look, this is one of the many tomes that the Sarkaz has written to hold their prophecies. Let's see, destroyed homeland, cruel enemies, the usual stuff... Wait, these are unlucky incidents... that all happened to me recently?! Could this book be foretelling my fate? I wonder if I can change my luck if I did some revisions...\"",
+      "\"...And I won't go hungry anymore. The end!\"",
+      "\"...And I got a great fortune. The end!\"",
+      "\"...And I blessed with all-around good luck. The end!\"",
+      "\"Best not add anything! What's so bad about a little misfortune?\""
     ],
     "OPTIONS": [
-      "[Continue] #gObtain #yEgotist, #yTraitor, #ySeeker, #yLoner, #yPioneer.",
-      "[Stop] #gHeal #g",
-      " #gHP.",
-      "[Leave]",
+      "[I want to eat better] #r1 #rIdea: #gGain #g10 #gMax #gHP.",
+      "[I want more good stuff] #r1 #rIdea: #gObtain #ga #gspecial #grelic.",
+      "[I want ALL] #rLose #r",
+      " #rIdea， #gObtain #gTiny #gHouse.",
+      "[I'm not willing to be at the mercy of prophecy] Leave",
+      "[Locked] Requires: ",
+      " Idea",
       "[Leave]"
     ]
   },
-  "rhinemod:HeartEvent": {
-    "NAME": "The Heart",
+  "encountermod:Lost And Found": {
+    "NAME": "Lost and Found",
     "DESCRIPTIONS": [
-      "You have everything ready, but before takeoff, there’s one issue that needs to be resolved—The Heart. Its pulsation interferes with all data calculations and must be eliminated.",
-      "Saria clenched her fist...",
-      "~One~ ~punch~ ~...~",
-      "@Two@ @punches@ @...@",
-      "@Three@ @punches!@",
-      "The Heart was pierced through, and the greatest threat has been eliminated. Now it’s time to break through the Starpod."
+      "The hunter is now the hunted. Shambling through the silver mounts, each step brings him closer to death. But amidst the relentless metallic onslaught, something seems destined to lead him out of this lethal peril, and that something is—",
+      "The hunter takes the strange object and continues deeper into the mountain range... NL —The artifact you place down instantly changes into another, and the story jumps forward thousands of years. The one that completed the exchange for you, the Sa... the Teekaz is none other than Farchaser, the first King of Sarkaz.",
+      "The Hunter suddenly understood the way out. NL You decide to let go of this storyline and explore other possibilities instead.",
+      "The Hunter chose to retrace his steps to the last fork in the path, ready to make a different choice.",
+      "The damaged metal device failed to ignite flames, thus allowing the Hunter to venture deeper into the mountains unharmed.",
+      "You decide to abandon this narrative thread and construct a new starting point."
     ],
     "OPTIONS": [
-      "[Continue]",
-      "[Fight]",
-      "[Continue]",
-      "[Continue]",
-      "[Continue]",
-      "[Continue]",
-      "[Continue]",
-      "[Locked] Requires: AscensionLevel 20",
-      "[Locked] Requires: AscensionLevel 19 or below"
-    ]
-  },
-  "rhinemod:UnsecuredCorridors": {
-    "NAME": "Unsecured Corridors",
-    "DESCRIPTIONS": [
-      "You pushed open a heavy door, only to be greeted by an unexpectedly shabby sight. The walls around you were smooth and flat, resembling an ordinary storage room. The only exception was a partition door on one side, exuding an air of mystery, as if something extremely important was hidden behind it.",
-      "A phrase rings in your head:\" ~If~ ~I~ ~had~ ~any~ ~say~ ~in~ ~it,~ ~this~ ~place~ ~would~ ~be~ ~stuffed~ ~full~ ~of~ @power@ @armor@ .\" NL In an instant, several power armors appeared before you, their metallic joints emitting a low, rumbling @hum@ as they charged toward you.",
-      "\"There must be quite a few traps here,\" you decided to quickly cross the corridor to avoid them as much as possible. NL You navigated through @the@ @spears@ @emerged@ @from@ @the@ @ground@ , @floor@ @that@ @suddenly@ @collapsed@ , but didn't dodge @the@ @flying@ @blades@ , resulting in injuries as you entered the partition door. Behind the door was only a #gsmall #gball covered with glass, which you put into your pocket.",
-      "You felt you should stay focused on the goal of being here and not waste time on such irrelevant matters. You turned around and left."
-    ],
-    "OPTIONS": [
-      "[Recollect] You recalled a classic comment made by a colleague.",
-      "[Continue] #rTake #r",
-      " #rDamage. #gObtain #gDor-3 #gBionic.",
+      "[A Trinket] #rLose #r1 #rIdea， #gObtain #ga #grandom #grelic.",
+      "[More Trinkets] #rLose #r1 #r构想， #gObtain #gtwo #grandom #grelics",
+      "[Locked] Requires: 1 Idea.",
+      "[Locked] Requires: Relic from Fated Encounter.",
       "[Leave]",
-      "[Fight] #rEngage #rin #ra #rdifficult #rbattle. #gObtain #g2 #gRelics."
+      "[An Inspiration] #rLose",
+      " , randomly obtain another.",
+      "[A Choice] #rLose #r1 #rIdea, #rLose",
+      " , choose another and obtain.",
+      "[A Pile of Metal] Leave",
+      "[Oh...it's this] Obtain #g",
+      "."
     ]
   },
-  "rhinemod:TheCure": {
-    "NAME": "The Cure",
+  "encountermod:Inauguration Ceremony": {
+    "NAME": "Inauguration Ceremony",
     "DESCRIPTIONS": [
-      "The stairs of the tower suddenly change, the passageway for the other end @instantly@ @open@ . The light coming in mapped out a brown Liberi, you recognize she is Olivia Silence from Structural Section NL \"You want to tear a corner of the sky, but even if we all raise our heads, it doesn't means the problems under our feet will simply disappear. Knowing this, do you still want to move forward regardless?\"",
-      "\"Yes, at all cost.\" NL Silence gives her own unmanned aerial vehicle to you, it will help you bridge the gap between your dreams.",
-      "\"Yes, unless there are insurmountable obstacles.\" NL Silence pulls out a bottle of potion that glitters with gold and wishes you all a safe trip home.",
-      "\"...\" you hesitated. NL Silence looks to one of you, \"I know how far a scientist would go for her dream. I know that feeling of rapture, which is why I know the strength it takes to fight it with morality.\" NL \"Saria, you've long been seeking a balance between science and order. You do well; perhaps too well.\" NL \"Your order is falling apart. But if you're willing to let balance go... perhaps you'll find your roots amidst the chaos.\" NL \"I believe you can.\""
+      "Night descends swiftly, and a hot wind stirs ashes and torn page fragments. Tonight marks the first night since Kazdel ascended into the sky. The bare soil bears no trace of the city, only hundreds of glowing iron barrels scattered across the landscape. You see Sarkaz engineers throwing stacks of blueprints into the flames. Some of the engineers cast wary glances behind you. Turning around, you face a group of ominous outlanders. An engineer on watch demands to know why you're here, and you respond—",
+      "When the engineers hear you're here for the seminar, they relax and point you the way. \"We have friends of all races to thank for Kazdel's ascent. This design seminar is to share our experiences with everyone as a token of gratitude.\" You follow the outlanders—who were actually lost—to the event venue and take many notes. This knowledge will certainly be useful in the future.",
+      "N/A",
+      "The engineers enjoyed chatting with you. At parting, they gave your team a small gift.",
+      "The discussion broadened your perspective, and you offered them corrections. In thanks, they paid you a nominal \"patent fee\".",
+      "N/A",
+      "You wanted nothing to do with them and left without a word."
     ],
     "OPTIONS": [
-      "[Determination] #rLose #y75 #rGold， #gObtain #gAuxiliary #gDrone.",
-      "[Vigil] #gObtain #gFairy #gin #ga #gBottle.",
-      "[Hesitation] #gObtain #gTracing #gOrigins.",
+      "[Peaceful Discussion] #gObtain #g",
+      " #gIdea.",
+      "[Firm Demands] Fight with them to #gobtain #g3 #gIdea #gand #g1 #gRelic.",
       "[Leave]",
-      "[Locked] Requires: At least 75 Gold.",
-      "[Locked] Requires: Play with character Rhine Lab."
+      "[Friendly Exchange] #gObtain #g",
+      " #gIdea #gand #g1 #gRelic.",
+      "[Share Insights] #gObtain #g",
+      " #gIdea #gand #y",
+      " #yGold.",
+      "[Catastrophe Is Coming] Fight against the Catastrophe."
     ]
   },
-  "rhinemod:StarlitNight": {
-    "NAME": "Starlit Night",
+  "encountermod:Big Fish": {
+    "NAME": "Big Fish",
     "DESCRIPTIONS": [
-      "You walked into a thick fog, and in a daze, you found yourself back on that night from your college days. The voice of Muelsyse, sounding a degree younger, echoed in your ears: 'Look at that stone, what does it resemble?' ... Right, what did that stone look like?",
-      "Kristen grabs the shining stone, and looks up. She seems to be comparing it to something, as she moves the rock around... NL \"Scientists do not believe that dreams are false. Because what they're essentially doing is proving to all humanity that dreams can come true.\" She said at the end.",
-      "\"Oh, come on! It looks like Saria, right? It's so hard, and yet it shines so 'perfectly!'\" Muelsyse took a big bite of the cream puff, as if to say that no one understood her joke.",
-      "Losing judgment due to emotions is foolish, especially since this is an illusion of the past. Since it's an illusion, all you need to do is break through it."
+      "As you thought this, the items suddenly sank lower, and you scooped them all up."
     ],
     "OPTIONS": [
-      "[Like Star] #gObtain #g\"Imperishable\".",
-      "[Like Saria] #gObtain #gWaterdrop #gManifestation.",
-      "[Stone is Just Stone] #gObatin #gCalcareous #gStamp.",
-      "[Leave]"
+      "[Of Course Both] #rLose #r1 #rIdea. #gObtain #gboth #grewards.",
+      "[Locked] Requires: 1 Idea."
+    ]
+  },
+  "encountermod:The Cleric": {
+    "NAME": "The Cleric",
+    "DESCRIPTIONS": [
+      "Twin beams of icy blue and golden warmth enveloped you, then dissipated. NL The creature grinned: \"A cleric can do anything. Well then, good luck out there!\""
+    ],
+    "OPTIONS": [
+      "[All] #y",
+      " #yGold: #gHeal #g",
+      " and #gRemove #ga #gcard #gfrom #gyour #gdeck."
+    ]
+  },
+  "encountermod:Golden Idol": {
+    "NAME": "Golden Idol",
+    "DESCRIPTIONS": [
+      "You wished to it for more riches, yet the Golden Idol shattered abruptly. NL Knowing traps lay ahead, you gathered only the portion of gold within your reach."
+    ],
+    "OPTIONS": [
+      "[Wish] Gain #y",
+      " #yGold."
+    ]
+  },
+  "encountermod:Shining Light": {
+    "NAME": "Shining Light",
+    "DESCRIPTIONS": [
+      "You stepped into the light, noticing its radiance being absorbed into your very body. NL The light burned with scalding heat! Yet the pain vanished as swiftly as it came. NL You felt invigorated—like receiving a sharp slap to the face when you needed waking. Even your inspiration surged."
+    ],
+    "OPTIONS": [
+      "[Walk In] #gUpgrade #g2 #grandom #gcards. #gGain #g3 #gIdea. #rLose #r"
+    ]
+  },
+  "encountermod:Golden Wing": {
+    "NAME": "Wing Statue",
+    "DESCRIPTIONS": [
+      "@CAAAAW@ NL You couldn't help but shout, as if the cry itself lent you strength. NL Once the echoes faded, you found a dagger embedded in your wing. Pulling it out, the blade gleamed wickedly sharp."
+    ],
+    "OPTIONS": [
+      "[Wish] #rLose #r",
+      " #rIdea. #gObtain Ritual Dagger",
+      "[Locked] Requires: ",
+      " Idea."
+    ]
+  },
+  "encountermod:Scrap Ooze": {
+    "NAME": "Scrap Ooze",
+    "DESCRIPTIONS": [
+      "Suddenly you noticed a bracelet by its mouth. You picked it up first, hoping to avoid further conflict down the road. NL Turning back to look, the creature appeared to have fully absorbed its meal."
+    ],
+    "OPTIONS": [
+      "[What's This] #gObtain Juzu Bracelet."
+    ]
+  },
+  "encountermod:World of Goop": {
+    "NAME": "World of Goop",
+    "DESCRIPTIONS": [
+      "You seemed to grasp its demand. Placing a card on the ground, you watched the goop gobble it up before vanishing. NL Then you scooped up every last #yGold left behind."
+    ],
+    "OPTIONS": [
+      "[Trade] #yGain #y175 #yGold. #rLose #r",
+      " .",
+      "[Locked] Requires: card with Rarity higher than Uncommon.",
+      "[Locked] Requires: card with Rarity higher than Common."
+    ]
+  },
+
+  "encountermod:Beggar": {
+    "NAME": "Old Beggar",
+    "DESCRIPTIONS": [
+      "The beggar suddenly cast off his coat—revealing himself as the Cleric! NL \"What a kind soul you are! Let me offer you counsel!\" he cried out. NL \"Here, the more intently you think of something, the more likely it manifests!\" NL As you pondered his words, they resonated with your past experiences—there was truth in them."
+    ],
+    "OPTIONS": [
+      "[Offer Bit Gold] #y",
+      " #yGold: #gObtain #g3 #gIdea.",
+      "[Locked] Requires: ",
+      " Gold."
+    ]
+  },
+  "encountermod:Back to Basics": {
+    "NAME": "Ancient Writing",
+    "DESCRIPTIONS": [
+      "Creation births all things."
+    ],
+    "OPTIONS": [
+      "[Inspiration] #gObtain #g4 #gIdea."
+    ]
+  },
+  "encountermod:Nest": {
+    "NAME": "The Nest",
+    "DESCRIPTIONS": [
+      "#r~\"MURDER!!~ #r~MURDER~ #r~MURDER!!\"~ NL #b~\"CAW~ #b~CAW~ #b~CAW~ #b~CAW!!\"~ NL The cultists die one by one, and you notice the dagger glinted with cold light.",
+      "The spiral of hatred began, plunging all past the point of no return."
+    ],
+    "OPTIONS": [
+      "[Kill Them All] #gTrigger Ritual Dagger's #gFatal #geffect #g4 #gtimes.",
+      "[Locked] Requires: Ritual Dagger.",
+      "#rLose #rDoodle #rof #rHope. #gObtain #rTalons #rof #rHatred."
+    ]
+  },
+  "encountermod:The Joust": {
+    "NAME": "The Joust",
+    "DESCRIPTIONS": [
+      "Everything unfolded just as you'd envisioned—your gamble paid off. NL As you claimed the coins, a wave of ~dizziness~ washed over you, your head growing heavy."
+    ],
+    "OPTIONS": [
+      "[I Think...] 1 Idea: #yBeg #y50 #yGold —— #g100%: #gWin #g250 #gGold",
+      "[Locked] Requires: 1 Idea."
+    ]
+  },
+  "encountermod:The Library": {
+    "NAME": "The Library",
+    "DESCRIPTIONS": [
+      "You set out to find a specific book... NL Following this thread of thought, you located the very tome in no time. NL "
+    ],
+    "OPTIONS": [
+      "[Find] 2 Idea: #gChoose #g1 #gcard #gof #gyour #gcharacter #gand #gadd #git #gto #gyour #gdeck.",
+      "[Locked] Requires: 2 Idea."
+    ]
+  },
+  "encountermod:The Mausoleum": {
+    "NAME": "The Mausoleum",
+    "DESCRIPTIONS": [
+      "You knelt on the ground, visualizing the life of the deceased... NL Aha—not bad at all! You can weave this into a story later."
+    ],
+    "OPTIONS": [
+      "[Mourn in silence before the coffin] #gObtain #g3 #gIdea."
+    ]
+  },
+  "encountermod:Colosseum": {
+    "NAME": "The Colosseum",
+    "DESCRIPTIONS": [
+      "While all eyes were locked on the opponent, you slipped away clean."
+    ],
+    "OPTIONS": [
+      "[Escape] #rLose #r1 #rIdea.",
+      "[Leave]",
+      "[Taunt] Fight with The Champ. #gWin #gMassive #gBounty."
+    ]
+  },
+  "encountermod:Forgotten Altar": {
+    "NAME": "Forgotten Altar",
+    "DESCRIPTIONS": [
+    ],
+    "OPTIONS": [
+    ]
+  },
+
+  "encountermod:Falling": {
+    "NAME": "Falling",
+    "DESCRIPTIONS": [
+      "As the thought settled, you touched down unscathed."
+    ],
+    "OPTIONS": [
+      "[I will be fine] #rLose #r1 #rIdea.",
+      "[Locked] Requires: 1 Idea."
+    ]
+  },
+  "encountermod:MindBloom": {
+    "NAME": "Mind Bloom",
+    "DESCRIPTIONS": [
+      "Right—what was I hesitating for?"
+    ],
+    "OPTIONS": [
+      "[I...] #gObtain #g99 #gIdea. #rCursed #r- #rWrithe."
+    ]
+  },
+  "encountermod:SecretPortal": {
+    "NAME": "Secret Portal",
+    "DESCRIPTIONS": [
+      "You reached in and rummaged through the void. Moments later, you retrieved a relic.",
+      "Stepping through the portal, you found yourself in an alien world. NL An Anasa sat cross-legged there. He was greatly astonished to see you and very friendly invited you to debate with him."
+    ],
+    "OPTIONS": [
+      "[I sense it can help me!] 1 Idea: #gObtain #ga #grandom #gRare #grelic.",
+      "[Locked] Requires: 1 Idea.",
+      "[I sense it leads beyond the world itself!] 2 Idea: Fight with special enemy.",
+      "[Locked] Requires: 2 Idea.",
+      "[Simulating Debate as Combat]"
+    ]
+  },
+  "encountermod:Tomb of Lord Red Mask": {
+    "NAME": "Tomb of Lord Red Mask",
+    "DESCRIPTIONS": [
+      "You think you did good thing."
+    ],
+    "OPTIONS": [
+      "[Shatter It] #gObtain #g2 #gIdea.",
+      "[Locked] Requires: card with damage not less than 15."
+    ]
+  },
+
+  "encountermod:Wheel of Change": {
+    "NAME": "Wheel of Change",
+    "DESCRIPTIONS": [],
+    "OPTIONS": [
+      "[Can I try again?] 1 Idea: #gSpin #gthe #gwheel #gagain."
+    ]
+  },
+  "encountermod:Fountain of Cleansing": {
+    "NAME": "The Divine Fountain",
+    "DESCRIPTIONS": [
+      "You used this water to thoroughly wash your face. Now you feel refreshed.",
+      "Choose 1 Curse to remove"
+    ],
+    "OPTIONS": [
+      "[Wash Face] #gRemove #g1 #gCurse. #gObtain #g2 #gIdea."
+    ]
+  },
+  "encountermod:Accursed Blacksmith": {
+    "NAME": "Ominous Forge",
+    "DESCRIPTIONS": [
+      "You took out an empty bottle and placed it by the Furnace. Closing your eyes, you wished for good luck. NL Suddenly, you felt hard thumps—like being hit by a hammer. Then came loud @CLANK!@ @CLANK!@ @CLANK!@ sounds. Your mind felt clearer. Opening your eyes, you saw the bottle filled with red liquid."
+    ],
+    "OPTIONS": [
+      "[Wish] #gObtain #g3 #gIdea. #gObtained #gthe #gFurnace's #gBlessing."
     ]
   }
 }

@@ -1,36 +1,36 @@
 {
   "encountermod:Envy": {
-    "NAME": "复杂的“妒”",
+    "NAME": "Complicated Envy",
     "MOVES": [],
     "DIALOG": []
   },
   "encountermod:Smarty": {
-    "NAME": "恍惚的“得意”",
+    "NAME": "Dazzled Smarty",
     "MOVES": [],
     "DIALOG": []
   },
   "encountermod:Fury": {
-    "NAME": "无羁的“盛怒”",
+    "NAME": "Unbridled Fury",
     "MOVES": [],
     "DIALOG": []
   },
   "encountermod:PadmāsanaOfRebirth": {
-    "NAME": "托生莲座",
+    "NAME": "Padmāsana of Rebirth",
     "MOVES": [],
     "DIALOG": []
   },
   "encountermod:AgginiOfNila": {
-    "NAME": "尼卢火",
+    "NAME": "Aggini of Nila",
     "MOVES": [],
     "DIALOG": []
   },
   "encountermod:Qui'lon, Avatāra of Mahāsattva": {
-    "NAME": "奎隆，摩诃萨埵权化",
-    "MOVES": ["惩五戒", "棒喝", "不着相", "呼吸法", "菩萨辩"],
+    "NAME": "Qui'lon, Avatāra of Mahāsattva",
+    "MOVES": ["Breaching of the Five Precepts", "Upaya", "Tathata", "Anapanasati", "Debate of the Bodhisattvas"],
     "DIALOG": []
   },
   "encountermod:SpinesOfEpoch": {
-    "NAME": "年代之刺",
+    "NAME": "Spines of Epoch",
     "MOVES": [],
     "DIALOG": []
   }

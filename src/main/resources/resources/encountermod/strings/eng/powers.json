@@ -1,0 +1,53 @@
+{
+  "encountermod:HatredPower": {
+    "NAME": "Hatred of the Era of Vendetta",
+    "DESCRIPTIONS": ["Attack damage increase to #g120% ."]
+  },
+  "encountermod:SmartyPower": {
+    "NAME": "BOOM!",
+    "DESCRIPTIONS": ["When taking action, if any other #ySmarty remains on the battlefield, detonate all #ySmarty and inflict massive damage. Upon death, explodes dealing #b", " damage."]
+  },
+  "encountermod:PORPower": {
+    "NAME": "All beings suffer",
+    "DESCRIPTIONS": ["Cards targeting this enemy are loaded into the ship instead of #yEmpty. Current loaded cards: ", ", ", ". When dead, add these cards to your discard pile. At end of turn, transport them to Phase 2 combat."]
+  },
+  "encountermod:NilaPower": {
+    "NAME": "Aggini of Nila",
+    "DESCRIPTIONS": ["Invincible. When a character gains Block, halve the Block amount. The reduced portion heals them. Exits the battlefield when HP is full. After #b", " turns, explodes and deals #b", " damage. Halves damage dealt by the player for #b5 turns."]
+  },
+  "encountermod:SuperWeakPower": {
+    "NAME": "Weaken",
+    "DESCRIPTIONS": ["Attack damage decrease #b50% in #b", " turns."]
+  },
+  "encountermod:RecordPower": {
+    "NAME": "Record",
+    "DESCRIPTIONS": ["Current cards transported: ", ", " , " . Only these cards can be played in Phase 2 combat."]
+  },
+  "encountermod:NilaShieldPower": {
+    "NAME": "Quenching the Three Fires",
+    "DESCRIPTIONS": ["Each Aggini of Nila reduces damage taken to #b80% (Current #b", " . After each attack, each Aggini of Nina deals #b", " damage in addition."]
+  },
+  "encountermod:FriendlyChatPower": {
+    "NAME": "Friendly Chat",
+    "DESCRIPTIONS": ["When you would die, prevent this damage and finish the combat. After combat, heal your HP to #b", " ."]
+  },
+  "encountermod:EmbodimentOfTrikāya": {
+    "NAME": "Embodiment of Trikāya",
+    "DESCRIPTIONS": [
+      "When HP lower than #b",
+      "(",
+      "), intent of current turn changes to summon Padmāsana of Rebirth and Smarty. Invincible before Padmāsana of Rebirth dead. After triggered, add ",
+      " #b50 #yGold to reward.",
+      " #b1 #yIdea to reward.",
+      " a group of cards to reward.",
+      "When HP lower than #b0 , remove other enemies, intent of current turn changes to revive. Remove all your cards and add recorded cards into your draw pile. After triggered, add #b50 #yGold and a Potion to reward.",
+      "When HP lower than #b0 , win the combat. and add #b150 #yGold , #b3 #yIdea , #b2 random Relics and a group of cards to reward."
+    ]
+  },
+  "encountermod:NotImportant": {
+    "NAME": "Secondary Target",
+    "DESCRIPTIONS": [
+      "You can win the combat without defeat this enemy. If you defeat it, obtain #b2 #yIdea ."
+    ]
+  }
+}
