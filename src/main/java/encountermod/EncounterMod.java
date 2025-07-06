@@ -57,7 +57,7 @@ import java.util.*;
 import static com.megacrit.cardcrawl.helpers.RelicLibrary.getRelic;
 
 @SpireInitializer
-public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscriber, EditStringsSubscriber, PostBattleSubscriber, PostInitializeSubscriber, PostDungeonInitializeSubscriber, AddCustomModeModsSubscriber, OnStartBattleSubscriber, OnPlayerLoseBlockSubscriber, RelicGetSubscriber {
+public class EncounterMod implements EditRelicsSubscriber, EditStringsSubscriber, PostBattleSubscriber, PostInitializeSubscriber, PostDungeonInitializeSubscriber, AddCustomModeModsSubscriber, OnStartBattleSubscriber, OnPlayerLoseBlockSubscriber, RelicGetSubscriber {
 
     private static final Logger logger = LogManager.getLogger(EncounterMod.class.getName());
     public static Texture ideaImg;
@@ -73,6 +73,7 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
     public static Random myMapRng;
     private static SpireConfig config;
     public static boolean challengeSpines;
+    public static boolean quilonBoss;
 
     public boolean isDemo = false;
 
@@ -106,9 +107,11 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
     private void initializeConfigs() {
         Properties defaultProperties = new Properties();
         defaultProperties.setProperty("challengeSpines", Boolean.toString(false));
+        defaultProperties.setProperty("quilonBoss", Boolean.toString(false));
         try {
             config = new SpireConfig("encountermod", "encounterConfig", defaultProperties);
             EncounterMod.challengeSpines = config.getBool("challengeSpines");
+            EncounterMod.quilonBoss = config.getBool("quilonBoss");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -129,6 +132,22 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
                 }
         );
         settingsPanel.addUIElement(challengeSpinesLabel);
+
+        ModLabeledToggleButton quilonBossLabel = new ModLabeledToggleButton(uiString.TEXT[1], 380.0F, 690.0F,
+                Settings.CREAM_COLOR, FontHelper.charDescFont, EncounterMod.quilonBoss, settingsPanel,
+                label -> {},
+                button -> {
+                    EncounterMod.quilonBoss = button.enabled;
+                    config.setString("quilonBoss", Boolean.toString(button.enabled));
+                    try {
+                        config.save();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+        );
+        settingsPanel.addUIElement(quilonBossLabel);
+
         BaseMod.registerModBadge(ImageMaster.loadImage("img/BaseModBadge.png"), "encounterMod", "_noname512, absi2011, moranzc", "Settings", settingsPanel);
     }
 
@@ -139,8 +158,8 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
         BaseMod.addMonster("Hatred 2", () -> new MonsterGroup(new AbstractMonster[] {new GremlinThief(-600.0F, 0.0F), new GremlinWarrior(-400.0F, 0.0F), new Exploder(-200.0F, 0.0F), new Spiker(0.0F, 0.0F)}));
         BaseMod.addMonster("Hatred 3", () -> new MonsterGroup(new AbstractMonster[] {new Spiker(-600.0F, 0.0F), new Spiker(-400.0F, 0.0F), new GremlinThief(-200.0F, 0.0F), new GremlinNob(0.0F, 0.0F)}));
         BaseMod.addMonster("Catastrophe Fight", () -> new MonsterGroup(new AbstractMonster[] {new SpinesOfEpoch(0.0F, 0.0F)}));
-        if (isDemo) {
-            BaseMod.addBoss(TheBeyond.ID, "Qui'Lon", "images/ui/map/boss/heart.png", "images/ui/map/bossOutline/heart.png");
+        if (quilonBoss) {
+            BaseMod.addBoss(TheBeyond.ID, "Qui'Lon", "resources/encountermod/images/ui/quilon.png", "resources/encountermod/images/ui/quilon.png");
         }
     }
 
@@ -169,7 +188,7 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
                 endsWithRewardsUI(false).
                 spawnCondition(() -> false).
                 create());
-        BaseMod.addEvent(new AddEventParams.Builder(FixedEra.ID, FixedEra.class).
+        BaseMod.addEvent(new AddEventParams.Builder(EpochalRevision.ID, EpochalRevision.class).
                 eventType(EventUtils.EventType.NORMAL).
                 endsWithRewardsUI(false).
                 dungeonID("TheCity").
@@ -390,21 +409,6 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
     public void receiveRelicGet(AbstractRelic r) {}
 
     @Override
-    public void receiveEditKeywords() {
-        Gson gson = new Gson();
-
-        String keywordStrings = Gdx.files.internal("resources/encountermod/strings/" + getLang() + "/keywords.json").readString(String.valueOf(StandardCharsets.UTF_8));
-        Type typeToken = new TypeToken<Map<String, Keyword>>() {}.getType();
-
-        Map<String, Keyword> keywords = gson.fromJson(keywordStrings, typeToken);
-
-        keywords.forEach((k,v)->{
-            logger.info("Adding Keyword - " + v.NAMES[0]);
-            BaseMod.addKeyword("rhinemod:", v.PROPER_NAME, v.NAMES, v.DESCRIPTION);
-        });
-    }
-
-    @Override
     public void receiveEditRelics() {
         // common.
         BaseMod.addRelic(new BagOfIdeas(), RelicType.SHARED);
@@ -442,11 +446,10 @@ public class EncounterMod implements EditKeywordsSubscriber, EditRelicsSubscribe
     }
 
     private String getLang() {
-        return "zhs";
-//        String lang = "eng";
-//        if (Settings.language == Settings.GameLanguage.ZHS || Settings.language == Settings.GameLanguage.ZHT) {
-//            lang = "zhs";
-//        }
-//        return lang;
+        String lang = "eng";
+        if (Settings.language == Settings.GameLanguage.ZHS || Settings.language == Settings.GameLanguage.ZHT) {
+            lang = "zhs";
+        }
+        return lang;
     }
 }
