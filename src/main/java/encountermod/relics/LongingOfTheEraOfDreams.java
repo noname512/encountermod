@@ -1070,7 +1070,12 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
     @Override
     public void atTurnStart() {
         totalTurnCnt++;
-        dungeonTurnCnt.put(AbstractDungeon.id, dungeonTurnCnt.get(AbstractDungeon.id) + 1);
+        if (dungeonTurnCnt.get(AbstractDungeon.id) == null) {
+            dungeonTurnCnt.put(AbstractDungeon.id, 1);
+        }
+        else {
+            dungeonTurnCnt.put(AbstractDungeon.id, dungeonTurnCnt.get(AbstractDungeon.id) + 1);
+        }
         maxBlockAtTurnStart = Math.max(maxBlockAtTurnStart, AbstractDungeon.player.currentBlock);
         int turn = GameActionManager.turn;
         if (maxDmgReceived.containsKey(turn)) {
