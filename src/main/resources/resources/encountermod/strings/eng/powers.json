@@ -49,5 +49,11 @@
     "DESCRIPTIONS": [
       "You can win the combat without defeat this enemy. If you defeat it, obtain #b2 #yIdea ."
     ]
+  },
+  "encountermod:CounterPower": {
+    "NAME": "EVAC COUNTDOWN!",
+    "DESCRIPTIONS": [
+      "Cannot be attacked or applied buff. You will evacuate after #b", " turns."
+    ]
   }
 }

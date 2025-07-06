@@ -1,28 +1,22 @@
 package encountermod.monsters;
 
-import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.common.*;
-import com.megacrit.cardcrawl.cards.status.VoidCard;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.potions.SmokeBomb;
 import com.megacrit.cardcrawl.vfx.combat.DeckPoofEffect;
-import encountermod.EncounterMod;
 import encountermod.actions.EndBattleAction;
 import encountermod.actions.SummonEnemyAction;
 import encountermod.powers.CounterPower;
-import encountermod.powers.NotImportantPower;
 
 public class Catastrophe extends AbstractMonster {
     public static final String ID = "encountermod:Catastrophe";
     public static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings(ID);
     public static final String NAME = monsterStrings.NAME;
-    public static final String IMAGE = "resources/encountermod/images/monsters/SpinesOfEpoch_128.png";
+    public static final String IMAGE = "resources/encountermod/images/monsters/Catastrophe.png";
     public static final String[] DIALOG = monsterStrings.DIALOG;
     public SpinesOfEpoch[] spines = new SpinesOfEpoch[5];
     public float[] posx = {-150.0F, -150.0F, -300.0F, -450.0F, -450.0F};

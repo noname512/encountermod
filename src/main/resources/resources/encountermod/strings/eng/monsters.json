@@ -33,5 +33,10 @@
     "NAME": "Spines of Epoch",
     "MOVES": [],
     "DIALOG": []
+  },
+  "encountermod:Catastrophe": {
+    "NAME": "\"Catastrophe\"",
+    "MOVES": [],
+    "DIALOG": ["Emergency! The Catastrophe NL is coming!", "Anyway...", "can't go back empty-handed.", "Situation's worse NL pulling out next turn.", "RUN!!!"]
   }
 }
