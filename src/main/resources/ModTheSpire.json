@@ -3,7 +3,7 @@
     "name": "Encounter(相遇)",
     "author_list": ["_noname512", "absi2011"],
     "description": "Add a special event.",
-    "version": "0.1.2",
+    "version": "1.0.0",
     "sts_version": "12-22-2020",
     "mts_version": "3.8.0",
     "dependencies": ["basemod", "stslib"]
