@@ -1,14 +1,12 @@
 package encountermod.powers;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.rewards.RewardItem;
 import encountermod.reward.IdeaReward;
 
 public class NotImportantPower extends AbstractPower {
@@ -21,7 +19,8 @@ public class NotImportantPower extends AbstractPower {
         this.name = NAME;
         this.type = PowerType.BUFF;
         this.owner = owner;
-        loadRegion("curiosity");
+        region128 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage("resources/encountermod/images/powers/NotImportant 84.png"), 0, 0, 84, 84);
+        region48 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage("resources/encountermod/images/powers/NotImportant 32.png"), 0, 0, 32, 32);
         updateDescription();
     }
     @Override

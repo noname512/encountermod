@@ -21,8 +21,8 @@ public class SuperWeakPower extends AbstractPower {
         this.type = PowerType.DEBUFF;
         this.owner = owner;
         this.amount = amount;
-        region128 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage("resources/encountermod/images/powers/HatredPower 84.png"), 0, 0, 84, 84);
-        region48 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage("resources/encountermod/images/powers/HatredPower 32.png"), 0, 0, 32, 32);
+        region128 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage("resources/encountermod/images/powers/SuperWeakPower 84.png"), 0, 0, 84, 84);
+        region48 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage("resources/encountermod/images/powers/SuperWeakPower 32.png"), 0, 0, 32, 32);
         updateDescription();
         this.priority = 99;
     }
