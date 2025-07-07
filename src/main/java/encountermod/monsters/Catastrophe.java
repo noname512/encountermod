@@ -23,7 +23,7 @@ public class Catastrophe extends AbstractMonster {
     public float[] posy = {300.0F, 0.0F, 150.0F, 300.0F, 0.0F};
     int turn = 1;
     public Catastrophe(float x, float y) {
-        super(NAME, ID, 5, 0, 0, 140.0F, 140.0F, IMAGE, x, y);
+        super(NAME, ID, 5, 0, 0, 300.0F, 300.0F, IMAGE, x, y);
         currentHealth = 1;
         type = EnemyType.NORMAL;
         flipHorizontal = true;

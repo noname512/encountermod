@@ -158,7 +158,7 @@ public class EncounterMod implements EditRelicsSubscriber, EditStringsSubscriber
         BaseMod.addMonster("Hatred 1", () -> new MonsterGroup(new AbstractMonster[] {new Exploder(-200.0F, 0.0F), new Repulsor(0.0F, 0.0F)}));
         BaseMod.addMonster("Hatred 2", () -> new MonsterGroup(new AbstractMonster[] {new GremlinThief(-600.0F, 0.0F), new GremlinWarrior(-400.0F, 0.0F), new Exploder(-200.0F, 0.0F), new Spiker(0.0F, 0.0F)}));
         BaseMod.addMonster("Hatred 3", () -> new MonsterGroup(new AbstractMonster[] {new Spiker(-600.0F, 0.0F), new Spiker(-400.0F, 0.0F), new GremlinThief(-200.0F, 0.0F), new GremlinNob(0.0F, 0.0F)}));
-        BaseMod.addMonster("Catastrophe Fight", () -> new MonsterGroup(new AbstractMonster[] {new Catastrophe(150.0F, 150.0F)}));
+        BaseMod.addMonster("Catastrophe Fight", () -> new MonsterGroup(new AbstractMonster[] {new Catastrophe(150.0F, 0.0F)}));
         if (quilonBoss) {
             BaseMod.addBoss(TheBeyond.ID, "Qui'Lon", "resources/encountermod/images/ui/quilon.png", "resources/encountermod/images/ui/quilon.png");
         }
