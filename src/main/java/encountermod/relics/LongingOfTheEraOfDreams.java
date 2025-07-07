@@ -447,7 +447,7 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         if (possibleUsefulForTurnip()) {
                             lst.add(new Turnip()); // 萝卜
                         }
-                        if (LongingOfTheEraOfDreams.dungeonDmgCnt.get(AbstractDungeon.id) * 7 <= LongingOfTheEraOfDreams.dungeonTurnCnt.get(AbstractDungeon.id) * getBossHp()) {
+                        if (LongingOfTheEraOfDreams.dungeonDmgCnt.getOrDefault(AbstractDungeon.id, 0) * 7 <= LongingOfTheEraOfDreams.dungeonTurnCnt.getOrDefault(AbstractDungeon.id, 0) * getBossHp()) {
                             lst.add(new StoneCalendar()); // 历石
                         }
                         break;
@@ -1070,16 +1070,11 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
     @Override
     public void atTurnStart() {
         totalTurnCnt++;
-        if (dungeonTurnCnt.get(AbstractDungeon.id) == null) {
-            dungeonTurnCnt.put(AbstractDungeon.id, 1);
-        }
-        else {
-            dungeonTurnCnt.put(AbstractDungeon.id, dungeonTurnCnt.get(AbstractDungeon.id) + 1);
-        }
+        dungeonTurnCnt.put(AbstractDungeon.id, dungeonTurnCnt.getOrDefault(AbstractDungeon.id, 0) + 1);
         maxBlockAtTurnStart = Math.max(maxBlockAtTurnStart, AbstractDungeon.player.currentBlock);
         int turn = GameActionManager.turn;
         if (maxDmgReceived.containsKey(turn)) {
-            maxDmgReceived.put(turn, Math.max(maxDmgReceived.get(turn), GameActionManager.damageReceivedThisTurn));
+            maxDmgReceived.put(turn, Math.max(maxDmgReceived.getOrDefault(turn, 0), GameActionManager.damageReceivedThisTurn));
         } else {
             maxDmgReceived.put(turn, GameActionManager.damageReceivedThisTurn);
         }
@@ -1199,6 +1194,6 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
     @Override
     public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
         damageDealTurn += damageAmount;
-        dungeonDmgCnt.put(AbstractDungeon.id, dungeonDmgCnt.get(AbstractDungeon.id) + damageAmount);
+        dungeonDmgCnt.put(AbstractDungeon.id, dungeonDmgCnt.getOrDefault(AbstractDungeon.id, 0) + damageAmount);
     }
 }
