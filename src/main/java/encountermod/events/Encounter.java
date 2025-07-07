@@ -14,7 +14,6 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import encountermod.EncounterMod;
 import encountermod.relics.*;
 
-
 public class Encounter extends AbstractImageEvent {
     public static final String ID = "encountermod:Encounter";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(ID);
