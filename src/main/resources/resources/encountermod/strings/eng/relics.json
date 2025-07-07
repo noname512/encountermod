@@ -17,7 +17,7 @@
   "encountermod:VisionsOfTheEraOfProsperity": {
     "NAME": "Vision of Prosperity",
     "FLAVOR": "Sarkaz, a legendary race from distant lands—I’ve certainly never seen one myself.",
-    "DESCRIPTIONS": ["Upon pickup, obtain #b180 #yGold. First refresh in each Stage do not cost #yIdea and always yield the Store Room. #b30 discount on all product."]
+    "DESCRIPTIONS": ["Upon pickup, obtain #b180 #yGold . First refresh in each Stage do not cost #yIdea and always yield the Store Room. #b30 discount on all product."]
   },
   "encountermod:SufferingOfTheEraOfCatastrophe": {
     "NAME": "Suffering of Catastrophe",
