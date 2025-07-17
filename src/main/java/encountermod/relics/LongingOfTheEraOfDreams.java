@@ -3,6 +3,8 @@ package encountermod.relics;
 import basemod.BaseMod;
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
+import com.evacipated.cardcrawl.modthespire.Loader;
+import com.evacipated.cardcrawl.modthespire.ModInfo;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
@@ -41,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.logging.Logger;
 
 public class LongingOfTheEraOfDreams extends CustomRelic {
 
@@ -133,8 +136,34 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
     public static class ReturnRandomRelicPatch {
         @SpirePrefixPatch
         public static SpireReturn<?> Prefix(AbstractRelic.RelicTier tier) {
+            ArrayList<AbstractRelic> lst = new ArrayList<>();
             if (AbstractDungeon.getCurrRoom() instanceof TreasureRoom && AbstractDungeon.player.hasRelic(LongingOfTheEraOfDreams.ID)) {
-                ArrayList<AbstractRelic> lst = new ArrayList<>();
+                if (BaseMod.hasModID("WishdaleMod:")) {
+                    if (AbstractDungeon.player.chosenClass.name().equals("WISHDALE_ZC") && tier == RelicTier.RARE && !AbstractDungeon.player.hasRelic("wishdalemod:RoaringHand")) {
+                        return SpireReturn.Return(BaseMod.getCustomRelic("wishdalemod:RoaringHand"));
+                    }
+                    if (AbstractDungeon.player.currentHealth <= 10 || AbstractDungeon.player.currentHealth <= AbstractDungeon.player.maxHealth * 0.1) {
+                        if (tier == RelicTier.UNCOMMON) {
+                            lst.add(BaseMod.getCustomRelic("wishdalemod:Guowangdexinqiang"));
+                            lst.add(BaseMod.getCustomRelic("wishdalemod:Guowangdeyanshen"));
+                        } else if (tier == RelicTier.RARE) {
+                            lst.add(BaseMod.getCustomRelic("wishdalemod:Guowangdekaijia"));
+                            lst.add(BaseMod.getCustomRelic("wishdalemod:Zhuwangdeguanmian"));
+                            lst.add(BaseMod.getCustomRelic("wishdalemod:GuowangdeHujie"));
+                        }
+                    }
+                    lst.removeIf(r -> AbstractDungeon.player.hasRelic(r.relicId));
+                    if (!lst.isEmpty()) {
+                        AbstractRelic spawnRelic = lst.get(AbstractDungeon.relicRng.random(lst.size() - 1));
+                        removeRelicFromPool(tier, spawnRelic);
+                        return SpireReturn.Return(spawnRelic);
+                    }
+                }
+                if (BaseMod.hasModID("ArchettoMod:")) {
+                    if (AbstractDungeon.player.chosenClass.name().equals("Archetto_CLASS") && tier == RelicTier.RARE && !AbstractDungeon.player.hasRelic("ArchettoMod:HandOfFireworks")) {
+                        return SpireReturn.Return(BaseMod.getCustomRelic("ArchettoMod:HandOfFireworks"));
+                    }
+                }
                 switch (tier) {
                     case COMMON:
                         if (AbstractDungeon.player.currentHealth < AbstractDungeon.player.maxHealth * 0.3) {
@@ -455,21 +484,6 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         AbstractDungeon.getCurrRoom().addRelicToRewards(new RedCirclet());
                         return SpireReturn.Continue();
                 }
-                if (BaseMod.hasModID("wishdale:")) {
-                    if (AbstractDungeon.player.chosenClass.name().equals("WISHDALE_ZC") && tier == RelicTier.RARE) {
-                        lst.add(BaseMod.getCustomRelic("wishdalemod:RoaringHand"));
-                    }
-                    if (AbstractDungeon.player.currentHealth <= 10 || AbstractDungeon.player.currentHealth <= AbstractDungeon.player.maxHealth * 0.1) {
-                        if (tier == RelicTier.UNCOMMON) {
-                            lst.add(BaseMod.getCustomRelic("wishdalemod:Guowangdexinqiang"));
-                            lst.add(BaseMod.getCustomRelic("wishdalemod:Guowangdeyanshen"));
-                        } else if (tier == RelicTier.RARE) {
-                            lst.add(BaseMod.getCustomRelic("wishdalemod:Guowangdekaijia"));
-                            lst.add(BaseMod.getCustomRelic("wishdalemod:Zhuwangdeguanmian"));
-                            lst.add(BaseMod.getCustomRelic("wishdalemod:GuowangdeHujie"));
-                        }
-                    }
-                }
                 if (BaseMod.hasModID("nearlmod:")) {
                     if (AbstractDungeon.player.chosenClass.name().equals("NEARL_CLASS")) {
                         if (calcFriendType() >= 3 && tier == RelicTier.RARE) {
@@ -551,7 +565,7 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                         }
                         if (calcAttackCard() <= AbstractDungeon.player.masterDeck.size() * 0.2 || calcSkillCard() <= AbstractDungeon.player.masterDeck.size() * 0.3) {
                             lst.add(BaseMod.getCustomRelic("samirg:HandOfRapidness")); // 极速之手
-                            }
+                        }
                         if (LongingOfTheEraOfDreams.maxExhaustCardCnt >= 20) {
                             lst.add(BaseMod.getCustomRelic("samirg:HandOfClean")); // 尘净之手
                         }
@@ -561,21 +575,24 @@ public class LongingOfTheEraOfDreams extends CustomRelic {
                 if (lst.isEmpty()) {
                     AbstractDungeon.getCurrRoom().addRelicToRewards(new CultistMask());
                     return SpireReturn.Continue();
-//                    lst.add(new CultistMask()); // 邪教徒头套
                 }
                 AbstractRelic spawnRelic = lst.get(AbstractDungeon.relicRng.random(lst.size() - 1));
-                if (tier == RelicTier.COMMON) {
-                    AbstractDungeon.commonRelicPool.remove(spawnRelic.relicId);
-                }
-                if (tier == RelicTier.UNCOMMON) {
-                    AbstractDungeon.uncommonRelicPool.remove(spawnRelic.relicId);
-                }
-                if (tier == RelicTier.RARE) {
-                    AbstractDungeon.rareRelicPool.remove(spawnRelic.relicId);
-                }
+                removeRelicFromPool(tier, spawnRelic);
                 return SpireReturn.Return(spawnRelic);
             }
             return SpireReturn.Continue();
+        }
+
+        private static void removeRelicFromPool(RelicTier tier, AbstractRelic spawnRelic) {
+            if (tier == RelicTier.COMMON) {
+                AbstractDungeon.commonRelicPool.remove(spawnRelic.relicId);
+            }
+            if (tier == RelicTier.UNCOMMON) {
+                AbstractDungeon.uncommonRelicPool.remove(spawnRelic.relicId);
+            }
+            if (tier == RelicTier.RARE) {
+                AbstractDungeon.rareRelicPool.remove(spawnRelic.relicId);
+            }
         }
 
         private static int calcExhaust() {

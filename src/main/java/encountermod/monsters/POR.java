@@ -15,7 +15,7 @@ public class POR extends AbstractMonster {
     public static final String NAME = monsterStrings.NAME;
     public static final String IMAGE = null;
     public POR(float x, float y) {
-        super(NAME, ID, 100, 20.0F, 0, 160.0F, 140.0F, IMAGE, x, y);
+        super(NAME, ID, 150, 20.0F, 0, 160.0F, 140.0F, IMAGE, x, y);
         type = EnemyType.ELITE;
         loadAnimation("resources/encountermod/images/monsters/enemy_2090_skzjbc/enemy_2090_skzjbc33.atlas", "resources/encountermod/images/monsters/enemy_2090_skzjbc/enemy_2090_skzjbc33.json", 1.5F);
         state.setAnimation(0, "Start", false);
