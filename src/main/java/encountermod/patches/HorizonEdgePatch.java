@@ -111,7 +111,9 @@ public class HorizonEdgePatch {
         @SpireInsertPatch(locator = Locator.class)
         public static void Insert(MapRoomNode _inst) {
             if (horizonConnect(AbstractDungeon.getCurrMapNode(), _inst) != null) {
-                EncounterMod.ideaCount -= moveCost;
+                if (EncounterMod.ideaCount >= moveCost) {
+                    EncounterMod.ideaCount -= moveCost;
+                }
             }
         }
 

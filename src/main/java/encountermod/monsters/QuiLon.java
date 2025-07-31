@@ -293,6 +293,9 @@ public class QuiLon extends AbstractMonster {
 
     @Override
     public void damage(DamageInfo info) {
+        if (currentHealth == 0) {
+            return;
+        }
         super.damage(info);
         if (currentMove <= 0) {
             return;
