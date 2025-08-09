@@ -68,7 +68,7 @@ public class GraffitiOfTheEraOfHope extends CustomRelic{
         if (AbstractDungeon.player.hasRelic(TinyChest.ID)) {
             AbstractDungeon.player.getRelic(TinyChest.ID).description = DESCRIPTIONS[2];
         }
-        /* TODO: 把上面那段变成获取时触发 */
+        /* TODO: 把上面那段变成获取时触发，并更新它们的 Tips */
         if ((room instanceof EventRoom) && (AbstractDungeon.player.hasRelic(JuzuBracelet.ID))) {
             AbstractDungeon.player.getRelic(JuzuBracelet.ID).flash();
             AbstractDungeon.player.getRelic(JuzuBracelet.ID).counter ++;
@@ -78,8 +78,6 @@ public class GraffitiOfTheEraOfHope extends CustomRelic{
             AbstractDungeon.player.getRelic(TinyChest.ID).counter ++;
             if (AbstractDungeon.player.getRelic(TinyChest.ID).counter == 4) {
                 AbstractDungeon.player.getRelic(TinyChest.ID).counter = 0;
-                AbstractRelic relic = AbstractDungeon.returnRandomScreenlessRelic(AbstractDungeon.returnRandomRelicTier());
-                AbstractDungeon.getCurrRoom().spawnRelicAndObtain((float) Settings.WIDTH / 2.0F, (float)Settings.HEIGHT / 2.0F, relic);
             }
         }
     }
@@ -123,6 +121,10 @@ public class GraffitiOfTheEraOfHope extends CustomRelic{
         @SpirePrefixPatch
         public static SpireReturn<?> Prefix(Random eventRng) {
             if (AbstractDungeon.player.hasRelic(ID)) {
+                if (AbstractDungeon.player.hasRelic(TinyChest.ID) && AbstractDungeon.player.getRelic(TinyChest.ID).counter == 0) {
+                    AbstractRelic relic = AbstractDungeon.returnRandomScreenlessRelic(AbstractDungeon.returnRandomRelicTier());
+                    AbstractDungeon.getCurrRoom().spawnRelicAndObtain((float) Settings.WIDTH / 2.0F, (float)Settings.HEIGHT / 2.0F, relic);
+                }
                 return SpireReturn.Return(EventHelper.RoomResult.EVENT);
             } else {
                 return SpireReturn.Continue();
