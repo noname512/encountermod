@@ -10,7 +10,10 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.EventHelper;
+import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.localization.RelicStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.monsters.EnemyMoveInfo;
 import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.random.Random;
@@ -23,6 +26,10 @@ import encountermod.EncounterMod;
 import encountermod.patches.IdeaPatch;
 import encountermod.patches.RefreshPatch;
 import encountermod.vfx.IdeaFlashEffect;
+import jdk.internal.org.jline.reader.impl.DefaultParser;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public class GraffitiOfTheEraOfHope extends CustomRelic{
 
@@ -48,27 +55,29 @@ public class GraffitiOfTheEraOfHope extends CustomRelic{
             AbstractDungeon.player.getRelic(JuzuBracelet.ID).counter = 0;
             RefreshPatch.roomWeight.put("Event", 8);
             RefreshPatch.totalWeight = 15;
+            refreshTips(AbstractDungeon.player.getRelic(JuzuBracelet.ID));
         }
         if (AbstractDungeon.player.hasRelic(TinyChest.ID)) {
             AbstractDungeon.player.getRelic(TinyChest.ID).description = DESCRIPTIONS[2];
+            refreshTips(AbstractDungeon.player.getRelic(TinyChest.ID));
+        }
+    }
+
+    void refreshTips(AbstractRelic r) {
+        try {
+            r.tips.clear();
+            r.tips.add(new PowerTip(r.name, r.description));
+            Method method = AbstractRelic.class.getDeclaredMethod("initializeTips");
+            method.setAccessible(true);
+            method.invoke(r);
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void onEnterRoom(AbstractRoom room) {
-        /* 这一部分是暂时用来解决这俩遗物没变化的 */
-        if (AbstractDungeon.player.hasRelic(JuzuBracelet.ID)) {
-            AbstractDungeon.player.getRelic(JuzuBracelet.ID).description = DESCRIPTIONS[1];
-            if (AbstractDungeon.player.getRelic(JuzuBracelet.ID).counter == -1) {
-                AbstractDungeon.player.getRelic(JuzuBracelet.ID).counter = 0;
-            }
-            RefreshPatch.roomWeight.put("Event", 8);
-            RefreshPatch.totalWeight = 15;
-        }
-        if (AbstractDungeon.player.hasRelic(TinyChest.ID)) {
-            AbstractDungeon.player.getRelic(TinyChest.ID).description = DESCRIPTIONS[2];
-        }
-        /* TODO: 把上面那段变成获取时触发，并更新它们的 Tips */
         if ((room instanceof EventRoom) && (AbstractDungeon.player.hasRelic(JuzuBracelet.ID))) {
             AbstractDungeon.player.getRelic(JuzuBracelet.ID).flash();
             AbstractDungeon.player.getRelic(JuzuBracelet.ID).counter ++;
@@ -101,11 +110,13 @@ public class GraffitiOfTheEraOfHope extends CustomRelic{
         RefreshPatch.roomWeight.put("Event", 2);
         RefreshPatch.totalWeight = 12;
         if (AbstractDungeon.player.hasRelic(JuzuBracelet.ID)) {
-            AbstractDungeon.player.getRelic(JuzuBracelet.ID).description = CardCrawlGame.languagePack.getRelicStrings(JuzuBracelet.ID).DESCRIPTIONS[0];
+            AbstractDungeon.player.getRelic(JuzuBracelet.ID).description = AbstractDungeon.player.getRelic(JuzuBracelet.ID).getUpdatedDescription();
             AbstractDungeon.player.getRelic(JuzuBracelet.ID).counter = -1;
+            refreshTips(AbstractDungeon.player.getRelic(JuzuBracelet.ID));
         }
         if (AbstractDungeon.player.hasRelic(TinyChest.ID)) {
-            AbstractDungeon.player.getRelic(TinyChest.ID).description = CardCrawlGame.languagePack.getRelicStrings(TinyChest.ID).DESCRIPTIONS[0];
+            AbstractDungeon.player.getRelic(TinyChest.ID).description = AbstractDungeon.player.getRelic(TinyChest.ID).getUpdatedDescription();
+            refreshTips(AbstractDungeon.player.getRelic(TinyChest.ID));
         }
     }
 
@@ -130,6 +141,73 @@ public class GraffitiOfTheEraOfHope extends CustomRelic{
                 }
                 return SpireReturn.Return(EventHelper.RoomResult.EVENT);
             } else {
+                return SpireReturn.Continue();
+            }
+        }
+    }
+
+    @SpirePatch(clz = AbstractRelic.class, method = "onEquip")
+    public static class EquipPatch {
+        @SpirePrefixPatch
+        public static SpireReturn<?> Prefix(AbstractRelic __instance) {
+            if (AbstractDungeon.player.hasRelic(ID)) {
+                if (__instance instanceof JuzuBracelet) {
+                    __instance.counter = 0;
+                    RefreshPatch.roomWeight.put("Event", 8);
+                    RefreshPatch.totalWeight = 15;
+                }
+            }
+            return SpireReturn.Return();
+        }
+    }
+
+    @SpirePatch(clz = JuzuBracelet.class, method = "makeCopy")
+    public static class JuzuMakeCopyPatch {
+        @SpirePrefixPatch
+        public static SpireReturn<?> Prefix(AbstractRelic __instance) {
+            if ((AbstractDungeon.player != null) && (AbstractDungeon.player.hasRelic(ID)) ||
+                (CardCrawlGame.saveFile != null) && (CardCrawlGame.saveFile.relics != null) && (CardCrawlGame.saveFile.relics.contains(ID))) {
+                JuzuBracelet juzu = new JuzuBracelet();
+                juzu.description = DESCRIPTIONS[1];
+                try {
+                    juzu.tips.clear();
+                    juzu.tips.add(new PowerTip(juzu.name, juzu.description));
+                    Method method = AbstractRelic.class.getDeclaredMethod("initializeTips");
+                    method.setAccessible(true);
+                    method.invoke(juzu);
+                }
+                catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                return SpireReturn.Return(juzu);
+            }
+            else {
+                return SpireReturn.Continue();
+            }
+        }
+    }
+
+    @SpirePatch(clz = TinyChest.class, method = "makeCopy")
+    public static class TinyChestMakeCopyPatch {
+        @SpirePrefixPatch
+        public static SpireReturn<?> Prefix(AbstractRelic __instance) {
+            if (((AbstractDungeon.player != null) && (AbstractDungeon.player.hasRelic(ID))) ||
+                (CardCrawlGame.saveFile != null) && (CardCrawlGame.saveFile.relics != null) && (CardCrawlGame.saveFile.relics.contains(ID))) {
+                TinyChest tiny = new TinyChest();
+                tiny.description = DESCRIPTIONS[2];
+                try {
+                    tiny.tips.clear();
+                    tiny.tips.add(new PowerTip(tiny.name, tiny.description));
+                    Method method = AbstractRelic.class.getDeclaredMethod("initializeTips");
+                    method.setAccessible(true);
+                    method.invoke(tiny);
+                }
+                catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                return SpireReturn.Return(tiny);
+            }
+            else {
                 return SpireReturn.Continue();
             }
         }

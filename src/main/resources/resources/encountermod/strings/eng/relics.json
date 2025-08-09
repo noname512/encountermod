@@ -2,7 +2,10 @@
   "encountermod:GraffitiOfTheEraOfHope": {
     "NAME": "Doodle of Hope",
     "FLAVOR": "I'm a Teekaz orphan. My parents died in a Catastrophe, and it was my Feline neighbor who raised me and treated me as one of his own. I can say with a clear conscience that I am a descendant of the Ancients.",
-    "DESCRIPTIONS": ["Upon pickup, obtain #g2 #yIdea . A refreshed room has lower possibility to become a Monster Room, and will never become an Elite Monster Room. Provides extra choice in some events."]
+    "DESCRIPTIONS": ["Upon pickup, obtain #g2 #yIdea . A refreshed room has lower possibility to become a Monster Room, and will never become an Elite Monster Room. Provides extra choice in some events.",
+      "A refreshed room has higher possibility to become a #y? Room. For every #b4 #y? you passed, start each combat with 1 Strength and Dexterity. ",
+      "When you passed #b4 #y?, get a random #yrelic."
+    ]
   },
   "encountermod:HatredOfTheEraOfVendetta": {
     "NAME": "Talons of Hatred",
