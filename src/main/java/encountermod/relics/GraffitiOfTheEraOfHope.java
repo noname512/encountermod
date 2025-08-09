@@ -86,8 +86,11 @@ public class GraffitiOfTheEraOfHope extends CustomRelic{
     public void atPreBattle() {
         if (AbstractDungeon.player.hasRelic(JuzuBracelet.ID)) {
             int amount = AbstractDungeon.player.getRelic(JuzuBracelet.ID).counter / 4;
-            addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new StrengthPower(AbstractDungeon.player, amount)));
-            addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new DexterityPower(AbstractDungeon.player, amount)));
+            if (amount > 0) {
+                AbstractDungeon.player.getRelic(JuzuBracelet.ID).flash();
+                addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new StrengthPower(AbstractDungeon.player, amount)));
+                addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new DexterityPower(AbstractDungeon.player, amount)));
+            }
         }
     }
 
