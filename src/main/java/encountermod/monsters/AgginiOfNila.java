@@ -59,6 +59,11 @@ public class AgginiOfNila extends AbstractMonster {
     }
 
     @Override
+    public void heal(int healAmount, boolean showEffect) {
+        heal(healAmount);
+    }
+
+    @Override
     public void die() {
         super.die();
         addToBot(new ReducePowerAction(quiLon, quiLon, NilaShieldPower.POWER_ID, 1));
